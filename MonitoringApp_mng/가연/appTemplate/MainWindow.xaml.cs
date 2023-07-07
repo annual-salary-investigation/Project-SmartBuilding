@@ -25,8 +25,18 @@ namespace appTemplate
         public MainWindow()
         {
             InitializeComponent();
-            WindowStartupLocation = WindowStartupLocation.CenterScreen; // 스크린 정 중앙에 창 띄우기
+            WindowStartupLocation = WindowStartupLocation.CenterScreen; // 스크린 정 중앙에 창 띄우기 
         }
+
+        #region <로그인 창 로드 영역 - 앱 구현 마지막 단계에 주석 지우고 사용!>
+        //private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    var loginWindow = new Login();
+        //    loginWindow.Owner = this; // LoginWindow의 부모는 MainWindow
+        //    loginWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner; // MainWindow의 정중앙에 위치
+        //    loginWindow.ShowDialog();  // 모달창
+        //}
+        #endregion
 
         #region < 차량 관리 버튼 이벤트 영역 - 자식창 띄우기>
         private void BtnMngCar_Click(object sender, RoutedEventArgs e)
@@ -37,5 +47,7 @@ namespace appTemplate
             mngCarWindow.ShowDialog(); // 모달창
         }
         #endregion
+
+        
     }
 }
