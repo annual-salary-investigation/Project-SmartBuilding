@@ -33,12 +33,38 @@
         <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="0" Margin="10,10,5,10" CornerRadius="10">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="239*"/>
-                    <RowDefinition Height="275*"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
+                <Grid Grid.Row="0" VerticalAlignment="Bottom">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock x:Name="Txtdate" Text="yyyy-mm-dd" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="Txtday" Text="요일" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="TxtTime" Text="현재시간" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1">
                     <Image Source="Resources/cloudy-day.png" Width="120"
                     VerticalAlignment="Bottom" Margin="10"/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="기온" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="℃" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="습도" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="%" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="풍속" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="m/s" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                 </Grid>
             </Grid>
         </Border>
@@ -95,29 +121,79 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
+            <!-- 1층 사무실 (0,0) -->
             <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Grid.Column="0" Margin="0, 0, 5, 5" CornerRadius="10">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
 
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0">
+                        <Image Source="Resources/meeting-room.png" Height="30"/>
+                        <Label Content="1층" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                    </StackPanel>
                 </Grid>
             </Border>
+            <!-- 2층 마트 (0,1) -->
             <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Grid.Column="1" Margin="5, 0, 0, 5" CornerRadius="10">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
 
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0">
+                        <Image Source="Resources/grocery-cart.png" Height="30"/>
+                        <Label Content="2층" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10">
+                        <Label Content="화재감지센서" Margin="4, 0" FontSize="15" FontWeight="Bold"/>
+                        <TextBlock x:Name="fireSensor2" Text="정상 작동 중" Margin="10, 4" FontSize="15"></TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,-15,0,0">
+                        <mah:ToggleSwitch Header="전등 1" OffContent="OFF" OnContent="ON" Margin="10,0"/>
+                        <mah:ToggleSwitch Header="전등 2" OffContent="OFF" OnContent="ON" Margin="-70"/>
+                        <mah:ToggleSwitch Header="전등 3" OffContent="OFF" OnContent="ON" Margin="10,0"/>
+                    </StackPanel>
                 </Grid>
             </Border>
+            <!-- 3층 집 (1,0) -->
             <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="0" Margin="0, 5, 5, 0" CornerRadius="10">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
 
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0">
+                        <Image Source="Resources/bedroom.png" Height="30"/>
+                        <Label Content="3층" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                    </StackPanel>
                 </Grid>
             </Border>
+            <!-- 옥상 (1,1) -->
             <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="5,5,0,0" CornerRadius="10">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
 
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0">
+                        <Image Source="Resources/terrace.png" Height="30"/>
+                        <Label Content="옥상" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                    </StackPanel>
                 </Grid>
             </Border>
 
         </Grid>
 
-       
+
     </Grid>
 </mah:MetroWindow>

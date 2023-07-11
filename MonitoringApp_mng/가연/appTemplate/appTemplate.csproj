@@ -265,11 +265,34 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\barrier.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\cloudy-day.png" />
     <Resource Include="Resources\cloudy-day_line.png" />
     <Resource Include="Resources\garage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\fire.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\light-bulb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\tent1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\bedroom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\meeting-room.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\grocery-cart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\terrace.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,18 @@
+{"response":{"header":{"resultCode":"00","resultMsg":"NORMAL_SERVICE"},
+"body":{"dataType":"JSON" 
+,"items":{"item":[{"baseDate(발표일자)":"20230711","baseTime(발표시각 - 정시단위)":"1500","category":"PTY","nx(x좌표값)":98,"ny(y좌표값)":74,"obsrValue(실황값)":"1"}
+// PTY : 강수형태 - (초단기) 없음(0), 비(1), 비/눈(2), 눈(3), 빗방울(5) -- 흐림으로 정의 , 빗방울눈날림(6) -- 흐림으로 정의, 눈날림(7) -- 흐림으로 정의
+,{"baseDate":"20230711","baseTime":"1500","category":"REH","nx":98,"ny":74,"obsrValue":"91"}
+// REH : 습도(%)
+,{"baseDate":"20230711","baseTime":"1500","category":"RN1","nx":98,"ny":74,"obsrValue":"19.2"}
+// RN1 : 1시간 강수량(mm)
+,{"baseDate":"20230711","baseTime":"1500","category":"T1H","nx":98,"ny":74,"obsrValue":"24.1"}
+// T1H : 기온(℃)
+,{"baseDate":"20230711","baseTime":"1500","category":"UUU","nx":98,"ny":74,"obsrValue":"5.1"}
+// UUU : 동서바람성분
+,{"baseDate":"20230711","baseTime":"1500","category":"VEC","nx":98,"ny":74,"obsrValue":"223"}
+// VEC : 풍향
+,{"baseDate":"20230711","baseTime":"1500","category":"VVV","nx":98,"ny":74,"obsrValue":"5.4"}
+// VVV : 남북바람성분
+,{"baseDate":"20230711","baseTime":"1500","category":"WSD","nx":98,"ny":74,"obsrValue":"7.4"}]},"pageNo":1,"numOfRows":1000,"totalCount":8}}}
+// WSD : 풍속

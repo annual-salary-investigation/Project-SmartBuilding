@@ -25,7 +25,19 @@ namespace appTemplate
         public MainWindow()
         {
             InitializeComponent();
+            WindowState = WindowState.Maximized; // 실행시 전체화면
             WindowStartupLocation = WindowStartupLocation.CenterScreen; // 스크린 정 중앙에 창 띄우기 
+
+            #region < 대시보드1 날씨영역>
+            // 날짜, 요일, 시간
+            Txtdate.Text = DateTime.Today.ToShortDateString();
+            Txtday.Text = DateTime.Now.DayOfWeek.ToString();
+            TxtTime.Text = DateTime.Now.ToShortTimeString();
+
+            //OpenAPI로 날씨값 받아오기
+            #endregion
+
+
         }
 
         #region <로그인 창 로드 영역 - 앱 구현 마지막 단계에 주석 지우고 사용!>
@@ -48,6 +60,13 @@ namespace appTemplate
         }
         #endregion
 
-        
+        #region < 실제 OpenAPI 검색 영역 >
+        public async Task CheckWeatehr() 
+        {
+            return;
+        }
+        #endregion
+
+
     }
 }
