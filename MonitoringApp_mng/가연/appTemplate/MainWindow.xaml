@@ -30,7 +30,7 @@
         </Grid>
 
         <!-- 대시보드 1 날씨 영역 -->
-        <Border BorderThickness="1" BorderBrush="Black" Grid.Row="1" Grid.Column="0" Margin="10,10,5,10">
+        <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="0" Margin="10,10,5,10" CornerRadius="10">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="239*"/>
@@ -42,10 +42,10 @@
                 </Grid>
             </Grid>
         </Border>
-        
+
 
         <!-- 대시보드 2 차량 관리 영역 -->
-        <Border BorderThickness="1" BorderBrush="Black" Grid.Row="1" Grid.Column="1" Margin="5,10,5,10">
+        <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="5,10,5,10" CornerRadius="10">
             <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
@@ -85,10 +85,39 @@
         </Border>
 
         <!-- 대시보드 3 센서 감시 및 제어 영역 -->
-        <Border BorderThickness="1" BorderBrush="Black" Grid.Row="1" Grid.Column="2" Margin="5,10,10,10">
-            <Grid>
+        <Grid Grid.Row="1" Grid.Column="2" Margin="5,10,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
-            </Grid>
-        </Border>
+            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Grid.Column="0" Margin="0, 0, 5, 5" CornerRadius="10">
+                <Grid>
+
+                </Grid>
+            </Border>
+            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Grid.Column="1" Margin="5, 0, 0, 5" CornerRadius="10">
+                <Grid>
+
+                </Grid>
+            </Border>
+            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="0" Margin="0, 5, 5, 0" CornerRadius="10">
+                <Grid>
+
+                </Grid>
+            </Border>
+            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="5,5,0,0" CornerRadius="10">
+                <Grid>
+
+                </Grid>
+            </Border>
+
+        </Grid>
+
+       
     </Grid>
 </mah:MetroWindow>
