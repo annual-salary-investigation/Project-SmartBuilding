@@ -26,10 +26,19 @@ namespace appTemplate
             InitializeComponent();
         }
 
+
+        //private void LightButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Color mColor = (Color)ColorConverter.ConvertFromString("#FF1457ED");
+        //    LightButton_Click.Background = new SolidColorBrush(mColor);
+        //    mColor = (Color)ColorConverter.ConvertFromString("#FF161618");
+        //    LightButton_Click.Background = new SolidColorBrush(mColor);
+        //}
         private void LightButton_Click(object sender, RoutedEventArgs e)
         {
-
+           
         }
+
 
         private void ElevatorButton_Click(object sender, RoutedEventArgs e)
         {

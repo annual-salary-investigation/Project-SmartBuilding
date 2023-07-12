@@ -116,28 +116,136 @@
             </Grid.ColumnDefinitions>
 
                                         <!-- 버튼 영역 -->
-            <Button Width="100" Click="LightButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="0" Grid.Column="0">
+            <!--<Button Width="100" Click="LightButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="0" Grid.Column="0">
                 <Button.Content>
                     <iconPacks:PackIconMaterial Kind="Help" Width="100" />
                 </Button.Content>
             </Button>
-            <Button Width="100" Click="LightButton_Click" Background="Transparent" BorderThickness="0" Grid.Row="0" Grid.Column="1">
+            <Button Width="100" Click="ElevatorButton_Click" Background="Transparent" BorderThickness="0" Grid.Row="0" Grid.Column="1">
                 <Button.Content>
                     <iconPacks:PackIconMaterial Kind="Help" Width="100" />
                 </Button.Content>
             </Button>
-            <Button Width="100" Click="LightButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="1" Grid.Column="0">
+            <Button Width="100" Click="BliendButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="1" Grid.Column="0">
                 <Button.Content>
                     <iconPacks:PackIconMaterial Kind="Help" Width="100" />
                 </Button.Content>
             </Button>
-            <Button Width="100" Click="LightButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="1" Grid.Column="1">
+            <Button Width="100" Click="AirButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="1" Grid.Column="1">
                 <Button.Content>
                     <iconPacks:PackIconMaterial Kind="Help" Width="100" />
                 </Button.Content>
-            </Button>
+            </Button>-->
             
-            
+            <!--<Button Width="100" Click="LightButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="0" Grid.Column="0">
+                <Button.Content>
+                    <iconPacks:PackIconMaterial Kind="Help" Width="100" />
+                </Button.Content>
+            </Button>
+            <Button Width="100" Click="ElevatorButton_Click" Background="Transparent" BorderThickness="0" Grid.Row="0" Grid.Column="1">
+                <Button.Content>
+                    <iconPacks:PackIconMaterial Kind="Help" Width="100" />
+                </Button.Content>
+            </Button>
+            <Button Width="100" Click="BliendButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="1" Grid.Column="0">
+                <Button.Content>
+                    <iconPacks:PackIconMaterial Kind="Help" Width="100" />
+                </Button.Content>
+            </Button>
+            <Button Width="100" Click="AirButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="1" Grid.Column="1">
+                <Button.Content>
+                    <iconPacks:PackIconMaterial Kind="Help" Width="100" />
+                </Button.Content>
+            </Button>-->
+
+
+            <Grid>
+                <Button x:Name="LightButton" Width="250" Click="LightButton_Click" BorderThickness="0" Grid.Row="0" Grid.Column="0" Panel.ZIndex="1">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Resources/lightbulb.png" />
+                    </Button.Background>
+                </Button>
+            </Grid>
+
+            <!--<Button x:Name="LightButton" Width="100" Click="LightButton_Click" BorderThickness="0" Grid.Row="0" Grid.Column="0" Background="Blue" >
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Grid x:Name="ButtonBackground" Background="{TemplateBinding Background}" />
+                            <iconPacks:PackIconMaterial Kind="Help" Width="100" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBackground" Property="Background" Value="Red" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="False">
+                                <Setter TargetName="ButtonBackground" Property="Background" Value="Blue" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>-->
+
+            <Button x:Name="ElevatorButton" Width="100" Click="ElevatorButton_Click" BorderThickness="0" Grid.Row="0" Grid.Column="1" Background="Blue" Panel.ZIndex="1">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Grid x:Name="ButtonBackground" Background="{TemplateBinding Background}" />
+                            <iconPacks:PackIconMaterial Kind="Help" Width="100" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBackground" Property="Background" Value="Red" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBackground" Property="Background" Value="Red" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="BliendButton" Width="100" Click="BliendButton_Click" BorderThickness="0" Grid.Row="1" Grid.Column="0" Background="Blue" Panel.ZIndex="1">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Grid x:Name="ButtonBackground" Background="{TemplateBinding Background}" />
+                            <iconPacks:PackIconMaterial Kind="Help" Width="100" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBackground" Property="Background" Value="Red" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBackground" Property="Background" Value="Red" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="AirButton" Width="100" Click="AirButton_Click" BorderThickness="0" Grid.Row="1" Grid.Column="1" Background="Blue" Panel.ZIndex="1">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Grid x:Name="ButtonBackground" Background="{TemplateBinding Background}" />
+                            <iconPacks:PackIconMaterial Kind="Help" Width="100" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBackground" Property="Background" Value="Red" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBackground" Property="Background" Value="Red" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+
+
+
+
+
             <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Grid.Column="0" Margin="0, 0, 5, 5" CornerRadius="10">
                 <Grid>
                     <TextBlock FontSize="20"><Run Text="전등"/></TextBlock>
