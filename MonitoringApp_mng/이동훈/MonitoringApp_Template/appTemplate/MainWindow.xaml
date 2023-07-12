@@ -8,7 +8,6 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:lvc ="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        
         mc:Ignorable="d"
         Title="Building IoT System Monitoring" Height="600" Width="1200">
     <Grid>
@@ -35,14 +34,41 @@
         <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="0" Margin="10,10,5,10" CornerRadius="10">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="150"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" FontSize="20" VerticalAlignment="Center">
-                    상태바 - 전등 상태, 엘리베이터 위치<LineBreak/>
-                    화재감지 상태, 블라인드 상태<LineBreak/>
-                    RFID로 문열림 확인
-                </TextBlock>
+                <Grid Grid.Row="0" VerticalAlignment="Bottom">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock x:Name="Txtdate" Text="yyyy-mm-dd" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="Txtday" Text="요일" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="TxtTime" Text="현재시간" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1" Margin="0,0,10,-262">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Source="Resources/lightbulb.png" 
+                        VerticalAlignment="Center" Margin="34,0,34,0" Height="50"/>
+                    <TextBlock Grid.Column="1" Text="light on off" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                    <Image Source="Resources/elevator.png" 
+                        VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="1"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="층" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="108,0,0,0"/>
+                    <Image Source="Resources/flames.png" 
+                        VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="2"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="화재경고on/off" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    <Image Source="Resources/blinds.png" 
+                        VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="3"/>
+                    <Label Grid.Row="3" Grid.Column="1" Content="상태" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="96,0,0,0"/>
+                </Grid>
             </Grid>
         </Border>
 
@@ -91,53 +117,28 @@
 
             <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Grid.Column="0" Margin="0, 0, 5, 5" CornerRadius="10">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="온 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-
-                    <!--<TextBlock FontSize="20">
-                        전등
-                    </TextBlock>-->
+                    <TextBlock FontSize="20"><Run Text="전등"/></TextBlock>
                 </Grid>
             </Border>
             <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Grid.Column="1" Margin="5, 0, 0, 5" CornerRadius="10">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="1*"/>
-
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="엘 리 베 이 터" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                    <!--<TextBlock FontSize="20">
+                    <TextBlock FontSize="20">
                         엘리베이터
-                    </TextBlock>-->
+                    </TextBlock>
                 </Grid>
             </Border>
             <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="0" Margin="0, 5, 5, 0" CornerRadius="10">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="블 라 인 드" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                    <!--<TextBlock FontSize="20">
+                    <TextBlock FontSize="20">
                         블라인드
-                    </TextBlock>-->
+                    </TextBlock>
                 </Grid>
             </Border>
             <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="5,5,0,0" CornerRadius="10">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="에 어 컨" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                    <!--<TextBlock FontSize="20">
+                    <TextBlock FontSize="20">
                         에어컨
-                    </TextBlock>-->
+                    </TextBlock>
                 </Grid>
             </Border>
 
