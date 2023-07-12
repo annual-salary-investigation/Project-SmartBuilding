@@ -115,6 +115,29 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
+                                        <!-- 버튼 영역 -->
+            <Button Width="100" Click="LightButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="0" Grid.Column="0">
+                <Button.Content>
+                    <iconPacks:PackIconMaterial Kind="Help" Width="100" />
+                </Button.Content>
+            </Button>
+            <Button Width="100" Click="LightButton_Click" Background="Transparent" BorderThickness="0" Grid.Row="0" Grid.Column="1">
+                <Button.Content>
+                    <iconPacks:PackIconMaterial Kind="Help" Width="100" />
+                </Button.Content>
+            </Button>
+            <Button Width="100" Click="LightButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="1" Grid.Column="0">
+                <Button.Content>
+                    <iconPacks:PackIconMaterial Kind="Help" Width="100" />
+                </Button.Content>
+            </Button>
+            <Button Width="100" Click="LightButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="1" Grid.Column="1">
+                <Button.Content>
+                    <iconPacks:PackIconMaterial Kind="Help" Width="100" />
+                </Button.Content>
+            </Button>
+            
+            
             <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Grid.Column="0" Margin="0, 0, 5, 5" CornerRadius="10">
                 <Grid>
                     <TextBlock FontSize="20"><Run Text="전등"/></TextBlock>

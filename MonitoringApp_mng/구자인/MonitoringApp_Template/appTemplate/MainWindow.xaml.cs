@@ -25,5 +25,25 @@ namespace appTemplate
         {
             InitializeComponent();
         }
+
+        private void LightButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ElevatorButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BliendButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AirButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
