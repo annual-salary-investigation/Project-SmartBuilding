@@ -1,10 +1,12 @@
-﻿using appTemplate.Models;
+﻿using appTemplate.Logics;
+using appTemplate.Models;
 using appTemplate.Views;
 using MahApps.Metro.Controls;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -29,14 +31,10 @@ namespace appTemplate
             Txtdate.Text = DateTime.Today.ToShortDateString();
             Txtday.Text = DateTime.Now.DayOfWeek.ToString();
             TxtTime.Text = DateTime.Now.ToShortTimeString();
-
-            
             #endregion
-
-
         }
 
-        #region <로그인 창 로드 영역 - 앱 구현 마지막 단계에 주석 지우고 사용!>
+        #region <메인 창 로드 영역 - 로그인 창 부분은 앱 구현 마지막 단계에 주석 지우고 사용!>
         private async void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             //    var loginWindow = new Login();
@@ -50,9 +48,12 @@ namespace appTemplate
             {
                 await CheckWeatehr();
             }
-            catch(Exception ex)
+            catch
             { 
-                await Logics.Commons.ShowMessageAsync("오류", $"오류 발생 : {ex.Message}");
+                await Logics.Commons.ShowMessageAsync("오류", $"오류 발생 : 날씨 정보를 받아올 수 없습니다.");
+                // 기상청 API 초단기실황 자체가 생성, 조회되는 기준시간이 있기 때문에 시간이 안맞으면 오류 발생 할 수 있음
+                // 1. 24시간 동안만의 결과값을 제공  그 이전 값은 조회 오류 => 현재 날짜로 조회하기 때문에 이 문제는 해당X
+                // 2. 기준시간 00시의 값은 00시 30분에 생성되어 제공되기 때문에 새벽 12시~12시 30분 사이에 조회하면 값이 없음
             }
         }
         #endregion
@@ -67,12 +68,12 @@ namespace appTemplate
         }
         #endregion
 
-        #region < 실제 OpenAPI 검색 영역 >
+        #region < 실제 OpenAPI 불러오는 함수 >
         public async Task CheckWeatehr() 
         {
-            string serviceKey = "6U1OgOHXoO56%2FqdyFMr%2F5XyU8d6H2iWdFnZmtNuLA%2BhDq3mNlkfOIxbEpgVMVWrU9cb5HM8NAs2iNA0UcXE8ag%3D%3D"; // 기상청 API 인증키
-
-            string openApiUri = $"http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey={serviceKey}&numOfRows=10&dataType=JSON&pageNo=1&base_date=20230712&base_time=1200&nx=98&ny=74"; // openAPI 요청
+            // openAPI 요청 uri
+            string openApiUri = $"http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey={Commons.apiKey}&numOfRows=10&dataType=JSON&pageNo=1&base_date={Commons.convertedToday}&base_time={Commons.currentTime}&nx=98&ny=74";
+            // 하루 동안만의 결과값 제공함!
             string result = string.Empty; //결과값 초기화
 
             // API 실행할 WebRequest, WebResponse 객체
@@ -126,65 +127,55 @@ namespace appTemplate
              PTY(강수형태) : 없음(0), 비(1), 비/눈(2), 눈(3), 빗방울(5) -- 흐림으로 정의 , 빗방울눈날림(6) -- 흐림으로 정의, 눈날림(7) -- 흐림으로 정의
              REH(습도) : 실수값으로 반환
              T1H(기온) : 실수값으로 반환
-             WSD(풍속) : 실수값으로 반환 / 4미만 : 바람약함 / 4 ~ 9 : 약간강(안면감촉, 나뭇잎 조금 흔들림) / 9 ~ 14 : 강(나무가지 깃발 가볍게 흔들림) / 14~ : 매우강(먼지 일고 나무 전체 흔들림)
-             
+             WSD(풍속) : 실수값으로 반환 / 4미만 : 바람약함 / 4 ~ 8 : 약간강(안면감촉, 나뭇잎 조금 흔들림) / 9 ~ 13 : 강(나무가지 깃발 가볍게 흔들림) / 14~ : 매우강(먼지 일고 나무 전체 흔들림) 
              */
 
             foreach (var weather in weatherResult)
             {
-                Debug.WriteLine($"BaseDate: {weather.BaseDate}");
-                Debug.WriteLine($"BaseTime: {weather.BaseTime}");
-                Debug.WriteLine($"Category: {weather.Category}");
-                Debug.WriteLine($"NX: {weather.NX}");
-                Debug.WriteLine($"NY: {weather.NY}");
-                Debug.WriteLine($"ObsrValue: {weather.ObsrValue}");
-                Debug.WriteLine("============");
-
-                if (weather.Category == "PTY") // 이미지 부분 아직 안됨
+                switch (weather.Category) // Category 기준으로 화면에 값 띄워줌
                 {
-                    if (weather.ObsrValue == 0)
-                    {
-                        ImgWeather.Source = new BitmapImage(new Uri("sunny.png", UriKind.Relative));
-                    }
-                    else if (weather.ObsrValue == 1)
-                    {
-                        ImgWeather.Source = new BitmapImage(new Uri("rainy.png", UriKind.Relative));
-                    }
-                    else if (weather.ObsrValue == 2)
-                    {
-                        ImgWeather.Source = new BitmapImage(new Uri("rainy.png", UriKind.Relative));
-                    }
-                    else if(weather.ObsrValue == 3)
-                    {
-                        ImgWeather.Source = new BitmapImage(new Uri("snowy.png", UriKind.Relative));
-                    }
-                    else if(weather.ObsrValue == 5)
-                    {
-                        ImgWeather.Source = new BitmapImage(new Uri("cloud.png", UriKind.Relative));
-                    }
-                    else if(weather.ObsrValue == 6)
-                    {
-                        ImgWeather.Source = new BitmapImage(new Uri("cloud.png", UriKind.Relative));
-                    }
-                    else if (weather.ObsrValue == 7)
-                    {
-                        ImgWeather.Source = new BitmapImage(new Uri("cloud.png", UriKind.Relative));
-                    }
+                    case "PTY": // 날씨 이미지
+                        GetWeatherImagePath(weather.ObsrValue, weather);
+                        break;
+
+                    case "T1H": // 기온
+                        TxtTemp.Text = $"{weather.ObsrValue} ℃";
+                        break;
+
+                    case "REH": // 습도
+                        TxtHumid.Text = $"{weather.ObsrValue} %";
+                        break;
+
+                    case "WSD": // 풍속
+                        TxtWind.Text = $"{weather.ObsrValue} m/s";
+                        if (weather.ObsrValue < 4) { Txtalarm.Text = "바람 약함"; }
+                        else if (weather.ObsrValue >= 4 && weather.ObsrValue < 9) { Txtalarm.Text = "바람 약간 강함"; }
+                        else if (weather.ObsrValue >= 9 && weather.ObsrValue < 14) { Txtalarm.Text = "바람 강함"; }
+                        else { Txtalarm.Text = "주의! 바람 매우 강함"; }
+                        break;
                 }
+            }
+        }
 
-                if (weather.Category == "T1H")
+        private void GetWeatherImagePath(double obsrValue, Weather weather)
+        {
+            if (weather.Category == "PTY") // 이미지 부분
+            {
+                if (weather.ObsrValue == 0)
                 {
-                    TxtTemp.Text = $"{weather.ObsrValue} ℃";
+                    ImgWeather.Source = new BitmapImage(new Uri("/Resources/sunny.png", UriKind.Relative));
                 }
-
-                if (weather.Category == "REH")
+                else if (obsrValue == 1 || obsrValue == 5 || obsrValue == 6 || obsrValue == 7)
                 {
-                    TxtHumid.Text = $"{weather.ObsrValue} %";
+                    ImgWeather.Source = new BitmapImage(new Uri("/Resources/cloud.png", UriKind.Relative));
                 }
-
-                if (weather.Category == "WSD")
+                else if (weather.ObsrValue == 2)
                 {
-                    TxtWind.Text = $"{weather.ObsrValue} m/s";
+                    ImgWeather.Source = new BitmapImage(new Uri("/Resources/rainy.png", UriKind.Relative));
+                }
+                else if (weather.ObsrValue == 3)
+                {
+                    ImgWeather.Source = new BitmapImage(new Uri("/Resources/snowy.png", UriKind.Relative));
                 }
             }
         }
