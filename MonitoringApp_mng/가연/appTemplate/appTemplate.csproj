@@ -210,6 +210,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\CarList.cs" />
+    <Compile Include="Models\Weather.cs" />
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -270,7 +271,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\cloudy-day.png" />
-    <Resource Include="Resources\cloudy-day_line.png" />
     <Resource Include="Resources\garage.png" />
   </ItemGroup>
   <ItemGroup>
@@ -293,6 +293,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\terrace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\rainy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cloud.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\snowy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\sunny.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,7 +8,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="Building IoT System Monitoring" Height="600" Width="1200">
+        Title="Building IoT System Monitoring" Height="600" Width="1200" Loaded="MetroWindow_Loaded">
     <Grid>
         <!-- 전체 그리드 높이 / 넓이 -->
         <Grid.ColumnDefinitions>
@@ -45,7 +45,7 @@
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <Image Source="Resources/cloudy-day.png" Width="120"
+                    <Image x:Name="ImgWeather" Source="{Binding}" Width="120"
                     VerticalAlignment="Bottom" Margin="10"/>
                 </Grid>
                 <Grid Grid.Row="2">
@@ -60,11 +60,11 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0" Content="기온" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="℃" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="TxtTemp" Grid.Row="0" Grid.Column="1" Text="℃" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
                     <Label Grid.Row="1" Grid.Column="0" Content="습도" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="%" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="TxtHumid" Grid.Row="1" Grid.Column="1" Text="%" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <Label Grid.Row="2" Grid.Column="0" Content="풍속" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="m/s" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="TxtWind" Grid.Row="2" Grid.Column="1" Text="m/s" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                 </Grid>
             </Grid>
         </Border>

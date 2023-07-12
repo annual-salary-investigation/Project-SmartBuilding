@@ -1,6 +1,7 @@
 {"response":{"header":{"resultCode":"00","resultMsg":"NORMAL_SERVICE"},
 "body":{"dataType":"JSON" 
-,"items":{"item":[{"baseDate(발표일자)":"20230711","baseTime(발표시각 - 정시단위)":"1500","category":"PTY","nx(x좌표값)":98,"ny(y좌표값)":74,"obsrValue(실황값)":"1"}
+,"items":{"item":
+[{"baseDate(발표일자)":"20230711","baseTime(발표시각 - 정시단위)":"1500","category":"PTY","nx(x좌표값)":98,"ny(y좌표값)":74,"obsrValue(실황값)":"1"}
 // PTY : 강수형태 - (초단기) 없음(0), 비(1), 비/눈(2), 눈(3), 빗방울(5) -- 흐림으로 정의 , 빗방울눈날림(6) -- 흐림으로 정의, 눈날림(7) -- 흐림으로 정의
 ,{"baseDate":"20230711","baseTime":"1500","category":"REH","nx":98,"ny":74,"obsrValue":"91"}
 // REH : 습도(%)
@@ -16,3 +17,92 @@
 // VVV : 남북바람성분
 ,{"baseDate":"20230711","baseTime":"1500","category":"WSD","nx":98,"ny":74,"obsrValue":"7.4"}]},"pageNo":1,"numOfRows":1000,"totalCount":8}}}
 // WSD : 풍속
+
+
+http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=인증키&numOfRows=10&dataType=JSON&pageNo=1&base_date=20210628&base_time=0600&nx=55&ny=127
+
+http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=6U1OgOHXoO56%2FqdyFMr%2F5XyU8d6H2iWdFnZmtNuLA%2BhDq3mNlkfOIxbEpgVMVWrU9cb5HM8NAs2iNA0UcXE8ag%3D%3D&numOfRows=10&dataType=JSON&pageNo=1&base_date=20230712&base_time=1200&nx=98&ny=74
+
+
+{
+  "response": {
+    "header": {
+      "resultCode": "00",
+      "resultMsg": "NORMAL_SERVICE"
+    },
+    "body": {
+      "dataType": "JSON",
+      "items": {
+        "item": [
+          {
+            "baseDate": "20230712",
+            "baseTime": "1200",
+            "category": "PTY",
+            "nx": 98,
+            "ny": 74,
+            "obsrValue": "1"
+          },
+          {
+            "baseDate": "20230712",
+            "baseTime": "1200",
+            "category": "REH",
+            "nx": 98,
+            "ny": 74,
+            "obsrValue": "87"
+          },
+          {
+            "baseDate": "20230712",
+            "baseTime": "1200",
+            "category": "RN1",
+            "nx": 98,
+            "ny": 74,
+            "obsrValue": "0.3"
+          },
+          {
+            "baseDate": "20230712",
+            "baseTime": "1200",
+            "category": "T1H",
+            "nx": 98,
+            "ny": 74,
+            "obsrValue": "24.5"
+          },
+          {
+            "baseDate": "20230712",
+            "baseTime": "1200",
+            "category": "UUU",
+            "nx": 98,
+            "ny": 74,
+            "obsrValue": "3.7"
+          },
+          {
+            "baseDate": "20230712",
+            "baseTime": "1200",
+            "category": "VEC",
+            "nx": 98,
+            "ny": 74,
+            "obsrValue": "242"
+          },
+          {
+            "baseDate": "20230712",
+            "baseTime": "1200",
+            "category": "VVV",
+            "nx": 98,
+            "ny": 74,
+            "obsrValue": "2"
+          },
+          {
+            "baseDate": "20230712",
+            "baseTime": "1200",
+            "category": "WSD",
+            "nx": 98,
+            "ny": 74,
+            "obsrValue": "4.2"
+          }
+        ]
+      },
+      "pageNo": 1,
+      "numOfRows": 10,
+      "totalCount": 8
+    }
+  }
+}
