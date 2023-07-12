@@ -6,7 +6,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:appTemplate"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:lvc ="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        
         mc:Ignorable="d"
         Title="Building IoT System Monitoring" Height="600" Width="1200">
     <Grid>
@@ -48,12 +50,31 @@
         <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="5,10,5,10" CornerRadius="10">
             <Grid >
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
                     <RowDefinition Height="1*"/>
+                    <RowDefinition Height="40"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" FontSize="20" VerticalAlignment="Center">
-                    상태바 - 온습도 상태(위 온도, 밑 습도)
-                </TextBlock>
+                <Label Grid.Row="0" Content="온 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                <lvc:Gauge Grid.Row="1" x:Name="LvcTemp" Margin="15" Value="0" >
+                    <lvc:Gauge.GaugeActiveFill>
+                        <LinearGradientBrush>
+                            <GradientStop Color="Aqua" Offset="0.0"/>
+                            <GradientStop Color="GreenYellow" Offset="0.5"/>
+                            <GradientStop Color="OrangeRed" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </lvc:Gauge.GaugeActiveFill>
+                </lvc:Gauge>
+                <Label Grid.Row="2" Content="습 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                <lvc:AngularGauge Grid.Row="3" Grid.Column="1" x:Name="LvcLivingHumid"
+                              FromValue="0" ToValue="90" LabelsStep="10" Value="0"
+                              SectionsInnerRadius="0.6" Margin="15">
+                    <lvc:AngularGauge.Sections>
+                        <lvc:AngularSection FromValue="0" ToValue="30" Fill="Yellow"/>
+                        <lvc:AngularSection FromValue="30" ToValue="60" Fill="GreenYellow"/>
+                        <lvc:AngularSection FromValue="60" ToValue="90" Fill="SkyBlue"/>
+                    </lvc:AngularGauge.Sections>
+                </lvc:AngularGauge>
             </Grid>
         </Border>
 
@@ -70,30 +91,53 @@
 
             <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Grid.Column="0" Margin="0, 0, 5, 5" CornerRadius="10">
                 <Grid>
-                    <TextBlock FontSize="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="온 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+
+                    <!--<TextBlock FontSize="20">
                         전등
-                    </TextBlock>
+                    </TextBlock>-->
                 </Grid>
             </Border>
             <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Grid.Column="1" Margin="5, 0, 0, 5" CornerRadius="10">
                 <Grid>
-                    <TextBlock FontSize="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="1*"/>
+
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="엘 리 베 이 터" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                    <!--<TextBlock FontSize="20">
                         엘리베이터
-                    </TextBlock>
+                    </TextBlock>-->
                 </Grid>
             </Border>
             <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="0" Margin="0, 5, 5, 0" CornerRadius="10">
                 <Grid>
-                    <TextBlock FontSize="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="블 라 인 드" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                    <!--<TextBlock FontSize="20">
                         블라인드
-                    </TextBlock>
+                    </TextBlock>-->
                 </Grid>
             </Border>
             <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="5,5,0,0" CornerRadius="10">
                 <Grid>
-                    <TextBlock FontSize="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="에 어 컨" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                    <!--<TextBlock FontSize="20">
                         에어컨
-                    </TextBlock>
+                    </TextBlock>-->
                 </Grid>
             </Border>
 
