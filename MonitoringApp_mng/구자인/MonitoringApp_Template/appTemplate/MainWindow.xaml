@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:appTemplate"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:lvc ="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="Building IoT System Monitoring" Height="600" Width="1200">
@@ -159,13 +159,13 @@
             </Button>-->
 
 
-            <Grid>
+            <!--<Grid>
                 <Button x:Name="LightButton" Width="250" Click="LightButton_Click" BorderThickness="0" Grid.Row="0" Grid.Column="0" Panel.ZIndex="1">
                     <Button.Background>
                         <ImageBrush ImageSource="Resources/lightbulb.png" />
                     </Button.Background>
                 </Button>
-            </Grid>
+            </Grid>-->
 
             <Button x:Name="LightButton1" Width="100" Click="LightButton_Click" BorderThickness="0" Grid.Row="0" Grid.Column="0" Background="Blue" >
                 <Button.Template>
