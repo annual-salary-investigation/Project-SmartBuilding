@@ -14,7 +14,9 @@
 - 엘리베이터 : 드라이버 추가구매
 - wpf : 기본 템플릿 ui 50%완료
 ### 7.13
-- 버튼 메서드 정의,
+- 버튼 ToggleSwitch로 대체, 
+- ui 구조 조정, 거실 화장실 온도 lvc:Gauge / 습도 lvc:AngularGauge 더미데이터로 동작 (아직 mqtt, serial 통신 x) [ViewModel.cs]
+- 마트 주문 DB연결
 
 ## 센서 제어(예서 수민)
 

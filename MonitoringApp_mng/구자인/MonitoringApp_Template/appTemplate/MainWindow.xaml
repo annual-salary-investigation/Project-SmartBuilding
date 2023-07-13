@@ -89,7 +89,7 @@
 
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" Content="거실 온 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                <lvc:Gauge Grid.Row="1" Grid.Column="0" x:Name="LvcTemp" Margin="15" From="20" To="50"
+                <lvc:Gauge Grid.Row="1" Grid.Column="0" x:Name="LvcTemp" Margin="15" From="20" To="50"  
                 Value="{Binding TempValue, Mode=OneWay}">
                     <lvc:Gauge.GaugeActiveFill>
                         <LinearGradientBrush>
@@ -143,7 +143,16 @@
                     <RowDefinition Height="150"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" VerticalAlignment="Bottom">
-
+                    <StackPanel Orientation="Vertical">
+                        <!--<TextBlock  Text="Mart App에서 OrderList에서 " FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock  Text="상품명, 수량" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock  Text="현재시간" FontSize="20" HorizontalAlignment="Center"></TextBlock>-->
+                        <StackPanel Grid.Column="0">
+                            
+                            <Button Content="주문내역조회" x:Name="BtnOrderList" HorizontalAlignment="Center" Width="50" Height="30"
+                    Style="{StaticResource MahApps.Styles.Button.Dialogs.Accent}" Click="BtnOrderList_Click"/>
+                        </StackPanel>
+                    </StackPanel>
                 </Grid>
                 <Grid Grid.Row="1" Margin="0,0,10,-262">
                     <Grid.RowDefinitions>

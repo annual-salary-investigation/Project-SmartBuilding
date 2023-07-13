@@ -23,6 +23,8 @@ namespace appTemplate
     public partial class MainWindow : MetroWindow   // 솔루션 패키지에서 MahApp.Metro 삭제 후 다시 설치 필수!!! 
     {
         public ViewModel ViewModel { get; set; }
+        public static Uri Source { get; private set; }
+
         private DispatcherTimer _timer;
         public MainWindow()
         {
@@ -59,5 +61,9 @@ namespace appTemplate
             ViewModel.Temp2Value = dummyTemp2Value;
         }
 
+        private void BtnOrderList_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Source = new Uri("OrderList.xaml", UriKind.Relative);
+        }
     }
 }
