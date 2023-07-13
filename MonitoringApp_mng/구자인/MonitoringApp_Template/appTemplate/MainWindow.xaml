@@ -55,25 +55,21 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-
-                    <Image Source="Resources/lightbulb.png" 
-                        VerticalAlignment="Center" Margin="34,0,34,0" Height="50"/>
-                    <TextBlock Grid.Column="1" Text="light on off" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                    <Image Source="Resources/elevator.png" 
-                        VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="1"/>
+                                        <!--빌드했을때 아이콘이 사라짐--> 
+                    <Image Source="Resources/lightbulb.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="0" Grid.Column="0"/>
+                    <TextBlock Grid.Column="1" Text="light on off" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="74,0,0,0" />
+                    <Image Source="Resources/elevator.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="1" Grid.Column="0"/>
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="층" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="108,0,0,0"/>
-                    <Image Source="Resources/flames.png" 
-                        VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="2"/>
+                    <Image Source="Resources/flames.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="2" Grid.Column="0"/>
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="화재경고on/off" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                    <Image Source="Resources/blinds.png" 
-                        VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="3"/>
+                    <Image Source="Resources/blinds.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="3" Grid.Column="0"/>
                     <Label Grid.Row="3" Grid.Column="1" Content="상태" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="96,0,0,0"/>
                 </Grid>
             </Grid>
         </Border>
 
         <!-- 대시보드 2 차량 관리 영역 -->
-        <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="5,10,5,10" CornerRadius="10">
+        <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="2" Margin="5,10,5,10" CornerRadius="10">
             <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
@@ -81,8 +77,13 @@
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Content="온 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                <lvc:Gauge Grid.Row="1" x:Name="LvcTemp" Margin="15" Value="0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="거실 온 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                <lvc:Gauge Grid.Row="1" Grid.Column="0" x:Name="LvcTemp" Margin="15" Value="0" >
                     <lvc:Gauge.GaugeActiveFill>
                         <LinearGradientBrush>
                             <GradientStop Color="Aqua" Offset="0.0"/>
@@ -91,8 +92,28 @@
                         </LinearGradientBrush>
                     </lvc:Gauge.GaugeActiveFill>
                 </lvc:Gauge>
-                <Label Grid.Row="2" Content="습 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                <lvc:AngularGauge Grid.Row="3" Grid.Column="1" x:Name="LvcLivingHumid"
+                <Label Grid.Row="0" Grid.Column="1" Content="화장실 온 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                <lvc:Gauge Grid.Row="1" Grid.Column="1" x:Name="LvcTemp2" Margin="15" Value="0" >
+                    <lvc:Gauge.GaugeActiveFill>
+                        <LinearGradientBrush>
+                            <GradientStop Color="Aqua" Offset="0.0"/>
+                            <GradientStop Color="GreenYellow" Offset="0.5"/>
+                            <GradientStop Color="OrangeRed" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </lvc:Gauge.GaugeActiveFill>
+                </lvc:Gauge>
+                <Label Grid.Row="2" Grid.Column="0" Content="거실 습 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                <lvc:AngularGauge Grid.Row="3" Grid.Column="0" x:Name="LvcLivingHumid"
+                              FromValue="0" ToValue="90" LabelsStep="10" Value="0"
+                              SectionsInnerRadius="0.6" Margin="15">
+                    <lvc:AngularGauge.Sections>
+                        <lvc:AngularSection FromValue="0" ToValue="30" Fill="Yellow"/>
+                        <lvc:AngularSection FromValue="30" ToValue="60" Fill="GreenYellow"/>
+                        <lvc:AngularSection FromValue="60" ToValue="90" Fill="SkyBlue"/>
+                    </lvc:AngularGauge.Sections>
+                </lvc:AngularGauge>
+                <Label Grid.Row="2" Grid.Column="1" Content="화장실 습 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                <lvc:AngularGauge Grid.Row="3" Grid.Column="1" x:Name="LvcLivingHumid2"
                               FromValue="0" ToValue="90" LabelsStep="10" Value="0"
                               SectionsInnerRadius="0.6" Margin="15">
                     <lvc:AngularGauge.Sections>
@@ -105,176 +126,39 @@
         </Border>
 
         <!-- 대시보드 3 센서 감시 및 제어 영역 -->
-        <Grid Grid.Row="1" Grid.Column="2" Margin="5,10,10,10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
+        <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="10,10,5,10" CornerRadius="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" VerticalAlignment="Bottom">
 
-                                        <!-- 버튼 영역 -->
-            <!--<Button Width="100" Click="LightButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="0" Grid.Column="0">
-                <Button.Content>
-                    <iconPacks:PackIconMaterial Kind="Help" Width="100" />
-                </Button.Content>
-            </Button>
-            <Button Width="100" Click="ElevatorButton_Click" Background="Transparent" BorderThickness="0" Grid.Row="0" Grid.Column="1">
-                <Button.Content>
-                    <iconPacks:PackIconMaterial Kind="Help" Width="100" />
-                </Button.Content>
-            </Button>
-            <Button Width="100" Click="BliendButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="1" Grid.Column="0">
-                <Button.Content>
-                    <iconPacks:PackIconMaterial Kind="Help" Width="100" />
-                </Button.Content>
-            </Button>
-            <Button Width="100" Click="AirButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="1" Grid.Column="1">
-                <Button.Content>
-                    <iconPacks:PackIconMaterial Kind="Help" Width="100" />
-                </Button.Content>
-            </Button>-->
-            
-            <!--<Button Width="100" Click="LightButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="0" Grid.Column="0">
-                <Button.Content>
-                    <iconPacks:PackIconMaterial Kind="Help" Width="100" />
-                </Button.Content>
-            </Button>
-            <Button Width="100" Click="ElevatorButton_Click" Background="Transparent" BorderThickness="0" Grid.Row="0" Grid.Column="1">
-                <Button.Content>
-                    <iconPacks:PackIconMaterial Kind="Help" Width="100" />
-                </Button.Content>
-            </Button>
-            <Button Width="100" Click="BliendButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="1" Grid.Column="0">
-                <Button.Content>
-                    <iconPacks:PackIconMaterial Kind="Help" Width="100" />
-                </Button.Content>
-            </Button>
-            <Button Width="100" Click="AirButton_Click"  Background="Transparent" BorderThickness="0" Grid.Row="1" Grid.Column="1">
-                <Button.Content>
-                    <iconPacks:PackIconMaterial Kind="Help" Width="100" />
-                </Button.Content>
-            </Button>-->
-
-
-            <!--<Grid>
-                <Button x:Name="LightButton" Width="250" Click="LightButton_Click" BorderThickness="0" Grid.Row="0" Grid.Column="0" Panel.ZIndex="1">
-                    <Button.Background>
-                        <ImageBrush ImageSource="Resources/lightbulb.png" />
-                    </Button.Background>
-                </Button>
-            </Grid>-->
-
-            <Button x:Name="LightButton1" Width="100" Click="LightButton_Click" BorderThickness="0" Grid.Row="0" Grid.Column="0" Background="Blue" >
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Grid x:Name="ButtonBackground" Background="{TemplateBinding Background}" />
-                            <iconPacks:PackIconMaterial Kind="Help" Width="100" />
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="ButtonBackground" Property="Background" Value="Red" />
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="False">
-                                <Setter TargetName="ButtonBackground" Property="Background" Value="Blue" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-
-            <Button x:Name="ElevatorButton" Width="100" Click="ElevatorButton_Click" BorderThickness="0" Grid.Row="0" Grid.Column="1" Background="Blue" Panel.ZIndex="1">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Grid x:Name="ButtonBackground" Background="{TemplateBinding Background}" />
-                            <iconPacks:PackIconMaterial Kind="Help" Width="100" />
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="ButtonBackground" Property="Background" Value="Red" />
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonBackground" Property="Background" Value="Red" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Button x:Name="BliendButton" Width="100" Click="BliendButton_Click" BorderThickness="0" Grid.Row="1" Grid.Column="0" Background="Blue" Panel.ZIndex="1">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Grid x:Name="ButtonBackground" Background="{TemplateBinding Background}" />
-                            <iconPacks:PackIconMaterial Kind="Help" Width="100" />
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="ButtonBackground" Property="Background" Value="Red" />
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonBackground" Property="Background" Value="Red" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Button x:Name="AirButton" Width="100" Click="AirButton_Click" BorderThickness="0" Grid.Row="1" Grid.Column="1" Background="Blue" Panel.ZIndex="1">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Grid x:Name="ButtonBackground" Background="{TemplateBinding Background}" />
-                            <iconPacks:PackIconMaterial Kind="Help" Width="100" />
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="ButtonBackground" Property="Background" Value="Red" />
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonBackground" Property="Background" Value="Red" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-
-
-
-
-
-
-            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Grid.Column="0" Margin="0, 0, 5, 5" CornerRadius="10">
-                <Grid>
-                    <TextBlock FontSize="20"><Run Text="전등"/></TextBlock>
                 </Grid>
-            </Border>
-            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Grid.Column="1" Margin="5, 0, 0, 5" CornerRadius="10">
-                <Grid>
-                    <TextBlock FontSize="20">
-                        엘리베이터
-                    </TextBlock>
-                </Grid>
-            </Border>
-            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="0" Margin="0, 5, 5, 0" CornerRadius="10">
-                <Grid>
-                    <TextBlock FontSize="20">
-                        블라인드
-                    </TextBlock>
-                </Grid>
-            </Border>
-            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="5,5,0,0" CornerRadius="10">
-                <Grid>
-                    <TextBlock FontSize="20">
-                        에어컨
-                    </TextBlock>
-                </Grid>
-            </Border>
+                <Grid Grid.Row="1" Margin="0,0,10,-262">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
 
-        </Grid>
+                    <mah:ToggleSwitch Grid.Column="0" Header="거실" OffContent="OFF" OnContent="ON" Margin="34,11,0,0" Height="50" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
+                    <mah:ToggleSwitch Grid.Column="1" Grid.Row="0" Header="화장실" OffContent="OFF" OnContent="ON"  VerticalAlignment="Top" Margin="34,10,0,0" Height="50"/>
 
+                    <Button x:Name="ClearName" Grid.Row="1" Content="호출"  FontSize="35"
+                        Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}" HorizontalAlignment="Center" Height="83" Width="134" />
+
+                    <mah:ToggleSwitch Grid.Column="0" Grid.Row="2" Header="화재경보" OffContent="OFF" OnContent="ON" Margin="34,11,0,0" Height="51" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
+                    <mah:ToggleSwitch Grid.Column="0" Grid.Row="3" Header="블라인드" OffContent="OFF" OnContent="ON"  VerticalAlignment="Top" Margin="34,11,0,0" Height="50" Grid.ColumnSpan="2"/>
+
+                </Grid>
+            </Grid>
+        </Border>
 
     </Grid>
 </mah:MetroWindow>
