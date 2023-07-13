@@ -89,7 +89,7 @@
 
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" Content="거실 온 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                <lvc:Gauge Grid.Row="1" Grid.Column="0" x:Name="LvcTemp" Margin="15"
+                <lvc:Gauge Grid.Row="1" Grid.Column="0" x:Name="LvcTemp" Margin="15" From="20" To="50"
                 Value="{Binding TempValue, Mode=OneWay}">
                     <lvc:Gauge.GaugeActiveFill>
                         <LinearGradientBrush>
@@ -100,7 +100,7 @@
                     </lvc:Gauge.GaugeActiveFill>
                 </lvc:Gauge>
                 <Label Grid.Row="0" Grid.Column="1" Content="화장실 온 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                <lvc:Gauge Grid.Row="1" Grid.Column="1" x:Name="LvcTemp2" Margin="15"
+                <lvc:Gauge Grid.Row="1" Grid.Column="1" x:Name="LvcTemp2" Margin="15" From="20" To="50"
                 Value="{Binding Temp2Value, Mode=OneWay}">
                     <lvc:Gauge.GaugeActiveFill>
                         <LinearGradientBrush>

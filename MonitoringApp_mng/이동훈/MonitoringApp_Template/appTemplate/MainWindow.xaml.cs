@@ -25,5 +25,10 @@ namespace appTemplate
         {
             InitializeComponent();
         }
+
+        private void LvcTemp_Loaded()
+        {
+
+        }
     }
 }

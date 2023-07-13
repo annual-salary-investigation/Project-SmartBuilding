@@ -32,7 +32,7 @@ namespace appTemplate
 
             // 더미 데이터를 업데이트하는 타이머 설정
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(3);
+            _timer.Interval = TimeSpan.FromSeconds(1);
             _timer.Tick += Timer_Tick;
             _timer.Tick += Timer_Tick2;
 
@@ -53,8 +53,8 @@ namespace appTemplate
         {
             // 더미 데이터를 생성하고 ViewModel 속성에 할당
             Random random = new Random();
-            double dummyTempValue = random.Next(20, 30); // LvcTemp의 더미 데이터
-            double dummyTemp2Value = random.Next(20, 30); // LvcTemp2의 더미 데이터
+            double dummyTempValue = random.Next(20, 50); // LvcTemp의 더미 데이터
+            double dummyTemp2Value = random.Next(20, 50); // LvcTemp2의 더미 데이터
             ViewModel.TempValue = dummyTempValue;
             ViewModel.Temp2Value = dummyTemp2Value;
         }
