@@ -49,9 +49,9 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Row="0" Grid.Column="0" Content="기온" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" Margin="0,0,-30,10"/>
-                        <TextBlock x:Name="TxtTemp" Grid.Row="0" Grid.Column="1" Text="℃" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="0,-8,70,0"/>
+                        <TextBlock x:Name="TxtTemp" Grid.Row="0" Grid.Column="1" Text="℃" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="0,-9,70,0"/>
                         <Label Grid.Row="1" Grid.Column="0" Content="습도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="0,0,-30,10"/>
-                        <TextBlock x:Name="TxtHumid" Grid.Row="1" Grid.Column="1" Text="%" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="0,-8,70,0"/>
+                        <TextBlock x:Name="TxtHumid" Grid.Row="1" Grid.Column="1" Text="%" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="0,-9,70,0"/>
                         <Label Grid.Row="2" Grid.Column="0" Content="풍속" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18" Margin="0,10,-30,0"/>
                         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right"  Margin="0,10,70,0">
                             <TextBlock x:Name="TxtWind" Text="m/s" HorizontalAlignment="Right" FontSize="18" />
@@ -98,18 +98,15 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
 
             <!-- 1층 사무실 (0,0) -->
-            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Grid.Column="0" Margin="0, 0, 5, 5" CornerRadius="10">
+            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Margin="0, 0, 0, 5" CornerRadius="10">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
-                        <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
@@ -118,10 +115,21 @@
                         <Image Source="Resources/meeting-room.png" Height="30"/>
                         <Label Content="1층" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
                     </StackPanel>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10" HorizontalAlignment="Left">
+                        <Label Content="화재감지센서" Margin="4, 0" FontSize="15" FontWeight="Bold"/>
+                        <TextBlock x:Name="fireSensor1" Text="작동 중" Margin="10, 4" FontSize="15"></TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <mah:ToggleSwitch Header="전등 1" OffContent="OFF" OnContent="ON" Margin="10,0"/>
+                        <mah:ToggleSwitch Header="전등 2" OffContent="OFF" OnContent="ON" Margin="10,0"/>
+                        <mah:ToggleSwitch Header="전등 3" OffContent="OFF" OnContent="ON" Margin="10,0"/>
+                    </StackPanel>
                 </Grid>
             </Border>
             <!-- 2층 마트 (0,1) -->
-            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Grid.Column="1" Margin="5, 0, 0, 5" CornerRadius="10">
+            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Margin="0, 5, 0, 5" CornerRadius="10">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
@@ -147,7 +155,7 @@
                 </Grid>
             </Border>
             <!-- 3층 집 (1,0) -->
-            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="0" Margin="0, 5, 5, 0" CornerRadius="10">
+            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="2" Margin="0, 5, 0, 5" CornerRadius="10">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
@@ -161,7 +169,7 @@
                 </Grid>
             </Border>
             <!-- 옥상 (1,1) -->
-            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="5,5,0,0" CornerRadius="10">
+            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="3" Margin="0,5,0,0" CornerRadius="10">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
@@ -174,9 +182,6 @@
                     </StackPanel>
                 </Grid>
             </Border>
-
         </Grid>
-
-
     </Grid>
 </mah:MetroWindow>
