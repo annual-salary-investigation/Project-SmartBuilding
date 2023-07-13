@@ -144,9 +144,9 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" VerticalAlignment="Bottom">
                     <StackPanel Orientation="Vertical">
-                        <!--<TextBlock  Text="Mart App에서 OrderList에서 " FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock  Text="Mart App에서 OrderList에서 " FontSize="20" HorizontalAlignment="Center"></TextBlock>
                         <TextBlock  Text="상품명, 수량" FontSize="20" HorizontalAlignment="Center"></TextBlock>
-                        <TextBlock  Text="현재시간" FontSize="20" HorizontalAlignment="Center"></TextBlock>-->
+                        <TextBlock  Text="현재시간" FontSize="20" HorizontalAlignment="Center"></TextBlock>
                         <StackPanel Grid.Column="0">
                             
                             <Button Content="주문내역조회" x:Name="BtnOrderList" HorizontalAlignment="Center" Width="50" Height="30"

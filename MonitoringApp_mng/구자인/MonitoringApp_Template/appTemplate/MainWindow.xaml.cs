@@ -23,8 +23,6 @@ namespace appTemplate
     public partial class MainWindow : MetroWindow   // 솔루션 패키지에서 MahApp.Metro 삭제 후 다시 설치 필수!!! 
     {
         public ViewModel ViewModel { get; set; }
-        public static Uri Source { get; private set; }
-
         private DispatcherTimer _timer;
         public MainWindow()
         {
@@ -56,14 +54,10 @@ namespace appTemplate
             // 더미 데이터를 생성하고 ViewModel 속성에 할당
             Random random = new Random();
             double dummyTempValue = random.Next(20, 50); // LvcTemp의 더미 데이터
-            double dummyTemp2Value = random.Next(20, 50); // LvcTemp2의 더미 데이터
+            double dummyTemp2Value = random.Next(20, 30); // LvcTemp2의 더미 데이터
             ViewModel.TempValue = dummyTempValue;
             ViewModel.Temp2Value = dummyTemp2Value;
         }
 
-        private void BtnOrderList_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow.Source = new Uri("OrderList.xaml", UriKind.Relative);
-        }
     }
 }
