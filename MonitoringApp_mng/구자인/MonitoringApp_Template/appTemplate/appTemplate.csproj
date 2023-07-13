@@ -268,16 +268,16 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\lightbulb.png" />
+    <Resource Include="Resources\lightbulb.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\blinds.png" />
+    <Resource Include="Resources\blinds.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\flames.png" />
+    <Resource Include="Resources\flames.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\elevator.png" />
+    <Resource Include="Resources\elevator.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
