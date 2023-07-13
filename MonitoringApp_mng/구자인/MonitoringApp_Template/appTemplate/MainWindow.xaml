@@ -55,19 +55,19 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                                        <!--빌드했을때 아이콘이 사라짐--> 
-                                        <!--해결완료 : 경로나 코드나 어떠한 부분에서도 문제가 없을때 다음을 확인한다. 각 이미지 파일을 우클릭 후 속성에 들어가
+                    <!--빌드했을때 아이콘이 사라짐-->
+                    <!--해결완료 : 경로나 코드나 어떠한 부분에서도 문제가 없을때 다음을 확인한다. 각 이미지 파일을 우클릭 후 속성에 들어가
                                         "빌드작업"부분을 "Resource"로 설정해 줘야함-->
-                                        
+
                     <Image Source="/Resources/lightbulb.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="0" Grid.Column="0"/>
                     <TextBlock Grid.Column="1" Text="light on off" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="74,0,0,0" />
-                    
+
                     <Image Source="/Resources/elevator.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="1" Grid.Column="0"/>
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="층" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="108,0,0,0"/>
-                    
+
                     <Image Source="/Resources/flames.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="2" Grid.Column="0"/>
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="화재경고on/off" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                    
+
                     <Image Source="/Resources/blinds.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="3" Grid.Column="0"/>
                     <Label Grid.Row="3" Grid.Column="1" Content="상태" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="96,0,0,0"/>
                 </Grid>
@@ -89,7 +89,8 @@
 
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" Content="거실 온 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                <lvc:Gauge Grid.Row="1" Grid.Column="0" x:Name="LvcTemp" Margin="15" Value="0" >
+                <lvc:Gauge Grid.Row="1" Grid.Column="0" x:Name="LvcTemp" Margin="15"
+                Value="{Binding TempValue, Mode=OneWay}">
                     <lvc:Gauge.GaugeActiveFill>
                         <LinearGradientBrush>
                             <GradientStop Color="Aqua" Offset="0.0"/>
@@ -99,7 +100,8 @@
                     </lvc:Gauge.GaugeActiveFill>
                 </lvc:Gauge>
                 <Label Grid.Row="0" Grid.Column="1" Content="화장실 온 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                <lvc:Gauge Grid.Row="1" Grid.Column="1" x:Name="LvcTemp2" Margin="15" Value="0" >
+                <lvc:Gauge Grid.Row="1" Grid.Column="1" x:Name="LvcTemp2" Margin="15"
+                Value="{Binding Temp2Value, Mode=OneWay}">
                     <lvc:Gauge.GaugeActiveFill>
                         <LinearGradientBrush>
                             <GradientStop Color="Aqua" Offset="0.0"/>
@@ -110,8 +112,9 @@
                 </lvc:Gauge>
                 <Label Grid.Row="2" Grid.Column="0" Content="거실 습 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
                 <lvc:AngularGauge Grid.Row="3" Grid.Column="0" x:Name="LvcLivingHumid"
-                              FromValue="0" ToValue="90" LabelsStep="10" Value="0"
-                              SectionsInnerRadius="0.6" Margin="15">
+                FromValue="0" ToValue="90" LabelsStep="10"
+                Value="{Binding Value1, Mode=OneWay}"
+                SectionsInnerRadius="0.6" Margin="15">      
                     <lvc:AngularGauge.Sections>
                         <lvc:AngularSection FromValue="0" ToValue="30" Fill="Yellow"/>
                         <lvc:AngularSection FromValue="30" ToValue="60" Fill="GreenYellow"/>
@@ -120,8 +123,9 @@
                 </lvc:AngularGauge>
                 <Label Grid.Row="2" Grid.Column="1" Content="화장실 습 도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
                 <lvc:AngularGauge Grid.Row="3" Grid.Column="1" x:Name="LvcLivingHumid2"
-                              FromValue="0" ToValue="90" LabelsStep="10" Value="0"
-                              SectionsInnerRadius="0.6" Margin="15">
+                FromValue="0" ToValue="90" LabelsStep="10"
+                Value="{Binding Value2, Mode=OneWay}"
+                SectionsInnerRadius="0.6" Margin="15">
                     <lvc:AngularGauge.Sections>
                         <lvc:AngularSection FromValue="0" ToValue="30" Fill="Yellow"/>
                         <lvc:AngularSection FromValue="30" ToValue="60" Fill="GreenYellow"/>
