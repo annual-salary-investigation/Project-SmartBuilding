@@ -24,7 +24,7 @@ namespace appTemplate
         public MainWindow()
         {
             InitializeComponent();
-            WindowState = WindowState.Maximized; // 실행시 전체화면
+            // WindowState = WindowState.Maximized; // 실행시 전체화면
             WindowStartupLocation = WindowStartupLocation.CenterScreen; // 스크린 정 중앙에 창 띄우기 
 
             #region < 대시보드1 날씨영역>
