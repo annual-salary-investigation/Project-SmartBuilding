@@ -11,6 +11,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace appTemplate
@@ -53,7 +54,7 @@ namespace appTemplate
                 await Logics.Commons.ShowMessageAsync("오류", $"오류 발생 : 날씨 정보를 받아올 수 없습니다.");
                 // 기상청 API 초단기실황 자체가 생성, 조회되는 기준시간이 있기 때문에 시간이 안맞으면 오류 발생 할 수 있음
                 // 1. 24시간 동안만의 결과값을 제공  그 이전 값은 조회 오류 => 현재 날짜로 조회하기 때문에 이 문제는 해당X
-                // 2. 기준시간 00시의 값은 00시 30분에 생성되어 제공되기 때문에 새벽 12시~12시 30분 사이에 조회하면 값이 없음
+                // 2. 기준시간 00시의 값은 00시 30분에 생성되어 제공되기 때문에 새벽 12시~12시 30분 사이에 조회하면 값이 없음 =>
             }
         }
         #endregion
@@ -72,7 +73,7 @@ namespace appTemplate
         public async Task CheckWeatehr() 
         {
             // openAPI 요청 uri
-            string openApiUri = $"http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey={Commons.apiKey}&numOfRows=10&dataType=JSON&pageNo=1&base_date={Commons.convertedToday}&base_time={Commons.currentTime}&nx=98&ny=74";
+            string openApiUri = $"http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey={Commons.apiKey}&numOfRows=10&dataType=JSON&pageNo=1&base_date={Commons.convertedToday}&base_time={Commons.formattedTime}&nx=98&ny=74";
             // 하루 동안만의 결과값 제공함!
             string result = string.Empty; //결과값 초기화
 
@@ -150,8 +151,14 @@ namespace appTemplate
                         TxtWind.Text = $"{weather.ObsrValue} m/s";
                         if (weather.ObsrValue < 4) { Txtalarm.Text = "바람 약함"; }
                         else if (weather.ObsrValue >= 4 && weather.ObsrValue < 9) { Txtalarm.Text = "바람 약간 강함"; }
-                        else if (weather.ObsrValue >= 9 && weather.ObsrValue < 14) { Txtalarm.Text = "바람 강함"; }
-                        else { Txtalarm.Text = "주의! 바람 매우 강함"; }
+                        else if (weather.ObsrValue >= 9 && weather.ObsrValue < 14) {
+                            Txtalarm.Foreground = Brushes.DarkOrange;
+                            Txtalarm.Text = "바람 강함"; 
+                        }
+                        else {
+                            Txtalarm.Foreground = Brushes.DarkRed;
+                            Txtalarm.Text = "주의! 바람 매우 강함"; 
+                        }
                         break;
                 }
             }
