@@ -55,7 +55,7 @@
                         <Label Grid.Row="2" Grid.Column="0" Content="풍속" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18" Margin="0,10,-30,0"/>
                         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right"  Margin="0,10,70,0">
                             <TextBlock x:Name="TxtWind" Text="m/s" HorizontalAlignment="Right" FontSize="18" />
-                            <TextBlock x:Name="Txtalarm" Text="바람세기" HorizontalAlignment="Right" FontSize="18" />
+                            <TextBlock x:Name="Txtalarm" Text="바람세기(약함~아주강함)" HorizontalAlignment="Right" FontSize="18" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>
