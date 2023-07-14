@@ -216,6 +216,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Weather.cs" />
     <Compile Include="OrderItem.cs" />
     <Compile Include="OrderList.xaml.cs">
       <DependentUpon>OrderList.xaml</DependentUpon>
@@ -223,7 +224,7 @@
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ViewModel.cs" />
+    <Compile Include="Model\ViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -274,7 +275,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Resource Include="Resources\barrier.png" />
+    <Resource Include="Resources\bedroom.png" />
+    <Resource Include="Resources\cloud.png" />
+    <Resource Include="Resources\cloudy-day.png" />
+    <Resource Include="Resources\fire.png" />
+    <Resource Include="Resources\garage.png" />
+    <Resource Include="Resources\grocery-cart.png" />
+    <Resource Include="Resources\light-bulb.png" />
+    <Resource Include="Resources\meeting-room.png" />
+    <Resource Include="Resources\rainy.png" />
+    <Resource Include="Resources\snowy.png" />
+    <Resource Include="Resources\sunny.png" />
+    <Resource Include="Resources\tent1.png" />
+    <Resource Include="Resources\terrace.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\lightbulb.png" />
