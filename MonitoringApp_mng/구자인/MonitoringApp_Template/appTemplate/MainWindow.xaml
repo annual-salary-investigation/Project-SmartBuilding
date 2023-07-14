@@ -37,7 +37,7 @@
                     <TextBlock x:Name="Txtdate" Text="yyyy-mm-dd" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,0"></TextBlock>
                     <TextBlock x:Name="Txtday" Text="요일" FontSize="20" HorizontalAlignment="Center" Margin="0,10"></TextBlock>
                     <TextBlock x:Name="TxtTime" Text="현재시간" FontSize="20" HorizontalAlignment="Center" Margin="0,10"></TextBlock>
-                    <Image x:Name="ImgWeather" Source="{Binding}" Width="120" VerticalAlignment="Bottom" Margin="0,35"/>
+                    <Image x:Name="ImgWeather" Source="{Binding}" Width="120" VerticalAlignment="Bottom" />
                     <Grid Margin="0, 10, 0, 0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"/>
@@ -158,25 +158,27 @@
                     <Image Source="/Resources/lightbulb.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="0" Grid.Column="0"/>
                     <TextBlock Text="light on off" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
 
-                    <Image Source="/Resources/elevator.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="1" Grid.Column="0"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="층" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                    <!--<Image Source="/Resources/elevator.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="1" Grid.Column="0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="층" VerticalAlignment="Bottom" HorizontalAlignment="Center" />-->
 
-                    <Image Source="/Resources/flames.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="2" Grid.Column="0"/>
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="화재경고on/off" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                    <Image Source="/Resources/ice.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="1" Grid.Column="0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="에어컨on/off" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
 
-                    <Image Source="/Resources/blinds.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="3" Grid.Column="0"/>
-                    <Label Grid.Row="3" Grid.Column="0" Content="상태" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                    <Image Source="/Resources/blinds.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="2" Grid.Column="0"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="상태" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+
+                    <Image Source="/Resources/elevator.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="3" Grid.Column="0"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="현제 층" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
 
 
                     <Grid Grid.Column="1" Grid.Row="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="32.002"/>
-                        </Grid.RowDefinitions>
+                        
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
                         <mah:ToggleSwitch Grid.Column="0" Grid.Row="0" Header="거실" OffContent="OFF" OnContent="ON" Height="50" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
-                        <mah:ToggleSwitch Grid.Column="0" Grid.Row="1" Header="화장실" OffContent="OFF" OnContent="ON"  VerticalAlignment="Top" Height="50"/>
+                        <mah:ToggleSwitch Grid.Column="1" Grid.Row="0" Header="화장실" OffContent="OFF" OnContent="ON"  VerticalAlignment="Top" Height="50"/>
 
                         <!--<mah:ToggleSwitch Grid.Column="0" Header="거실" OffContent="OFF" OnContent="ON" Margin="34,11,0,0" Height="50" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
                     <mah:ToggleSwitch Grid.Column="1" Grid.Row="0" Header="화장실" OffContent="OFF" OnContent="ON"  VerticalAlignment="Top" Margin="34,10,0,0" Height="50"/>
@@ -186,6 +188,15 @@
 
                     <mah:ToggleSwitch Grid.Column="0" Grid.Row="2" Header="화재경보" OffContent="OFF" OnContent="ON" Margin="34,11,0,0" Height="51" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
                     <mah:ToggleSwitch Grid.Column="0" Grid.Row="3" Header="블라인드" OffContent="OFF" OnContent="ON"  VerticalAlignment="Top" Margin="34,11,0,0" Height="50" Grid.ColumnSpan="2"/>-->
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <mah:ToggleSwitch Grid.Column="0" Grid.Row="0" Header="거실" OffContent="OFF" OnContent="ON" Height="50" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="2">
+                        <mah:ToggleSwitch Grid.Column="0" Grid.Row="0" Header="거실" OffContent="OFF" OnContent="ON" Height="50" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="3">
+                        <Button x:Name="ClearName" Grid.Row="1" Content="호출"  FontSize="35" Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}" HorizontalAlignment="Center"  />
                     </Grid>
                 </Grid>
             </Grid>
