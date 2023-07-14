@@ -217,10 +217,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Weather.cs" />
-    <Compile Include="OrderItem.cs" />
-    <Compile Include="OrderList.xaml.cs">
-      <DependentUpon>OrderList.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Model\Paymentitem.cs" />
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -238,10 +235,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="OrderList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

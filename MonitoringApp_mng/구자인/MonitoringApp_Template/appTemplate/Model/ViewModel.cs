@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel;
 
+// 더미데이터
 public class ViewModel : INotifyPropertyChanged
-{
+{ 
+
     // 거실  온도
     private double _tempValue;
     public double TempValue

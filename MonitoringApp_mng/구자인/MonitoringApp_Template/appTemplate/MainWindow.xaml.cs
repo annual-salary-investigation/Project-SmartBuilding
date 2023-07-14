@@ -1,15 +1,19 @@
 ﻿using appTemplate.Logics;
 using appTemplate.Models;
 using MahApps.Metro.Controls;
+using MartApp.Models;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -28,51 +32,15 @@ namespace appTemplate
     /// </summary>
     public partial class MainWindow : MetroWindow   // 솔루션 패키지에서 MahApp.Metro 삭제 후 다시 설치 필수!!! 
     {
+        private System.Timers.Timer bTimer; //DB 내용 변경 시 실시간 반영을 위함
+
         public ViewModel ViewModel { get; set; }
         private DispatcherTimer _timer;
         public MainWindow()
         {
+
             InitializeComponent();
-            WindowStartupLocation = WindowStartupLocation.CenterScreen; // 스크린 정 중앙에 창 띄우기 
-
-            ViewModel = new ViewModel();
-            DataContext = ViewModel;
-
-            // 더미 데이터를 업데이트하는 타이머 설정
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(1);
-            _timer.Tick += Timer_Tick;
-            _timer.Tick += Timer_Tick2;
-
-            _timer.Start();
-
-            #region < 대시보드1 날씨영역>
-            // 날짜, 요일, 시간
-            Txtdate.Text = DateTime.Today.ToShortDateString();
-            Txtday.Text = DateTime.Now.DayOfWeek.ToString();
-            TxtTime.Text = DateTime.Now.ToShortTimeString();
-            #endregion
-        }
-
-        //습도
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            // 더미 데이터를 생성하고 ViewModel 속성에 할당
-            Random random = new Random();
-            double dummyValue1 = random.Next(20, 80); // LvcLivingHumid의 더미 데이터
-            double dummyValue2 = random.Next(20, 80); // LvcLivingHumid2의 더미 데이터
-            ViewModel.Value1 = dummyValue1;
-            ViewModel.Value2 = dummyValue2;
-        }
-        //온도
-        private void Timer_Tick2(object sender, EventArgs e)
-        {
-            // 더미 데이터를 생성하고 ViewModel 속성에 할당
-            Random random = new Random();
-            double dummyTempValue = random.Next(20, 50); // LvcTemp의 더미 데이터
-            double dummyTemp2Value = random.Next(20, 30); // LvcTemp2의 더미 데이터
-            ViewModel.TempValue = dummyTempValue;
-            ViewModel.Temp2Value = dummyTemp2Value;
+        
         }
 
         #region < 실제 OpenAPI 불러오는 함수 >
@@ -195,27 +163,158 @@ namespace appTemplate
             }
         }
         #endregion
+
         #region <메인 창 로드 영역 - 로그인 창 부분은 앱 구현 마지막 단계에 주석 지우고 사용!>
         private async void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+            {
+                bTimer = new System.Timers.Timer(500);
+
+                bTimer.AutoReset = true;
+                bTimer.Enabled = true;
+
+
+
+                //    var loginWindow = new Login();
+                //    loginWindow.Owner = this; // LoginWindow의 부모는 MainWindow
+                //    loginWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner; // MainWindow의 정중앙에 위치
+                //    loginWindow.ShowDialog();  // 모달창
+
+
+                //OpenAPI로 날씨값 받아오기
+                try
+                {
+                    await CheckWeatehr();
+                }
+                catch
+                {
+                    await Logics.Commons.ShowMessageAsync("오류", $"오류 발생 : 날씨 정보를 받아올 수 없습니다.");
+                    // 기상청 API 초단기실황 자체가 생성, 조회되는 기준시간이 있기 때문에 시간이 안맞으면 오류 발생 할 수 있음
+                    // 1. 24시간 동안만의 결과값을 제공  그 이전 값은 조회 오류 => 현재 날짜로 조회하기 때문에 이 문제는 해당X
+                    // 2. 기준시간 00시의 값은 00시 30분에 생성되어 제공되기 때문에 새벽 12시~12시 30분 사이에 조회하면 값이 없음 =>
+                }
+
+                WindowStartupLocation = WindowStartupLocation.CenterScreen; // 스크린 정 중앙에 창 띄우기 
+
+                ViewModel = new ViewModel();
+                DataContext = ViewModel;
+
+                // 더미 데이터를 업데이트하는 타이머 설정
+                _timer = new DispatcherTimer();
+                _timer.Interval = TimeSpan.FromSeconds(1);
+                _timer.Tick += Timer_Tick;
+                _timer.Tick += Timer_Tick2;
+
+                _timer.Start();
+
+                #region < 대시보드1 날씨영역>
+                // 날짜, 요일, 시간
+                Txtdate.Text = DateTime.Today.ToShortDateString();
+                Txtday.Text = DateTime.Now.DayOfWeek.ToString();
+                TxtTime.Text = DateTime.Now.ToShortTimeString();
+            #endregion
+
+                bTimer.Elapsed += ProcUpdate; //btimer는 ProcUpdate함수를 호출
+                bTimer.Start();
+        }
+        #endregion
+
+        #region < 마트 DB 불러오는 함수>
+
+        private void ProcUpdate(object sender, ElapsedEventArgs e)
         {
-            //    var loginWindow = new Login();
-            //    loginWindow.Owner = this; // LoginWindow의 부모는 MainWindow
-            //    loginWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner; // MainWindow의 정중앙에 위치
-            //    loginWindow.ShowDialog();  // 모달창
-
-
-            //OpenAPI로 날씨값 받아오기
-            try
+            this.Invoke(() =>
             {
-                await CheckWeatehr();
-            }
-            catch
+                Payment();//DB를 Load하여 화면에 출력하는 함수 호출
+            });
+        }
+
+        private void Payment()
+        {
             {
-                await Logics.Commons.ShowMessageAsync("오류", $"오류 발생 : 날씨 정보를 받아올 수 없습니다.");
-                // 기상청 API 초단기실황 자체가 생성, 조회되는 기준시간이 있기 때문에 시간이 안맞으면 오류 발생 할 수 있음
-                // 1. 24시간 동안만의 결과값을 제공  그 이전 값은 조회 오류 => 현재 날짜로 조회하기 때문에 이 문제는 해당X
-                // 2. 기준시간 00시의 값은 00시 30분에 생성되어 제공되기 때문에 새벽 12시~12시 30분 사이에 조회하면 값이 없음 =>
+                this.DataContext = null;
+                List<PaymentItem> list = new List<PaymentItem>();
+
+                try
+                {
+                    using (MySqlConnection conn = new MySqlConnection(Commons.MyConnString))
+                    {
+                        if (conn.State == ConnectionState.Closed) { conn.Open(); }
+
+                        var query = @"SELECT ProductId,
+                                             Id,
+                                             Product,
+                                             Price,
+                                             Count,
+                                             Category,
+                                             Image,
+                                             DateTime
+                                        FROM paymentdb
+                                        WHERE ID='user'";
+                        var cmd = new MySqlCommand(query, conn);
+                        var adapter = new MySqlDataAdapter(cmd);
+                        DataSet ds = new DataSet();
+                        adapter.Fill(ds, "paymentdb");
+
+                        foreach (DataRow row in ds.Tables["paymentdb"].Rows)
+                        {
+                            //var TimeDate = DateTime.
+                            list.Add(new PaymentItem
+                            {
+                                Id = Convert.ToString(row["Id"]),
+                                Product = Convert.ToString(row["Product"]),
+                                Price = Convert.ToInt32(row["Price"]),
+                                Count = Convert.ToInt32(row["Count"]),
+                                Category = Convert.ToString(row["Category"]),
+                                Image = Convert.ToString(row["Image"]),
+                                DateTime = Convert.ToDateTime(row["DateTime"]),
+                            });
+                        }
+                        this.DataContext = list;        // 가져온 데이터를 GUI에 뿌려줌
+                        GrdUserInfo.ItemsSource = list; // 이미지 띄움
+
+                        query = $@"SELECT Id,
+                                      SUM(Price) AS Total
+                                 FROM paymentdb
+                                WHERE Id = 'user'
+                                GROUP BY Id";
+                        cmd = new MySqlCommand(query, conn);
+                        adapter = new MySqlDataAdapter(cmd);
+                        ds = new DataSet();
+                        adapter.Fill(ds, "paymentdb");
+
+                        var labeltext = Convert.ToString(ds.Tables["paymentdb"].Rows[0]["Total"]);
+                        LblTotalPrice.Content = $"총 합계 금액 : {labeltext}";
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    Debug.WriteLine("오류남 오류남");
+                }
             }
+        }
+        #endregion
+
+        #region < 온 습도 바 동작>
+        //습도
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            // 더미 데이터를 생성하고 ViewModel 속성에 할당
+            Random random = new Random();
+            double dummyValue1 = random.Next(20, 80); // LvcLivingHumid의 더미 데이터
+            double dummyValue2 = random.Next(20, 80); // LvcLivingHumid2의 더미 데이터
+            ViewModel.Value1 = dummyValue1;
+            ViewModel.Value2 = dummyValue2;
+        }
+        //온도
+        private void Timer_Tick2(object sender, EventArgs e)
+        {
+            // 더미 데이터를 생성하고 ViewModel 속성에 할당
+            Random random = new Random();
+            double dummyTempValue = random.Next(20, 50); // LvcTemp의 더미 데이터
+            double dummyTemp2Value = random.Next(20, 30); // LvcTemp2의 더미 데이터
+            ViewModel.TempValue = dummyTempValue;
+            ViewModel.Temp2Value = dummyTemp2Value;
         }
         #endregion
     }

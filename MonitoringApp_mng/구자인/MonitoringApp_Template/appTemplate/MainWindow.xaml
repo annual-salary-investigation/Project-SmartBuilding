@@ -13,7 +13,7 @@
     <Grid>
         <!-- 전체 그리드 높이 / 넓이 -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
@@ -33,7 +33,7 @@
         <!-- 대시보드 1 날씨 영역 -->
         <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="0" Margin="10,10,5,10" CornerRadius="10">
             <Grid>
-                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0,-100,0,0">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0,10,0,0">
                     <TextBlock x:Name="Txtdate" Text="yyyy-mm-dd" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,0"></TextBlock>
                     <TextBlock x:Name="Txtday" Text="요일" FontSize="20" HorizontalAlignment="Center" Margin="0,10"></TextBlock>
                     <TextBlock x:Name="TxtTime" Text="현재시간" FontSize="20" HorizontalAlignment="Center" Margin="0,10"></TextBlock>
@@ -46,7 +46,7 @@
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Row="0" Grid.Column="0" Content="기온" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" Margin="0,0,-30,10"/>
@@ -54,21 +54,107 @@
                         <Label Grid.Row="1" Grid.Column="0" Content="습도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="0,0,-30,10"/>
                         <TextBlock x:Name="TxtHumid" Grid.Row="1" Grid.Column="1" Text="%" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="0,-9,70,0"/>
                         <Label Grid.Row="2" Grid.Column="0" Content="풍속" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18" Margin="0,10,-30,0"/>
-                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right"  Margin="0,10,70,0">
-                            <TextBlock x:Name="TxtWind" Text="m/s" HorizontalAlignment="Right" FontSize="18" />
+                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="left" >
+                            <TextBlock x:Name="TxtWind" Text="m/s" HorizontalAlignment="Center" FontSize="18" />
                             <TextBlock x:Name="Txtalarm" Text="바람세기" HorizontalAlignment="Right" FontSize="18" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>
             </Grid>
         </Border>
-  
-        <!--빌드했을때 아이콘이 사라짐-->
-        <!--해결완료 : 경로나 코드나 어떠한 부분에서도 문제가 없을때 다음을 확인한다. 각 이미지 파일을 우클릭 후 속성에 들어가
+        <!--빌드했을때 아이콘이 사라짐 // 해결완료 : 경로나 코드나 어떠한 부분에서도 문제가 없을때 다음을 확인한다. 각 이미지 파일을 우클릭 후 속성에 들어가
                                         "빌드작업"부분을 "Resource"로 설정해 줘야함-->
-        
-        
-        <!-- 대시보드 2 차량 관리 영역 -->
+
+        <!-- 대시보드 2 센서 감시 및 제어 영역 -->
+        <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="10,10,5,10" CornerRadius="10">
+            <Grid>
+                <!--MartApp payment DB 연결 영역-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" >
+                    <DataGrid x:Name="GrdUserInfo" Margin="5,5,5,5" FontSize="15"
+                              IsReadOnly="True" Style="{StaticResource MahApps.Styles.DataGrid.Azure}"
+                              ItemsSource="{Binding}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <!--<DataGridTextColumn Binding="{Binding Id}" Header="아이디" />-->
+                            <DataGridTextColumn Binding="{Binding Product}" Header="상품" />
+                            <DataGridTextColumn Binding="{Binding Price}" Header="가격" />
+                            <DataGridTextColumn Binding="{Binding Count}" Header="수량" />
+                            <DataGridTemplateColumn Header="이미지">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image x:Name="img" Source="{Binding Image}" Width="70" Height="70"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <StackPanel>
+                        <Label x:Name="LblTotalPrice" Content="총 합계 금액 : 0" HorizontalAlignment="Right" FontWeight="Bold" FontSize="14"/>
+                    </StackPanel>
+                </Grid>
+                
+                <!--아두이노 버튼제어 영역-->
+                <Grid Grid.Row="2" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--이모티콘 영역-->
+                    <Image Source="/Resources/lightbulb.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="0" Grid.Column="0"/>
+                    <Image Source="/Resources/ice.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="1" Grid.Column="0"/>
+                    <Image Source="/Resources/blinds.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="2" Grid.Column="0"/>
+                    <Image Source="/Resources/elevator.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="3" Grid.Column="0"/>
+                    
+                    <TextBlock Text="light on off" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="에어컨on/off" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="상태" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+
+
+
+                    <Grid Grid.Column="1" Grid.Row="0">
+                        <StackPanel Orientation="Horizontal">
+                        <mah:ToggleSwitch Grid.Column="0" Grid.Row="0" Header="거실" OffContent="OFF" OnContent="ON" Height="50" Grid.ColumnSpan="2" VerticalAlignment="Top" />
+                        <mah:ToggleSwitch Grid.Column="1" Grid.Row="0" Header="화장실" OffContent="OFF" OnContent="ON"  VerticalAlignment="Top" Height="50"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <mah:ToggleSwitch Grid.Column="0" Grid.Row="0" Header="거실" OffContent="OFF" OnContent="ON" Height="50" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="2">
+                        <mah:ToggleSwitch Grid.Column="0" Grid.Row="0" Header="거실" OffContent="OFF" OnContent="ON" Height="50" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
+                    </Grid>
+                    
+                    
+                    <Grid Grid.Column="1" Grid.Row="3">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Label Content="현제 층" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" />
+
+                            <DataGrid x:Name="NFloor" Margin="40,0,40,0" IsReadOnly="True" Style="{StaticResource MahApps.Styles.DataGrid.Azure}"
+                              ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                
+                            </DataGrid>
+                            <Button x:Name="ClearName" Content="호출"  FontSize="35" Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- 대시보드 3 온습도 시각화영역-->
         <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="2" Margin="5,10,5,10" CornerRadius="10">
             <Grid >
                 <Grid.RowDefinitions>
@@ -128,79 +214,5 @@
                 </lvc:AngularGauge>
             </Grid>
         </Border>
-
-        <!-- 대시보드 3 센서 감시 및 제어 영역 -->
-        <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="10,10,5,10" CornerRadius="10">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" VerticalAlignment="Bottom">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock  Text="Mart App에서 OrderList에서 " FontSize="20" HorizontalAlignment="Center"></TextBlock>
-                        <TextBlock  Text="상품명, 수량" FontSize="20" HorizontalAlignment="Center"></TextBlock>
-                        <StackPanel Grid.Column="0"/>
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Row="1" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Image Source="/Resources/lightbulb.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="0" Grid.Column="0"/>
-                    <TextBlock Text="light on off" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
-
-                    <!--<Image Source="/Resources/elevator.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="1" Grid.Column="0"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="층" VerticalAlignment="Bottom" HorizontalAlignment="Center" />-->
-
-                    <Image Source="/Resources/ice.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="1" Grid.Column="0"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="에어컨on/off" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-
-                    <Image Source="/Resources/blinds.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="2" Grid.Column="0"/>
-                    <Label Grid.Row="2" Grid.Column="0" Content="상태" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
-
-                    <Image Source="/Resources/elevator.png" VerticalAlignment="Center" Margin="34,0,34,0" Height="50" Grid.Row="3" Grid.Column="0"/>
-                    <Label Grid.Row="3" Grid.Column="0" Content="현제 층" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
-
-
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-                        <mah:ToggleSwitch Grid.Column="0" Grid.Row="0" Header="거실" OffContent="OFF" OnContent="ON" Height="50" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
-                        <mah:ToggleSwitch Grid.Column="1" Grid.Row="0" Header="화장실" OffContent="OFF" OnContent="ON"  VerticalAlignment="Top" Height="50"/>
-
-                        <!--<mah:ToggleSwitch Grid.Column="0" Header="거실" OffContent="OFF" OnContent="ON" Margin="34,11,0,0" Height="50" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
-                    <mah:ToggleSwitch Grid.Column="1" Grid.Row="0" Header="화장실" OffContent="OFF" OnContent="ON"  VerticalAlignment="Top" Margin="34,10,0,0" Height="50"/>
-
-                    <Button x:Name="ClearName" Grid.Row="1" Content="호출"  FontSize="35"
-                        Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}" HorizontalAlignment="Center" Height="83" Width="134" />
-
-                    <mah:ToggleSwitch Grid.Column="0" Grid.Row="2" Header="화재경보" OffContent="OFF" OnContent="ON" Margin="34,11,0,0" Height="51" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
-                    <mah:ToggleSwitch Grid.Column="0" Grid.Row="3" Header="블라인드" OffContent="OFF" OnContent="ON"  VerticalAlignment="Top" Margin="34,11,0,0" Height="50" Grid.ColumnSpan="2"/>-->
-                    </Grid>
-                    <Grid Grid.Column="1" Grid.Row="1">
-                        <mah:ToggleSwitch Grid.Column="0" Grid.Row="0" Header="거실" OffContent="OFF" OnContent="ON" Height="50" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
-                    </Grid>
-                    <Grid Grid.Column="1" Grid.Row="2">
-                        <mah:ToggleSwitch Grid.Column="0" Grid.Row="0" Header="거실" OffContent="OFF" OnContent="ON" Height="50" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
-                    </Grid>
-                    <Grid Grid.Column="1" Grid.Row="3">
-                        <Button x:Name="ClearName" Grid.Row="1" Content="호출"  FontSize="35" Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}" HorizontalAlignment="Center"  />
-                    </Grid>
-                </Grid>
-            </Grid>
-        </Border>
-
     </Grid>
 </mah:MetroWindow>
