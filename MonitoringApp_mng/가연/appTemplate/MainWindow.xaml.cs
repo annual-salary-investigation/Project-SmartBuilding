@@ -149,15 +149,15 @@ namespace appTemplate
 
                     case "WSD": // 풍속
                         TxtWind.Text = $"{weather.ObsrValue} m/s";
-                        if (weather.ObsrValue < 4) { Txtalarm.Text = "바람 약함"; }
-                        else if (weather.ObsrValue >= 4 && weather.ObsrValue < 9) { Txtalarm.Text = "바람 약간 강함"; }
+                        if (weather.ObsrValue < 4) { Txtalarm.Text = "약함"; }
+                        else if (weather.ObsrValue >= 4 && weather.ObsrValue < 9) { Txtalarm.Text = "약간 강함"; }
                         else if (weather.ObsrValue >= 9 && weather.ObsrValue < 14) {
                             Txtalarm.Foreground = Brushes.DarkOrange;
-                            Txtalarm.Text = "바람 강함"; 
+                            Txtalarm.Text = "강함"; 
                         }
                         else {
                             Txtalarm.Foreground = Brushes.DarkRed;
-                            Txtalarm.Text = "주의! 바람 매우 강함"; 
+                            Txtalarm.Text = "매우 강함"; 
                         }
                         break;
                 }
