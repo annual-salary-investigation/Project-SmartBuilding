@@ -36,7 +36,7 @@
                     <TextBlock x:Name="Txtdate" Text="yyyy-mm-dd" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,0"></TextBlock>
                     <TextBlock x:Name="Txtday" Text="요일" FontSize="20" HorizontalAlignment="Center" Margin="0,10"></TextBlock>
                     <TextBlock x:Name="TxtTime" Text="현재시간" FontSize="20" HorizontalAlignment="Center" Margin="0,10"></TextBlock>
-                    <Image x:Name="ImgWeather" Source="{Binding}" Width="120" VerticalAlignment="Bottom" Margin="0,35"/>
+                    <Image x:Name="ImgWeather" Source="{Binding}" Width="120" VerticalAlignment="Bottom" Margin="0,25"/>
                     <Grid Margin="0, 10, 0, 0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"/>
@@ -55,7 +55,7 @@
                         <Label Grid.Row="2" Grid.Column="0" Content="풍속" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18" Margin="0,10,-30,0"/>
                         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right"  Margin="0,10,70,0">
                             <TextBlock x:Name="TxtWind" Text="m/s" HorizontalAlignment="Right" FontSize="18" />
-                            <TextBlock x:Name="Txtalarm" Text="바람세기(약함~아주강함)" HorizontalAlignment="Right" FontSize="18" />
+                            <TextBlock x:Name="Txtalarm" Text="바람세기" HorizontalAlignment="Right" FontSize="18" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -66,6 +66,7 @@
         <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="5,10,5,10" CornerRadius="10">
             <Grid >
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="주차 관리" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,-20,0,20"/>
                     <Image Source="Resources/garage.png" Width="120" VerticalAlignment="Bottom" Margin="0,0,0,50"/>
                     <Button x:Name="BtnShowCar" Content="입차 현황" Margin="0, 15" FontSize="18"
                     Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Width="150" BorderThickness="0">
