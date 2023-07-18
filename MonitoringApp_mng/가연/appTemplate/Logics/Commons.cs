@@ -1,12 +1,10 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.Controls;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Globalization;
+using uPLibrary.Networking.M2Mqtt;
 
 namespace appTemplate.Logics
 {
@@ -30,6 +28,16 @@ namespace appTemplate.Logics
         public static readonly DateTime now = DateTime.Now;
         public static readonly int currentTime = now.Hour * 100 - 70; // 기준 시간에 따른 데이터 못불러오는 문제 해결하기 위해 시간값 *100 후 -70.. 9시 23분에 조회하면 0830으로 들어가게
         public static readonly string formattedTime = currentTime.ToString("0000"); // 이렇게 안하면 12시 08분의 경우 8로 값 들어감 이렇게 해야 0008로 됨
+
+        // 화면마다 공유할 MQTT 브로커 ip 변수
+        // 학교용
+         public static string BROKERHOST { get; set; } = "210.119.12.77";
+        // 집에서 할 때
+        //public static string BROKERHOST { get; set; } = "192.168.124.102";
+        public static string MQTTTOPIC { get; set; } = "pknu/rpi/control/";
+
+        // MQTT 클라이언트 공용 객체
+        public static MqttClient MQTT_CLIENT { get; set; }
 
         // 메트로 다이얼로그창을 위한 정적 메서드
         public static async Task<MessageDialogResult> ShowMessageAsync(string title, string message, MessageDialogStyle style = MessageDialogStyle.Affirmative)
