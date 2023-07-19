@@ -152,7 +152,7 @@ namespace appTemplate
 
                         // 지역 이름이 부산이면 데이터를 출력
                         if (location.Contains(city))
-                        {
+                        {   
                             try // Double.Parse에서 오류 발생 많음 => 오류 발생시 0으로 
                             {
                                 double convertCloud = Double.Parse(cloud);
@@ -160,7 +160,7 @@ namespace appTemplate
 
                                 GetWeatherImagePath(convertCloud, convertRainy);
                             }
-                            catch
+                            catch 
                             {
                                 double errorCloud = 0;
                                 double errorRainy = 0;
@@ -170,16 +170,14 @@ namespace appTemplate
 
                             TxtTemp.Text = $"{temperature} ℃";
 
-                            TxtHumid.Text = $"{humidity} %";
+                            TxtHumid.Text = $"{humidity} % 입니다.";
 
-                            TxtWind.Text = $"{windSpeed} m/s ";
-
-                            if (Double.Parse(windSpeed) < 4) { Txtalarm.Text = "약함"; }
-                            else if (Double.Parse(windSpeed) >= 4 && Double.Parse(windSpeed) < 9) { Txtalarm.Text = "약간 강함"; }
+                            if (Double.Parse(windSpeed) < 4) { Txtalarm.Text = "[바람 약함]"; }
+                            else if (Double.Parse(windSpeed) >= 4 && Double.Parse(windSpeed) < 9) { Txtalarm.Text = "[바람 약간 강함]"; }
                             else if (Double.Parse(windSpeed) >= 9 && Double.Parse(windSpeed) < 14)
                             {
                                 Txtalarm.Foreground = Brushes.DarkOrange;
-                                Txtalarm.Text = "강함";
+                                Txtalarm.Text = "[주의! 바람 강함]";
                             }
                             break;
                         }
@@ -189,6 +187,7 @@ namespace appTemplate
             catch(Exception e )
             {
                 await Logics.Commons.ShowMessageAsync("오류", $"오류 발생 : {e}");
+                
             }
 
         }
