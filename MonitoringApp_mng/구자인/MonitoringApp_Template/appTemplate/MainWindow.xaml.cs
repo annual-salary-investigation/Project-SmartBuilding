@@ -220,79 +220,79 @@ namespace appTemplate
 
         #region < 마트 DB 불러오는 함수>
 
-        private void ProcUpdate(object sender, ElapsedEventArgs e)
-        {
-            this.Invoke(() =>
+            private void ProcUpdate(object sender, ElapsedEventArgs e)
             {
-                Payment();//DB를 Load하여 화면에 출력하는 함수 호출
-            });
-        }
-
-        private void Payment()
-        {
-            {
-                this.DataContext = null;
-                List<PaymentItem> list = new List<PaymentItem>();
-
-                try
+                this.Invoke(() =>
                 {
-                    using (MySqlConnection conn = new MySqlConnection(Commons.MyConnString))
+                    Payment();//DB를 Load하여 화면에 출력하는 함수 호출
+                });
+            }
+
+            private void Payment()
+            {
+                {
+                    this.DataContext = null;
+                    List<PaymentItem> list = new List<PaymentItem>();
+
+                    try
                     {
-                        if (conn.State == ConnectionState.Closed) { conn.Open(); }
-
-                        var query = @"SELECT ProductId,
-                                             Id,
-                                             Product,
-                                             Price,
-                                             Count,
-                                             Category,
-                                             Image,
-                                             DateTime
-                                        FROM paymentdb
-                                        WHERE ID='user'";
-                        var cmd = new MySqlCommand(query, conn);
-                        var adapter = new MySqlDataAdapter(cmd);
-                        DataSet ds = new DataSet();
-                        adapter.Fill(ds, "paymentdb");
-
-                        foreach (DataRow row in ds.Tables["paymentdb"].Rows)
+                        using (MySqlConnection conn = new MySqlConnection(Commons.MyConnString))
                         {
-                            //var TimeDate = DateTime.
-                            list.Add(new PaymentItem
+                            if (conn.State == ConnectionState.Closed) { conn.Open(); }
+
+                            var query = @"SELECT ProductId,
+                                                 Id,
+                                                 Product,
+                                                 Price,
+                                                 Count,
+                                                 Category,
+                                                 Image,
+                                                 DateTime
+                                            FROM paymentdb
+                                            WHERE ID='user'";
+                            var cmd = new MySqlCommand(query, conn);
+                            var adapter = new MySqlDataAdapter(cmd);
+                            DataSet ds = new DataSet();
+                            adapter.Fill(ds, "paymentdb");
+
+                            foreach (DataRow row in ds.Tables["paymentdb"].Rows)
                             {
-                                Id = Convert.ToString(row["Id"]),
-                                Product = Convert.ToString(row["Product"]),
-                                Price = Convert.ToInt32(row["Price"]),
-                                Count = Convert.ToInt32(row["Count"]),
-                                Category = Convert.ToString(row["Category"]),
-                                Image = Convert.ToString(row["Image"]),
-                                DateTime = Convert.ToDateTime(row["DateTime"]),
-                            });
+                                //var TimeDate = DateTime.
+                                list.Add(new PaymentItem
+                                {
+                                    Id = Convert.ToString(row["Id"]),
+                                    Product = Convert.ToString(row["Product"]),
+                                    Price = Convert.ToInt32(row["Price"]),
+                                    Count = Convert.ToInt32(row["Count"]),
+                                    Category = Convert.ToString(row["Category"]),
+                                    Image = Convert.ToString(row["Image"]),
+                                    DateTime = Convert.ToDateTime(row["DateTime"]),
+                                });
+                            }
+                            this.DataContext = list;        // 가져온 데이터를 GUI에 뿌려줌
+                            GrdUserInfo.ItemsSource = list; // 이미지 띄움
+
+                            query = $@"SELECT Id,
+                                          SUM(Price) AS Total
+                                     FROM paymentdb
+                                    WHERE Id = 'user'
+                                    GROUP BY Id";
+                            cmd = new MySqlCommand(query, conn);
+                            adapter = new MySqlDataAdapter(cmd);
+                            ds = new DataSet();
+                            adapter.Fill(ds, "paymentdb");
+
+                            var labeltext = Convert.ToString(ds.Tables["paymentdb"].Rows[0]["Total"]);
+                            LblTotalPrice.Content = $"총 합계 금액 : {labeltext}";
                         }
-                        this.DataContext = list;        // 가져온 데이터를 GUI에 뿌려줌
-                        GrdUserInfo.ItemsSource = list; // 이미지 띄움
-
-                        query = $@"SELECT Id,
-                                      SUM(Price) AS Total
-                                 FROM paymentdb
-                                WHERE Id = 'user'
-                                GROUP BY Id";
-                        cmd = new MySqlCommand(query, conn);
-                        adapter = new MySqlDataAdapter(cmd);
-                        ds = new DataSet();
-                        adapter.Fill(ds, "paymentdb");
-
-                        var labeltext = Convert.ToString(ds.Tables["paymentdb"].Rows[0]["Total"]);
-                        LblTotalPrice.Content = $"총 합계 금액 : {labeltext}";
+                    }
+                    catch (System.Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                        Debug.WriteLine("오류남 오류남");
                     }
                 }
-                catch (System.Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                    Debug.WriteLine("오류남 오류남");
-                }
             }
-        }
         #endregion
 
         #region < 온 습도 바 동작>
