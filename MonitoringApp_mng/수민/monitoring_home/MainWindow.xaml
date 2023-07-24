@@ -41,8 +41,22 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
+                <!-- 온도 (온도값불러오기) -->
                 <Grid Grid.Row="0">
-                    
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                        <Image x:Name="Imgdegree" Source="{Binding}" Width="200" VerticalAlignment="Center" ></Image>
+                        <TextBlock x:Name="Txtdegree" Text="ºC" FontFamily="Nanum" FontSize="30" FontWeight="ExtraBold" 
+                                   HorizontalAlignment="Center" Margin="0,0,0,0"></TextBlock>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                        <Image x:Name="Imghumid" Source="{Binding}" Width="200" VerticalAlignment="Center"></Image>
+                        <TextBlock x:Name="Txthumid" Text="%" FontFamily="Nanum" FontSize="30" FontWeight="ExtraBold"
+                                   HorizontalAlignment="Center" Margin="0,0,0,0"></TextBlock>
+                        
+                    </StackPanel>
                 </Grid>
             </Grid>
         </Border>
@@ -63,9 +77,9 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                    <mah:ToggleSwitch Header="전등 1" OffContent="OFF" OnContent="ON" Margin="10,0" Toggled="ToggleSwitch_Toggled_1"/>
-                    <mah:ToggleSwitch Header="전등 2" OffContent="OFF" OnContent="ON" Margin="10,0" Toggled="ToggleSwitch_Toggled_2"/>
-                    <mah:ToggleSwitch Header="전등 3" OffContent="OFF" OnContent="ON" Margin="10,0" Toggled="ToggleSwitch_Toggled_3"/>
+                    <mah:ToggleSwitch Header="전등 1" OffContent="OFF" OnContent="ON" Margin="10,0"/>
+                    <mah:ToggleSwitch Header="전등 2" OffContent="OFF" OnContent="ON" Margin="10,0"/>
+                    <mah:ToggleSwitch Header="전등 3" OffContent="OFF" OnContent="ON" Margin="10,0"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
