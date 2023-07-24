@@ -2,7 +2,9 @@
 using appTemplate.Views;
 using HtmlAgilityPack;
 using MahApps.Metro.Controls;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Text;
@@ -301,6 +303,27 @@ namespace appTemplate
             var msg = Encoding.UTF8.GetString(e.Message);
             Debug.WriteLine(msg);
 
+            var currSensor = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg); // 역직렬화
+
+            if (currSensor["Temp"] != null)
+            {
+                this.Invoke(() =>
+                {
+                    var tempValue = currSensor["Temp"];
+                    Txtdegree.Text = tempValue.ToString();
+                });
+
+            }
+
+            if (currSensor["Humid"] != null)
+            {
+                this.Invoke(() =>
+                {
+                    var humidValue = currSensor["Humid"];
+                    Txthumid.Text = humidValue.ToString();
+                });
+
+            }
         }
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

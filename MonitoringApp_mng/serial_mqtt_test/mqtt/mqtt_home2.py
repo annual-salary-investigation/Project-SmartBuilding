@@ -38,7 +38,12 @@ class publisher(Thread):
 
     def publish_data_auto(self):
         response = ser.readline().decode().strip() # 아두이노에서 데이터 읽기 
-        pub_data = json.dumps(response) # json 변환
+        origin_data = response.split('|')
+        temp = origin_data[0]
+        humid = origin_data[1]
+        result_data = { 'Temp' : temp,
+                        'Humid' : humid }
+        pub_data = json.dumps(result_data) # json 변환
         self.client.publish(topic='pknu/rpi/control/', payload=pub_data)
         print('Data published')
         Timer(2.0, self.publish_data_auto).start() # Timer로 2초에 한 번씩 publish_data_auto 실행해서 MQTT broker로 데이터 전송
