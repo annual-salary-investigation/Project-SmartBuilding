@@ -143,7 +143,7 @@ def GetFee():
 
 # DB 정리하는 함수
 def Clear():
-    query = 'DELETE FROM parking WHERE IsExit = 0;' # 만차
+    query = 'DELETE FROM parking WHERE IsExit = 0;'
     cur = conn.cursor()
     cur.execute(query)
 
@@ -179,7 +179,7 @@ try:
         if distance < 8 : # 8보다 작은 경우
            
             metadata = picam2.capture_file("test1.jpg") # 카메라에서 이미지 캡쳐 후 test1.jpg 파일로 저장
-            time.sleep(1)
+            time.sleep(2)
 
             test = Preprocess("test1.jpg") # metadata = picam2.capture_file("test1.jpg")에 있는 test1.jpg 사용
             test.run()
