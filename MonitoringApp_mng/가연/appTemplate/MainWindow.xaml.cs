@@ -103,6 +103,7 @@ namespace appTemplate
         }
         #endregion
 
+        #region < 날씨 크롤링 >
         private string DownloadWebPage(string url)
         {
             string htmlContent;
@@ -134,7 +135,7 @@ namespace appTemplate
                     {
                         string location = cells[0].InnerText.Trim(); // 이름
                         string cloud = cells[3].InnerText.Trim(); // 운량
-                        if(cloud is null) // cloud랑 rainy는 밑에서 double로 형변환 해야하기 때문에 비어있으면 조회 오류 발생함 => null값일때의 오류 처리 위해서 0으로 지정
+                        if (cloud is null) // cloud랑 rainy는 밑에서 double로 형변환 해야하기 때문에 비어있으면 조회 오류 발생함 => null값일때의 오류 처리 위해서 0으로 지정
                         {
                             cloud = "0";
                         }
@@ -186,11 +187,32 @@ namespace appTemplate
                     }
                 }
             }
-            catch(Exception e )
+            catch (Exception e)
             {
                 await Logics.Commons.ShowMessageAsync("오류", $"오류 발생 : {e}");
             }
 
+        }
+
+        private void GetWeatherImagePath(double cloud, double rainy)
+        {
+
+            if (cloud <= 2 && rainy == 0)
+            {
+                ImgWeather.Source = new BitmapImage(new Uri("/Resources/sunny.png", UriKind.Relative));
+            }
+            else if (cloud > 2 && cloud < 5 && rainy == 0)
+            {
+                ImgWeather.Source = new BitmapImage(new Uri("/Resources/cloudy-day.png", UriKind.Relative));
+            }
+            else if (cloud > 5 && rainy == 0)
+            {
+                ImgWeather.Source = new BitmapImage(new Uri("/Resources/cloud.png", UriKind.Relative));
+            }
+            else if (rainy > 0)
+            {
+                ImgWeather.Source = new BitmapImage(new Uri("/Resources/rainy.png", UriKind.Relative));
+            }
         }
 
         private string ExtractWindSpeedFromScriptTag(string windScript)
@@ -205,7 +227,7 @@ namespace appTemplate
 
             return "N/A"; // 풍속 못받아오면 N/A 리턴
         }
-
+        #endregion
 
         #region < 차량 관리 버튼 이벤트 영역 - 자식창 띄우기>
         private void BtnMngCar_Click(object sender, RoutedEventArgs e)
@@ -216,6 +238,38 @@ namespace appTemplate
             mngCarWindow.ShowDialog(); // 모달창
         }
         #endregion
+
+        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
+
+            if (Commons.MQTT_CLIENT.IsConnected)
+            {
+                if (toggleSwitch.IsOn)
+                {
+                    // LED 켜기 메시지 발행
+                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("1"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                }
+                else
+                {
+                    // LED 끄기 메시지 발행
+                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("0"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                }
+            }
+        }
+
+        private void MQTT_CLIENT_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+        {
+            var msg = Encoding.UTF8.GetString(e.Message);
+            Debug.WriteLine(msg);
+
+        }
+
+        // 클로징 이벤트 
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Process.GetCurrentProcess().Kill();
+        }
 
         #region < 실제 OpenAPI 불러오는 함수 >
         //public async Task CheckWeatehr() 
@@ -312,57 +366,5 @@ namespace appTemplate
         //    }
         //}
         #endregion
-        private void GetWeatherImagePath(double cloud, double rainy)
-        {
-
-            if (cloud <= 2 && rainy == 0)
-            {
-                ImgWeather.Source = new BitmapImage(new Uri("/Resources/sunny.png", UriKind.Relative));
-            }
-            else if (cloud > 2 && cloud < 5 && rainy == 0)
-            {
-                ImgWeather.Source = new BitmapImage(new Uri("/Resources/cloudy-day.png", UriKind.Relative));
-            }
-            else if (cloud > 5 && rainy == 0)
-            {
-                ImgWeather.Source = new BitmapImage(new Uri("/Resources/cloud.png", UriKind.Relative));
-            }
-            else if (rainy > 0)
-            {
-                ImgWeather.Source = new BitmapImage(new Uri("/Resources/rainy.png", UriKind.Relative));
-            }
-        }
-
-
-        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
-        {
-            ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
-
-            if (Commons.MQTT_CLIENT.IsConnected)
-            {
-                if (toggleSwitch.IsOn)
-                {
-                    // LED 켜기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("1"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
-                }
-                else
-                {
-                    // LED 끄기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("0"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
-                }
-            }
-        }
-
-        private void MQTT_CLIENT_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
-        {
-            var msg = Encoding.UTF8.GetString(e.Message);
-            Debug.WriteLine(msg);
-
-        }
-
-        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Environment.Exit(0);
-        }
     }
 }

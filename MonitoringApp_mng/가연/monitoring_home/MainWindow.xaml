@@ -8,11 +8,10 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="Building IoT System Monitoring" Height="700" Width="1300" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing">
+        Title="Building IoT System Monitoring" Height="700" Width="1000" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing">
     <Grid>
         <!-- 전체 그리드 높이 / 넓이 -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350"/>
             <ColumnDefinition Width="350"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
@@ -34,7 +33,7 @@
             </StackPanel>
         </Grid>
 
-        <!-- 대시보드 1 온,습도 -->
+        <!-- 대시보드 1 온,습도 영역-->
         <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="0" Margin="10,10,5,10" CornerRadius="10">
             <Grid>
                 <Grid.RowDefinitions>
@@ -48,17 +47,36 @@
             </Grid>
         </Border>
 
-        <!-- 대시보드 2 -->
-        <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="5,10,5,10" CornerRadius="10">
-            <Grid >
-
-            </Grid>
-        </Border>
-
-        <!-- 대시보드 3 -->
-        <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="2" Margin="5,10,10,10" CornerRadius="10">
+        <!-- 대시보드 3 센서 영역-->
+        <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="5,10,10,10" CornerRadius="10">
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
 
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10" HorizontalAlignment="Left">
+                    <Label Content="화재감지센서" Margin="4, 0" FontSize="15" FontWeight="Bold"/>
+                    <TextBlock x:Name="fireSensor1" Text="작동 중" Margin="10, 4" FontSize="15"></TextBlock>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <mah:ToggleSwitch Header="전등 1" OffContent="OFF" OnContent="ON" Margin="10,0"/>
+                    <mah:ToggleSwitch Header="전등 2" OffContent="OFF" OnContent="ON" Margin="10,0"/>
+                    <mah:ToggleSwitch Header="전등 3" OffContent="OFF" OnContent="ON" Margin="10,0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <mah:ToggleSwitch Header="펜" OffContent="OFF" OnContent="ON" Margin="10,0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Label Content="현재 층" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                    <TextBlock FontSize="20" VerticalAlignment="Center">1층</TextBlock>
+                    <Button x:Name="btnEle" Content="호출"  FontSize="20" Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}"/>
+                </StackPanel>
             </Grid>
         </Border>
 
