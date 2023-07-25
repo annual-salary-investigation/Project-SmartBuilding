@@ -355,15 +355,15 @@ namespace appTemplate
         {
             if (humid < 40)
             {
-                Imghumid.Source = new BitmapImage(new Uri("/Resources/.png", UriKind.Relative));
+                Imghumid.Source = new BitmapImage(new Uri("/Resources/dry.png", UriKind.Relative));
             }
             else if (humid >= 40 && humid <=60)
             {
-                Imghumid.Source = new BitmapImage(new Uri("/Resources/.png", UriKind.Relative));
+                Imghumid.Source = new BitmapImage(new Uri("/Resources/moderate.png", UriKind.Relative));
             }
             else if (humid > 60)
             {
-                Imghumid.Source = new BitmapImage(new Uri("/Resources/.png", UriKind.Relative));
+                Imghumid.Source = new BitmapImage(new Uri("/Resources/damp.png", UriKind.Relative));
             }
         }
         #endregion
