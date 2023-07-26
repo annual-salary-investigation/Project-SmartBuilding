@@ -9,7 +9,7 @@ bool isClockwise = true;
 void setup() {
   myStepper.setSpeed(15);
   Serial.begin(9600);
-  pinMode(btnPin, INPUT);
+  pinMode(btnPin, INPUT_PULLUP);
   pinMode(buzzerPin, OUTPUT); // 부저 핀을 출력으로 설정
 }
 
