@@ -1,6 +1,10 @@
 # FinalProject
 스마트 빌딩(Smart Building) 프로젝트
 
+## 차양막(차수막) [팀전체]
+- 봉이 두개임, 손은 모터라생각하시면됨
+<img src="https://github.com/annual-salary-investigation/Project-SmartBuilding/blob/main/image/%EC%B0%A8%EC%88%98%EB%A7%89.gif?raw=true" width="700">
+
 
 ## 엘리베이터, 3층 wpf제작 (자인 동훈)
 ### 7.4, 7.5
