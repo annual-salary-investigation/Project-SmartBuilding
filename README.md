@@ -1,11 +1,11 @@
 # FinalProject
 스마트 빌딩(Smart Building) 프로젝트
 
-## 차양막(차수막) [팀전체]
+## 차양막(차수막) [팀전체] 7.26
 - 봉이 두개임, 손은 모터라생각하시면됨
 <img src="https://github.com/annual-salary-investigation/Project-SmartBuilding/blob/main/image/%EC%B0%A8%EC%88%98%EB%A7%89.gif?raw=true" width="700">
 
-## 세이프가드 [팀전체]
+## 세이프가드 [팀전체] 7.27
 - 봉이 두개임, 손은 모터라생각하시면됨
 <img src="https://github.com/annual-salary-investigation/Project-SmartBuilding/blob/main/image/safe_guard.gif?raw=true" width="700">
 
