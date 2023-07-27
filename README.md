@@ -7,7 +7,7 @@
 
 ## 세이프가드 [팀전체]
 - 봉이 두개임, 손은 모터라생각하시면됨
-<img src="https://github.com/annual-salary-investigation/Project-SmartBuilding/blob/main/image/%EC%B0%A8%EC%88%98%EB%A7%89.gif?raw=true" width="700">
+<img src="https://github.com/annual-salary-investigation/Project-SmartBuilding/blob/main/image/safe_guard.gif?raw=true" width="700">
 
 
 
