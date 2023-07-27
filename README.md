@@ -5,6 +5,9 @@
 - 봉이 두개임, 손은 모터라생각하시면됨
 <img src="https://github.com/annual-salary-investigation/Project-SmartBuilding/blob/main/image/%EC%B0%A8%EC%88%98%EB%A7%89.gif?raw=true" width="700">
 
+## 세이프가드 [팀전체]
+- 봉이 두개임, 손은 모터라생각하시면됨
+<img src="https://github.com/annual-salary-investigation/Project-SmartBuilding/blob/main/image/%EC%B0%A8%EC%88%98%EB%A7%89.gif?raw=true" width="700">
 
 
 
@@ -27,7 +30,7 @@
 - 엘리베이터 실물제작
 
 
-## 센서 제어(예서 수민)
+## 센서 제어(예서, 자인, 동훈)
 
 ### 7월 4일 ~ 5일
 - 온습도 센서 , 펜모터 제어 => 온도 올라가면 펜돌아가게
@@ -45,6 +48,10 @@
 - 온습도센서 DHT 22사용
 - FanMotor 사용
 - MQTT 연결
+
+### ~7월 27일
+- 차양막 (스텝모터 사용)제작 (버튼)
+- 안전 가드 제작(스텝모터, 초음파센서, 부저)
   
 
 ## 자동차 번호판인식 (소영 지은)

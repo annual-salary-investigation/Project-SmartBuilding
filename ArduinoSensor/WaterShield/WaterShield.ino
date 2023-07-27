@@ -18,11 +18,11 @@ void loop() {
     if (isClockwise) {
       tone(buzzerPin, 1000, 1000); // 부저를 1000Hz 주파수로 0.1초 동안 울림
       Serial.println("LEFT");
-      myStepper.step(stepsPerRevolution);
+      myStepper.step(stepsPerRevolution*4);
     } else {
       tone(buzzerPin, 1000, 1000); // 부저를 1000Hz 주파수로 0.1초 동안 울림
       Serial.println("RIGHT");
-      myStepper.step(-stepsPerRevolution);
+      myStepper.step(-stepsPerRevolution*4);
     }
     delay(500);
     isClockwise = !isClockwise;
