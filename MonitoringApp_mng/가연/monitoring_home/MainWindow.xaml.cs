@@ -105,6 +105,8 @@ namespace appTemplate
         }
         #endregion
 
+        
+
         #region < 날씨 크롤링>
         private string DownloadWebPage(string url)
         {
@@ -302,29 +304,96 @@ namespace appTemplate
         {
             var msg = Encoding.UTF8.GetString(e.Message);
             Debug.WriteLine(msg);
-
-            var currSensor = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg); // 역직렬화
-
-            if (currSensor["Temp"] != null)
+            try
             {
-                this.Invoke(() =>
+                var currSensor = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg); // 역직렬화
+              
+                if (currSensor["Temp"] != null)
                 {
-                    var tempValue = currSensor["Temp"];
-                    Txtdegree.Text = tempValue.ToString();
-                });
+                    this.Invoke(() =>
+                    {
+                        var tempValue = currSensor["Temp"];
 
+                        try
+                        {
+                            double converttemp = Double.Parse(tempValue);
+
+                            Txtdegree.Text = $"{tempValue} ℃";
+                            GetDegreeImagePath(converttemp);
+                        }
+                        catch(Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+
+                    });
+
+                }
+
+                if (currSensor["Humid"] != null)
+                {
+                    this.Invoke(() =>
+                    {
+                        var humidValue = currSensor["Humid"];
+
+                        try
+                        {
+                            double converthumid = Double.Parse(humidValue);
+
+                            Txthumid.Text = $"{humidValue} %";
+                            GetHumidImagePath(converthumid);
+                        }
+
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+   
+                    });
+
+                }
             }
-
-            if (currSensor["Humid"] != null)
+            catch (Exception ex)
             {
-                this.Invoke(() =>
-                {
-                    var humidValue = currSensor["Humid"];
-                    Txthumid.Text = humidValue.ToString();
-                });
-
+                MessageBox.Show(ex.Message);
             }
         }
+
+        #region < 온도 이미지 띄우기 >
+        private void GetDegreeImagePath(double degree)
+        {
+            if (degree <= 18)
+            {
+                Imgdegree.Source = new BitmapImage(new Uri("/Resources/cold.png", UriKind.Relative));
+            }
+            else if (degree > 18 && degree <= 28)
+            {
+                Imgdegree.Source = new BitmapImage(new Uri("/Resources/normal.png", UriKind.Relative));
+            }
+            else if (degree > 28)
+            {
+                Imgdegree.Source = new BitmapImage(new Uri("/Resource/heat.png", UriKind.Relative));
+            }
+        }
+        #endregion
+
+        #region < 습도 이미지 띄우기 >
+        private void GetHumidImagePath(double humid)
+        {
+            if (humid < 40)
+            {
+                Imghumid.Source = new BitmapImage(new Uri("/Resources/dry.png", UriKind.Relative));
+            }
+            else if (humid >= 40 && humid <= 60)
+            {
+                Imghumid.Source = new BitmapImage(new Uri("/Resources/moderate.png", UriKind.Relative));
+            }
+            else if (humid > 60)
+            {
+                Imghumid.Source = new BitmapImage(new Uri("/Resources/damp.png", UriKind.Relative));
+            }
+        }
+        #endregion
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
