@@ -315,5 +315,23 @@
   <ItemGroup>
     <Resource Include="Resources\sunny.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cold.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\damp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\dry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\heat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\moderate.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
