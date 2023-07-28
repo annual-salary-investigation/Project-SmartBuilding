@@ -68,8 +68,8 @@
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock Text="주차 관리" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,-20,0,20"/>
                     <Image Source="Resources/garage.png" Width="120" VerticalAlignment="Bottom" Margin="0,0,0,50"/>
-                    <Button x:Name="BtnShowCar" Content="입차 현황" Margin="0, 15" FontSize="18"
-                    Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Width="150" BorderThickness="0">
+                    <Button x:Name="BtnParking" Content="입차 현황" Margin="0, 15" FontSize="18"
+                    Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Width="150" BorderThickness="0" Click="BtnParking_Click">
                         <Button.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

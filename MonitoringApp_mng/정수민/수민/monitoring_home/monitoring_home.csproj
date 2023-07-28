@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5165F4CC-3C00-42AF-974C-46CF8E06A92E}</ProjectGuid>
+    <ProjectGuid>{8B9F74A2-79A0-4E4E-895E-A278FBD94FF2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>appTemplate</RootNamespace>
     <AssemblyName>appTemplate</AssemblyName>
@@ -14,8 +14,6 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -316,6 +314,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\sunny.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cold.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\damp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\dry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\heat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\moderate.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
