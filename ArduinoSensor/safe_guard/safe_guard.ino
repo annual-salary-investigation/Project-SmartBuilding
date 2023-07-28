@@ -30,20 +30,19 @@ void loop()
   Serial.print(distance); //측정된 물체로부터 거리값(cm값)을 보여줍니다.
   Serial.println(" Cm");
   delay(1000); //1초마다 측정값을 보여줍니다.j
-j
-  if(distance <10)j
-  {j
+
+  if(distance <20)
+  {
     tone(BUZ, 1000, 3000);
   }
 
-  if(flag == 0 && distance < 10)
+  if(flag == 0 && distance < 20)
   {
      myStepper.step(stepsPerRevolution);
-     tone(BUZ, 1000, 3000);
      flag = 1;
   }
 
-  if(flag == 1 && distance > 10)
+  if(flag == 1 && distance > 20)
   {
     myStepper.step(-stepsPerRevolution);
     flag = 0;
