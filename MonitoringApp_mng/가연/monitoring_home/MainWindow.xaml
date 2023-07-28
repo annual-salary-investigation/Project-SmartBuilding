@@ -25,11 +25,11 @@
         <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="AliceBlue">
             <StackPanel Orientation="Horizontal">
                 <Image x:Name="ImgWeather" Source="{Binding}" Width="40" VerticalAlignment="Center" Margin="10,0"/>
-                <TextBlock x:Name="Txtalarm" Text="바람세기" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" />
-                <Label Grid.Row="0" Grid.Column="0" Content="현재 기온은" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="10,0"/>
+                <TextBlock Text="안녕하세요 {username}님, 현재 기온은" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" />
                 <TextBlock x:Name="TxtTemp" Grid.Row="0" Grid.Column="1" Text="℃" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="10,0"/>
-                <Label Grid.Row="1" Grid.Column="0" Content="습도는" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="10,0"/>
+                <TextBlock Text="습도는" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" />
                 <TextBlock x:Name="TxtHumid" Grid.Row="1" Grid.Column="1" Text="%" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="10,0"/>
+                <TextBlock x:Name="Txtalarm" Text="바람세기" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" />
             </StackPanel>
         </Grid>
 
@@ -37,22 +37,25 @@
         <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="0" Margin="10,10,5,10" CornerRadius="10">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
                     <RowDefinition Height="1*"/>
+                    <RowDefinition Height="50"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-                <!-- 온도 (온도값불러오기) -->
-                <Grid Grid.Row="0">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <Image x:Name="Imgdegree" Source="/Resources/cold.png" Width="150" VerticalAlignment="Center" ></Image>
+                <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20">거실 온도</TextBlock>
+                <Grid Grid.Row="1">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="Imgdegree" Source="/Resources/normal.png" Width="100" VerticalAlignment="Center" ></Image>
                         <TextBlock x:Name="Txtdegree" Text="ºC" FontFamily="Nanum" FontSize="30" FontWeight="ExtraBold" 
                                    VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30,0,0,0"></TextBlock>
                     </StackPanel>
                 </Grid>
 
-                <Grid Grid.Row="1">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <Image x:Name="Imghumid" Source="/Resources/cold.png" Width="150" VerticalAlignment="Center"></Image>
+                <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20">거실 습도</TextBlock>
+                <Grid Grid.Row="3">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="Imghumid" Source="/Resources/moderate.png" Width="100" VerticalAlignment="Center"></Image>
                         <TextBlock x:Name="Txthumid" Text="%" FontFamily="Nanum" FontSize="30" FontWeight="ExtraBold"
                                    VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30,0,0,0"></TextBlock>
                     </StackPanel>
@@ -60,7 +63,7 @@
             </Grid>
         </Border>
 
-        <!-- 대시보드 3 센서 영역-->
+        <!-- 대시보드2 센서 영역-->
         <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="5,10,10,10" CornerRadius="10">
             <Grid>
                 <Grid.RowDefinitions>
@@ -70,16 +73,19 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10" HorizontalAlignment="Left">
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0" HorizontalAlignment="Left">
                     <Label Content="화재감지센서" Margin="4, 0" FontSize="15" FontWeight="Bold"/>
                     <TextBlock x:Name="fireSensor1" Text="작동 중" Margin="10, 4" FontSize="15"></TextBlock>
                 </StackPanel>
 
-                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                    <mah:ToggleSwitch Header="전등 1" OffContent="OFF" OnContent="ON" Margin="10,0" Toggled="ToggleSwitch_Toggled_1"/>
-                    <mah:ToggleSwitch Header="전등 2" OffContent="OFF" OnContent="ON" Margin="10,0" Toggled="ToggleSwitch_Toggled_2"/>
-                    <mah:ToggleSwitch Header="전등 3" OffContent="OFF" OnContent="ON" Margin="10,0" Toggled="ToggleSwitch_Toggled_3"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0, 30">
+                    <mah:ToggleSwitch Header="전체 소등" OffContent="OFF" OnContent="ON" Margin="10,0" Toggled="ToggleSwitch_Toggled_All"/>
+                    <mah:ToggleSwitch Header="전등 1" OffContent="OFF" OnContent="ON" Margin="5,0" Toggled="ToggleSwitch_Toggled_1"/>
+                    <mah:ToggleSwitch Header="전등 2" OffContent="OFF" OnContent="ON" Margin="5,0" Toggled="ToggleSwitch_Toggled_2"/>
+                    <mah:ToggleSwitch Header="전등 3" OffContent="OFF" OnContent="ON" Margin="5,0" Toggled="ToggleSwitch_Toggled_3"/>
                 </StackPanel>
+
+
 
                 <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
                     <mah:ToggleSwitch Header="펜" OffContent="OFF" OnContent="ON" Margin="10,0"/>

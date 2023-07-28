@@ -242,7 +242,12 @@ namespace appTemplate
         }
         #endregion
 
-        
+        #region < LED 제어 영역 >
+        private void ToggleSwitch_Toggled_All(object sender, RoutedEventArgs e)
+        {
+            // 전체 소등 이벤트 핸들러 추가
+        }
+
         private void ToggleSwitch_Toggled_1(object sender, RoutedEventArgs e)
         {
             ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
@@ -324,7 +329,9 @@ namespace appTemplate
                 }
             }
         }
+        #endregion
 
+        #region <온습도값 구독 영역>
         private void MQTT_CLIENT_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             var msg = Encoding.UTF8.GetString(e.Message);
@@ -383,6 +390,7 @@ namespace appTemplate
                 MessageBox.Show($"MqttMsgPublishReceived Error : {ex.Message}");
             }
         }
+        #endregion
 
         #region < 온도 이미지 띄우기 >
         private void GetDegreeImagePath(double degree)
@@ -420,11 +428,13 @@ namespace appTemplate
         }
         #endregion
 
+
+        // 종료 이벤트 - 프로세스 아예 꺼줌
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Process.GetCurrentProcess().Kill();
         }
 
-
+        
     }
 }
