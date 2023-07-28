@@ -397,9 +397,9 @@ namespace appTemplate
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Environment.Exit(0);
+            Process.GetCurrentProcess().Kill();
         }
 
-      
+
     }
 }
