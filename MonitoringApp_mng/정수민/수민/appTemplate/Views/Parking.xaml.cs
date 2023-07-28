@@ -27,7 +27,7 @@ namespace appTemplate.Views
 
         private async void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            private async Task ShowParking()
+            private async Task ShowParkingList()
             {
                 this.DataContext = null;
 
@@ -57,7 +57,11 @@ namespace appTemplate.Views
                         {
                             cars.Add(new ParkingList
                             {
-                                CarId = Con
+                                Number = Convert.ToInt32(dr["Number"]),
+                                CarName = Convert.ToString(dr["CarName"]),
+                                EntranceTime = Convert.To(dr["EntranceTime"]),
+                                CarId = Convert.ToInt32(dr["CarId"]),
+                                IsExit = Convert.ToInt32(dr["IsExit"])
                             });
                         }
                     }
