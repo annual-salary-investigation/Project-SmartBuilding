@@ -366,5 +366,13 @@ namespace appTemplate
         //    }
         //}
         #endregion
+
+        private void BtnParking_Click(object sender, RoutedEventArgs e)
+        {
+            var parkingWindow = new Parking();
+            parkingWindow.Owner = this;
+            parkingWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner; // 부모창 정중앙에 띄우기
+            parkingWindow.ShowDialog(); // 모달창
+        }
     }
 }
