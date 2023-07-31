@@ -75,7 +75,7 @@
 
                 <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0" HorizontalAlignment="Left">
                     <Label Content="화재감지센서" Margin="4, 0" FontSize="15" FontWeight="Bold"/>
-                    <TextBlock x:Name="fireSensor1" Text="작동 중" Margin="10, 4" FontSize="15"></TextBlock>
+                    <TextBlock x:Name="fireSensor" Text="작동 중" Margin="10, 4" FontSize="15"></TextBlock>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0, 30">
@@ -88,6 +88,11 @@
 
 
                 <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Label Content="거실 펜" Margin="4, 0" FontSize="15" FontWeight="Bold" VerticalContentAlignment="Center"/>
+                    <Button x:Name="btnFan_ON" Content="ON"  FontSize="20" Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}"
+                            Click="btnFan_ON_Click"/>
+                    <Button x:Name="btnFab_OFF" Content="OFF"  FontSize="20" Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}"
+                            Click="btnFab_OFF_Click"/>
                     <mah:ToggleSwitch Header="펜" OffContent="OFF" OnContent="ON" Margin="10,0" Toggled="ToggleSwitch_Toggfan"/>
                 </StackPanel>
 
