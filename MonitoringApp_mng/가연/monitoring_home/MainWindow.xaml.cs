@@ -43,7 +43,7 @@ namespace appTemplate
             timer.Start();
         }
 
-        #region < 대시보드1 날씨영역 - 시간/날씨 실시간으로 받기 위한 메서드>
+        #region < 날씨영역 - 시간/날씨 실시간으로 받기 위한 메서드>
         public async void Timer_Tick(object sender, EventArgs e)
         {
             // 날짜, 요일, 시간
@@ -67,7 +67,7 @@ namespace appTemplate
             }
             catch (Exception ex)
             {
-                await Logics.Commons.ShowMessageAsync("오류", $"날씨 조회 오류 : {ex}");
+                await Commons.ShowMessageAsync("오류", $"날씨 조회 오류 : {ex}");
             }
             #endregion
         }
@@ -81,7 +81,7 @@ namespace appTemplate
             //    loginWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner; // MainWindow의 정중앙에 위치
             //    loginWindow.ShowDialog();  // 모달창
 
-            #region < MQTT >
+            #region < MQTT 통신 연결 설정 >
             Commons.MQTT_CLIENT = new MqttClient(Commons.BROKERHOST); // MQTT 클라이언트 초기화
             Commons.MQTT_CLIENT.MqttMsgPublishReceived += MQTT_CLIENT_MqttMsgPublishReceived; // MQTT 메시지 수신 이벤트 핸들러 등록
 
@@ -195,7 +195,7 @@ namespace appTemplate
 
         }
 
-        private string ExtractWindSpeedFromScriptTag(string windScript)
+        private string ExtractWindSpeedFromScriptTag(string windScript) // 풍속값 <script>writeWindSpeed('1.2', false, '', '', 1) 형태 => 정규식 사용해서 풍속만 추출
         {
             string pattern = @"writeWindSpeed\('([^']+)'";
             Match match = Regex.Match(windScript, pattern);
@@ -208,7 +208,7 @@ namespace appTemplate
             return "N/A"; // 풍속 못받아오면 N/A 리턴
         }
 
-        private void GetWeatherImagePath(double cloud, double rainy)
+        private void GetWeatherImagePath(double cloud, double rainy) // 날씨에 따른 이미지 바인딩
         {
 
             if (cloud <= 2 && rainy == 0)
@@ -230,22 +230,7 @@ namespace appTemplate
         }
         #endregion
 
-        #region < 차량 관리 버튼 이벤트 영역 - 자식창 띄우기>
-        private void BtnMngCar_Click(object sender, RoutedEventArgs e)
-        {
-            var mngCarWindow = new MngCar();
-            mngCarWindow.Owner = this;
-            mngCarWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner; // 부모창 정중앙에 띄우기
-            mngCarWindow.ShowDialog(); // 모달창
-        }
-        #endregion
-
         #region < LED 제어 영역 >
-        private void ToggleSwitch_Toggled_All(object sender, RoutedEventArgs e)
-        {
-            // 전체 소등 이벤트 핸들러 추가
-        }
-
         private void ToggleSwitch_Toggled_1(object sender, RoutedEventArgs e)
         {
             ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
@@ -258,7 +243,7 @@ namespace appTemplate
                     // LED1 켜기 메시지 발행
                     this.Invoke(() =>
                     {
-                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("1"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("1"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
                     });
 
                 }
@@ -269,7 +254,7 @@ namespace appTemplate
                     // LED1 끄기 메시지 발행
                     this.Invoke(() =>
                     {
-                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("0"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("0"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
                     });
 
                 }
@@ -287,7 +272,7 @@ namespace appTemplate
                     // LED2 켜기 메시지 발행
                     this.Invoke(() =>
                     {
-                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("3"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("3"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
                     });
 
                 }
@@ -296,7 +281,7 @@ namespace appTemplate
                     // LED2 끄기 메시지 발행  
                     this.Invoke(() =>
                     {
-                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("2"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("2"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
                     });
                 }
             }
@@ -313,7 +298,7 @@ namespace appTemplate
                     // LED3 켜기 메시지 발행
                     this.Invoke(() =>
                     {
-                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("5"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("5"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
 
                     });
                 }
@@ -322,14 +307,38 @@ namespace appTemplate
                     // LED3 끄기 메시지 발행
                     this.Invoke(() =>
                     {
-                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("4"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("4"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
                     });
                 }
             }
         }
         #endregion
 
-        #region <온습도값 구독 영역>
+        #region < 펜모터 >
+        private void btnFan_ON_Click(object sender, RoutedEventArgs e)
+        {
+            if (Commons.MQTT_CLIENT.IsConnected)
+            {
+                this.Invoke(() =>
+                {
+                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("7"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                });
+            }
+        }
+
+        private void btnFan_OFF_Click(object sender, RoutedEventArgs e)
+        {
+            if (Commons.MQTT_CLIENT.IsConnected)
+            {
+                this.Invoke(() =>
+                {
+                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("6"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                });
+            }
+        }
+        #endregion
+
+        #region <구독 영역 - 온.습도 , 화재감지센서 동작>
         private void MQTT_CLIENT_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             var msg = Encoding.UTF8.GetString(e.Message);
@@ -461,32 +470,5 @@ namespace appTemplate
         {
             Process.GetCurrentProcess().Kill();
         }
-
-        #region < 펜모터 >
-        private void btnFan_ON_Click(object sender, RoutedEventArgs e)
-        {
-            if (Commons.MQTT_CLIENT.IsConnected)
-            {
-                this.Invoke(() =>
-                {
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("7"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
-                });
-            }
-        }
-
-        private void btnFan_OFF_Click(object sender, RoutedEventArgs e)
-        {
-            if (Commons.MQTT_CLIENT.IsConnected)
-            {
-                this.Invoke(() =>
-                {
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("6"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
-                });
-            }
-        }
-        #endregion
-
-
-
     }
 }

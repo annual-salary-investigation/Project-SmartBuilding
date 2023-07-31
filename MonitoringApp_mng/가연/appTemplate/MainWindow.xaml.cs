@@ -265,12 +265,6 @@ namespace appTemplate
 
         }
 
-        // 클로징 이벤트 
-        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Process.GetCurrentProcess().Kill();
-        }
-
         #region < 실제 OpenAPI 불러오는 함수 >
         //public async Task CheckWeatehr() 
         //{
@@ -373,6 +367,12 @@ namespace appTemplate
             parkingWindow.Owner = this;
             parkingWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner; // 부모창 정중앙에 띄우기
             parkingWindow.ShowDialog(); // 모달창
+        }
+
+        // 클로징 이벤트 
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Process.GetCurrentProcess().Kill();
         }
     }
 }
