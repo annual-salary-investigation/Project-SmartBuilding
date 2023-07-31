@@ -88,7 +88,7 @@
 
 
                 <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                    <mah:ToggleSwitch Header="펜" OffContent="OFF" OnContent="ON" Margin="10,0"/>
+                    <mah:ToggleSwitch Header="펜" OffContent="OFF" OnContent="ON" Margin="10,0" Toggled="ToggleSwitch_Toggfan"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">

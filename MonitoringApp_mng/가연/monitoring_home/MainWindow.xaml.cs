@@ -435,6 +435,34 @@ namespace appTemplate
             Process.GetCurrentProcess().Kill();
         }
 
+<<<<<<< Updated upstream
         
+=======
+        private void ToggleSwitch_Toggfan(object sender, RoutedEventArgs e)
+        {
+            ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
+
+          if (Commons.MQTT_CLIENT.IsConnected)
+            {
+                if (toggleSwitch.IsOn)
+                {
+                    // LED2 켜기 메시지 발행
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("7"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+
+                }
+                else
+                {
+                    // LED2 끄기 메시지 발행  
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("6"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+                }
+            }
+        }
+>>>>>>> Stashed changes
     }
 }

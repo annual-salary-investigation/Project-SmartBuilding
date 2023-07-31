@@ -37,6 +37,7 @@ namespace appTemplate.Logics
         public static string MQTTTOPIC { get; set; } = "pknu/rpi/control/";
         public static string MQTTTOPIC_LED { get; set; } = "pknu/rpi/control/LED";
 
+
         // MQTT 클라이언트 공용 객체
         public static MqttClient MQTT_CLIENT { get; set; }
 
