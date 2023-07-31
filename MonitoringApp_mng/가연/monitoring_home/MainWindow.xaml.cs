@@ -463,33 +463,6 @@ namespace appTemplate
         }
 
         #region < 펜모터 >
-        private void ToggleSwitch_Toggfan(object sender, RoutedEventArgs e)
-        {
-            ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
-
-            if (Commons.MQTT_CLIENT.IsConnected)
-            {
-                if (toggleSwitch.IsOn)
-                {
-                    // 펜 켜기 메시지 발행
-                    this.Invoke(() =>
-                    {
-                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("7"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
-                    });
-
-                }
-                else
-                {
-                    // 끄기 메시지 발행  
-                    this.Invoke(() =>
-                    {
-                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("6"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
-                    });
-                }
-            }
-        }
-        #endregion
-
         private void btnFan_ON_Click(object sender, RoutedEventArgs e)
         {
             if (Commons.MQTT_CLIENT.IsConnected)
@@ -501,7 +474,7 @@ namespace appTemplate
             }
         }
 
-        private void btnFab_OFF_Click(object sender, RoutedEventArgs e)
+        private void btnFan_OFF_Click(object sender, RoutedEventArgs e)
         {
             if (Commons.MQTT_CLIENT.IsConnected)
             {
@@ -511,5 +484,9 @@ namespace appTemplate
                 });
             }
         }
+        #endregion
+
+
+
     }
 }
