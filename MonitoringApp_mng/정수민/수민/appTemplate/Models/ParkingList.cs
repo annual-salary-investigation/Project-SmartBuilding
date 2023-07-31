@@ -11,7 +11,10 @@ namespace appTemplate
         public int Number { get; set; }
         public string CarName { get; set; }
         public DateTime EntranceTime { get; set; }
-        public int CarId { get; set; }
-        public int IsExit { get; set; }
+        public DateTime ExitTime { get; set; }
+        public string Fee { get; set; }
+        public string CarId { get; set; }
+        public string IsExit { get; set; }
+        public string Reason { get; set; }
     }
 }

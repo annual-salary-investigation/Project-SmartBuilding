@@ -7,15 +7,15 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="Parking" Height="450" Width="800">
+        Title="Parking" Height="450" Width="800" Loaded="MetroWindow_Loaded">
     <Grid>
-        <GroupBox Margin="0" Header="입차 현황"
+        <GroupBox Margin="20, 50, 20, 20" Header="입차현황"
                     mah:HeaderedControlHelper.HeaderFontSize="14"
                     mah:HeaderedControlHelper.HeaderHorizontalContentAlignment="Center"
                     mah:HeaderedControlHelper.HeaderFontFamily="NanumGothic"
                     mah:HeaderedControlHelper.HeaderFontWeight="Bold">
             <DataGrid x:Name="GrdParking" IsReadOnly="True" Style="{StaticResource MahApps.Styles.DataGrid.Azure}" GridLinesVisibility="All"
-                      ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="GrdParking_SelectedCellsChanged" SelectionChanged="GrdParking_SelectionChanged">
+                      ItemsSource="{Binding}" AutoGenerateColumns="False" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Number}" Header="입차 순서"/>
                     <DataGridTextColumn Binding="{Binding CarName}" Header="차번호"/>

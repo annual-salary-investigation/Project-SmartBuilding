@@ -15,7 +15,7 @@ namespace appTemplate.Logics
                                                      "Port=3306;" +
                                                      "Database=miniproject;" +
                                                      "Uid=root;" +
-                                                     "Pwd=1234;";
+                                                     "Pwd=12345;";
         // 기상청 API 인증키
         public static readonly string apiKey = "6U1OgOHXoO56%2FqdyFMr%2F5XyU8d6H2iWdFnZmtNuLA%2BhDq3mNlkfOIxbEpgVMVWrU9cb5HM8NAs2iNA0UcXE8ag%3D%3D";
 
