@@ -80,6 +80,27 @@ namespace appTemplate.Views
                 await this.ShowMessageAsync("오류", $"DB조회 오류 {ex.Message}", MessageDialogStyle.Affirmative, null);
             }
         }
+
+        private async void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (GrdParking.SelectedItems.Count == 0) 
+            {
+                await this.ShowMessageAsync("오류", "삭제할 차량을 선택하세요", MessageDialogStyle.Affirmative, null);
+                return;
+            }
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(Commons.MyConnString))
+                {
+                    if (conn.State == ConnectionState.Closed) conn.Open();
+                    var query = "DELETE FROM parking WHERE Number = @Number";
+                    var delRes = 0;
+
+                    foreach (ParkingList item in GrdParking.SelectionItems)
+                }
+            }
+        }
     }
 
         #endregion

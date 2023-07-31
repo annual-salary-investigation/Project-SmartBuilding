@@ -9,11 +9,41 @@
         mc:Ignorable="d"
         Title="Parking" Height="450" Width="800" Loaded="MetroWindow_Loaded">
     <Grid>
-        <GroupBox Margin="20, 50, 20, 20" Header="입차현황"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Image Source="/Views/parkinglist.png" Width="80" Height="50"></Image>
+                <Label Grid.Column="0" Content="입차현황" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontSize="30" FontWeight="Bold"/>
+            </StackPanel>
+            
+            
+
+            <!-- 차량 정보 삭제 버튼 -->
+            <StackPanel Grid.Column="1">
+                <Button x:Name="BtnDelete"  Height="50" Width="200" Margin="10"
+                        Content="차량 정보 삭제" FontSize="20"
+                        Style="{StaticResource MahApps.Styles.Button.Square.Highlight}" Click="BtnDelete_Click"/>
+            </StackPanel>
+        </Grid>
+        
+        
+        <!-- 차량 정보 DB -->
+        <GroupBox Grid.Row="1" Margin="20,0"
                     mah:HeaderedControlHelper.HeaderFontSize="14"
                     mah:HeaderedControlHelper.HeaderHorizontalContentAlignment="Center"
                     mah:HeaderedControlHelper.HeaderFontFamily="NanumGothic"
                     mah:HeaderedControlHelper.HeaderFontWeight="Bold">
+            
             <DataGrid x:Name="GrdParking" IsReadOnly="True" Style="{StaticResource MahApps.Styles.DataGrid.Azure}" GridLinesVisibility="All"
                       ItemsSource="{Binding}" AutoGenerateColumns="False" >
                 <DataGrid.Columns>
