@@ -90,7 +90,7 @@ namespace appTemplate
                 if (!Commons.MQTT_CLIENT.IsConnected)
                 {
                     // MQTT 브로커에 연결
-                    Commons.MQTT_CLIENT.Connect("MONITOR");
+                    Commons.MQTT_CLIENT.Connect("SmartHome");
                     TxtLog.Text = ">>> MQTT Broker Connected";
 
                     // LED 상태를 확인하기 위해 구독
@@ -242,7 +242,12 @@ namespace appTemplate
         }
         #endregion
 
-        
+        #region < LED 제어 영역 >
+        private void ToggleSwitch_Toggled_All(object sender, RoutedEventArgs e)
+        {
+            // 전체 소등 이벤트 핸들러 추가
+        }
+
         private void ToggleSwitch_Toggled_1(object sender, RoutedEventArgs e)
         {
             ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
@@ -251,13 +256,24 @@ namespace appTemplate
             {
                 if (toggleSwitch.IsOn)
                 {
+                    
                     // LED1 켜기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("1"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("1"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+
                 }
+
                 else
                 {
+                    
                     // LED1 끄기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("0"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("0"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+
                 }
             }
         }
@@ -271,12 +287,19 @@ namespace appTemplate
                 if (toggleSwitch.IsOn)
                 {
                     // LED2 켜기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("3"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("3"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+                    
                 }
                 else
                 {
-                    // LED2 끄기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("2"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    // LED2 끄기 메시지 발행  
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("2"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
                 }
             }
         }
@@ -290,16 +313,25 @@ namespace appTemplate
                 if (toggleSwitch.IsOn)
                 {
                     // LED3 켜기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("5"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("5"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+
+                    });
                 }
                 else
                 {
                     // LED3 끄기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("4"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("4"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
                 }
             }
         }
+        #endregion
 
+        #region <온습도값 구독 영역>
         private void MQTT_CLIENT_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             var msg = Encoding.UTF8.GetString(e.Message);
@@ -323,7 +355,7 @@ namespace appTemplate
                         }
                         catch(Exception ex)
                         {
-                            MessageBox.Show(ex.Message);
+                            MessageBox.Show($"Temp Error : {ex.Message}");
                         }
 
                     });
@@ -346,7 +378,7 @@ namespace appTemplate
 
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message);
+                            MessageBox.Show($"Humid Error : {ex.Message}");
                         }
    
                     });
@@ -355,9 +387,10 @@ namespace appTemplate
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"MqttMsgPublishReceived Error : {ex.Message}");
             }
         }
+        #endregion
 
         #region < 온도 이미지 띄우기 >
         private void GetDegreeImagePath(double degree)
@@ -395,11 +428,13 @@ namespace appTemplate
         }
         #endregion
 
+
+        // 종료 이벤트 - 프로세스 아예 꺼줌
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Environment.Exit(0);
+            Process.GetCurrentProcess().Kill();
         }
 
-      
+        
     }
 }

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8B9F74A2-79A0-4E4E-895E-A278FBD94FF2}</ProjectGuid>
+    <ProjectGuid>{5165F4CC-3C00-42AF-974C-46CF8E06A92E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>appTemplate</RootNamespace>
     <AssemblyName>appTemplate</AssemblyName>
@@ -14,6 +14,8 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -219,12 +221,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\CarList.cs" />
+    <Compile Include="Models\ParkingList.cs" />
     <Compile Include="Models\Weather.cs" />
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MngCar.xaml.cs">
       <DependentUpon>MngCar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Parking.xaml.cs">
+      <DependentUpon>Parking.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -244,6 +250,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MngCar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Parking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

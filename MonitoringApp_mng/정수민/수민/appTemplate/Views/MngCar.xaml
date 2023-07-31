@@ -110,7 +110,7 @@
                       mah:HeaderedControlHelper.HeaderFontFamily="NanumGothic"
                       mah:HeaderedControlHelper.HeaderFontWeight="Bold">
                 <DataGrid x:Name="GrdCarlist" IsReadOnly="True" Style="{StaticResource MahApps.Styles.DataGrid}" GridLinesVisibility="All" 
-                          ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="GrdCarlist_SelectedCellsChanged">
+                          ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="GrdCarlist_SelectedCellsChanged" SelectionChanged="GrdCarlist_SelectionChanged">
                     <!--AutoGenerateColumns(자동 열 생성) False 해야 원하는 값만 바인딩 됨-->
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Id}" Header="번호"/>
