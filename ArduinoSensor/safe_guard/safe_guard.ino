@@ -3,9 +3,9 @@ const int stepsPerRevolution = 560;
 Stepper myStepper(stepsPerRevolution, 3, 4, 5, 6);
 int flag = 0;
 
-#define TRIG 12 //TRIG 핀 설정 (초음파 보내는 핀)
-#define ECHO 13 //ECHO 핀 설정 (초음파 받는 핀)
-#define BUZ 8 // 부저를 연결한 핀 번호
+#define TRIG 8 //TRIG 핀 설정 (초음파 보내는 핀)
+#define ECHO 9 //ECHO 핀 설정 (초음파 받는 핀)
+#define BUZ 10 // 부저를 연결한 핀 번호
 
 void setup() {
   myStepper.setSpeed(15);

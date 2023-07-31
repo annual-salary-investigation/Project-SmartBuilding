@@ -1,7 +1,7 @@
 #include <Stepper.h>
 #include <time.h>
 
-int led_pin[] = {8,9,10,11,12,13,A5};  // A,B,C,D,E,F,G
+int led_pin[] = {6, 7, 8, 9, 10, 11, 12};  // A,B,C,D,E,F,G
 
 // 각 숫자에 대한 LED 설정 값을 정의합니다.
 // 숫자에 매칭되는 LED의 로직레벨을 LOW(0) 상태로 설정합니다.
@@ -13,11 +13,11 @@ int set_number[4][7] = {
 };
 
 int stepsPerRev = 2048;
-Stepper stepper (stepsPerRev, 4,5,6,7); // ( IN4,IN2,IN3,IN1)
-int btn1 = 3;
-int btn2 = 2;
-int btn3 = 1;
-int btn4 = 0;
+Stepper stepper (stepsPerRev, A0,A1,A2,A3); // ( IN4,IN2,IN3,IN1)
+int btn1 = 2;
+int btn2 = 3;
+int btn3 = 4;
+int btn4 = 5;
 int floors = 4; //현재 위치
 int move = 0;
 int num = 0;
@@ -55,10 +55,11 @@ void loop() {
     {
       digitalWrite(led_pin[i], set_number[0][i]);
     }
-    move = floors - 1;
+    move = floors - 1;    // 움직인다 = 현제층에서 - 1
     Serial.print(move*-1);
     Serial.println("개층 이동합니다.");
-    stepper.step(stepsPerRev*move);  
+    Serial.println(stepsPerRev*move*-10);
+    stepper.step(stepsPerRev*move*-7);  // 스탭모터움직임(1바퀴) X 움직인다 X 7
     floors=1;
     btn1HL==HIGH;
     delay(1000);
@@ -75,7 +76,9 @@ void loop() {
     move = floors - 2;
     Serial.print(move*-1);
     Serial.println("개층 이동합니다.");
-    stepper.step(stepsPerRev*move);
+    Serial.println(stepsPerRev*move*-10);
+
+    stepper.step(stepsPerRev*move*-7);
     delay(500);
 
     floors=2;
@@ -96,7 +99,9 @@ void loop() {
     move = floors - 3;
     Serial.print(move*-1);
     Serial.println("개층 이동합니다.");
-    stepper.step(stepsPerRev*move);
+    Serial.println(stepsPerRev*move*-10);
+
+    stepper.step(stepsPerRev*move*-7);
     floors=3;
     btn3HL==HIGH;
     delay(1000);
@@ -115,7 +120,9 @@ void loop() {
     move = floors - 4;
     Serial.print(move*-1);
     Serial.println("개층 이동합니다.");
-    stepper.step(stepsPerRev*move);
+    Serial.println(stepsPerRev*move*-10);
+
+    stepper.step(stepsPerRev*move*-7);
     floors=4;
     btn4HL==HIGH;
     delay(1000);
