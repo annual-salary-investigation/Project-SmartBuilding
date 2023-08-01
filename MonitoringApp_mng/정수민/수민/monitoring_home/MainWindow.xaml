@@ -8,7 +8,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="Building IoT System Monitoring" Height="700" Width="1000" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing">
+        Title="Building IoT System Monitoring" Height="700" Width="1000" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing" FontFamily="SUITE">
     <Grid>
         <!-- 전체 그리드 높이 / 넓이 -->
         <Grid.ColumnDefinitions>

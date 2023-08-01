@@ -7,7 +7,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="Parking" Height="450" Width="800" Loaded="MetroWindow_Loaded">
+        Title="Parking" Height="450" Width="800" Loaded="MetroWindow_Loaded" FontFamily="SUITE">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
@@ -25,8 +25,6 @@
                 <Label Grid.Column="0" Content="입차현황" HorizontalAlignment="Center" VerticalAlignment="Center"
                    FontSize="30" FontWeight="Bold"/>
             </StackPanel>
-            
-            
 
             <!-- 차량 정보 삭제 버튼 -->
             <StackPanel Grid.Column="1">
@@ -45,7 +43,7 @@
                     mah:HeaderedControlHelper.HeaderFontWeight="Bold">
             
             <DataGrid x:Name="GrdParking" IsReadOnly="True" Style="{StaticResource MahApps.Styles.DataGrid.Azure}" GridLinesVisibility="All"
-                      ItemsSource="{Binding}" AutoGenerateColumns="False" >
+                      ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="GrdParking_SelectedCellsChanged" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Number}" Header="입차 순서"/>
                     <DataGridTextColumn Binding="{Binding CarName}" Header="차번호"/>

@@ -8,7 +8,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="Building IoT System Monitoring" Height="700" Width="1300" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing">
+        Title="Building IoT System Monitoring" Height="700" Width="1300" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing" FontFamily="SUITE">
     <Grid>
         <!-- 전체 그리드 높이 / 넓이 -->
         <Grid.ColumnDefinitions>
@@ -24,6 +24,7 @@
         <!-- 상단바 -->
         <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="AliceBlue">
             <StackPanel Orientation="Horizontal" >
+                <TextBlock x:Name="" />
                 <Label Content="MQTT 확인 -- 개발 마지막 단계에서 상단바 정리 예정!!" VerticalAlignment="Center"/>
                 <TextBox x:Name="TxtLog" Margin="10, 5" TextWrapping="Wrap" Width="300"/>
             </StackPanel>
@@ -33,9 +34,9 @@
         <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="0" Margin="10,10,5,10" CornerRadius="10">
             <Grid>
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0,-40,0,0">
-                    <TextBlock x:Name="Txtdate" Text="yyyy-mm-dd" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,0"></TextBlock>
-                    <TextBlock x:Name="Txtday" Text="요일" FontSize="20" HorizontalAlignment="Center" Margin="0,10"></TextBlock>
-                    <TextBlock x:Name="TxtTime" Text="현재시간" FontSize="20" HorizontalAlignment="Center" Margin="0,10"></TextBlock>
+                    <TextBlock x:Name="Txtdate" Text="yyyy-mm-dd" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,0"></TextBlock>
+                    <TextBlock x:Name="Txtday" Text="요일" FontSize="23" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,8,0,0"></TextBlock>
+                    <TextBlock x:Name="TxtTime" Text="현재시간" FontSize="23" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10"></TextBlock>
                     <Image x:Name="ImgWeather" Source="{Binding}" Width="120" VerticalAlignment="Bottom" Margin="0,25"/>
                     <Grid Margin="0, 10, 0, 0">
                         <Grid.RowDefinitions>
@@ -48,14 +49,14 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0" Content="기온" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" Margin="0,0,-30,10"/>
+                        <Label Grid.Row="0" Grid.Column="0" Content="기온" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,-30,10"/>
                         <TextBlock x:Name="TxtTemp" Grid.Row="0" Grid.Column="1" Text="℃" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="0,-9,70,0"/>
-                        <Label Grid.Row="1" Grid.Column="0" Content="습도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="0,0,-30,10"/>
-                        <TextBlock x:Name="TxtHumid" Grid.Row="1" Grid.Column="1" Text="%" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="0,-9,70,0"/>
-                        <Label Grid.Row="2" Grid.Column="0" Content="풍속" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18" Margin="0,10,-30,0"/>
-                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right"  Margin="0,10,70,0">
-                            <TextBlock x:Name="TxtWind" Text="m/s" HorizontalAlignment="Right" FontSize="18" />
-                            <TextBlock x:Name="Txtalarm" Text="바람세기" HorizontalAlignment="Right" FontSize="18" />
+                        <Label Grid.Row="1" Grid.Column="0" Content="습도" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,-30,10"/>
+                        <TextBlock x:Name="TxtHumid" Grid.Row="1" Grid.Column="1" Text="%" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="0,-9,75,0"/>
+                        <Label Grid.Row="2" Grid.Column="0" Content="풍속" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,-30,0"/>
+                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center"  Margin="-10,10,20,0">
+                            <TextBlock x:Name="TxtWind" Text="m/s" HorizontalAlignment="Right" FontSize="18" Margin="0,-5,0,0" />
+                            <TextBlock x:Name="Txtalarm" Text="바람세기" HorizontalAlignment="Right" FontSize="18" Margin="3,-5,0,0" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -66,7 +67,7 @@
         <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="5,10,5,10" CornerRadius="10">
             <Grid >
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="주차 관리" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,-20,0,20"/>
+                    <TextBlock Text="주차 관리" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,-20,0,20"/>
                     <Image Source="Resources/garage.png" Width="120" VerticalAlignment="Bottom" Margin="0,0,0,50"/>
                     <Button x:Name="BtnParking" Content="입차 현황" Margin="0, 15" FontSize="18"
                     Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Width="150" BorderThickness="0" Click="BtnParking_Click">
@@ -108,38 +109,37 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0">
-                        <Image Source="Resources/fire.png" Height="30"/>
-                        <Label Content="화재감지" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20,3,20,0">
+                        <Image Source="Resources/fire.png" Height="30" Margin="0,0,3,0"/>
+                        <Label Content="화재감지" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10" HorizontalAlignment="Left">
-                        <Label Content="1층" Margin="4, 0" FontSize="15" FontWeight="Bold"/>
-                        <TextBlock x:Name="fireSensor1" Text="작동 중" Margin="10, 4" FontSize="15"></TextBlock>
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10" HorizontalAlignment="Center">
+                        <Label Content="1층" Margin="4, 0" FontSize="18" FontWeight="Bold"/>
+                        <TextBlock x:Name="fireSensor1" Text="작동 중" Margin="10, 4" FontSize="18"></TextBlock>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10" HorizontalAlignment="Left">
-                        <Label Content="2층" Margin="4, 0" FontSize="15" FontWeight="Bold"/>
-                        <TextBlock x:Name="fireSensor2" Text="작동 중" Margin="10, 4" FontSize="15"></TextBlock>
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10" HorizontalAlignment="Center">
+                        <Label Content="2층" Margin="4, 0" FontSize="18" FontWeight="Bold"/>
+                        <TextBlock x:Name="fireSensor2" Text="작동 중" Margin="10, 4" FontSize="18"></TextBlock>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10" HorizontalAlignment="Left">
-                        <Label Content="3층" Margin="4, 0" FontSize="15" FontWeight="Bold"/>
-                        <TextBlock x:Name="fireSensor3" Text="작동 중" Margin="10, 4" FontSize="15"></TextBlock>
+                    <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,30" HorizontalAlignment="Center">
+                        <Label Content="3층" Margin="4, 0" FontSize="18" FontWeight="Bold"/>
+                        <TextBlock x:Name="fireSensor3" Text="작동 중" Margin="10, 4" FontSize="18"></TextBlock>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10" HorizontalAlignment="Left">
-                        <Label Content="4층" Margin="4, 0" FontSize="15" FontWeight="Bold"/>
-                        <TextBlock x:Name="fireSensor4" Text="작동 중" Margin="10, 4" FontSize="15"></TextBlock>
+                    <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,30" HorizontalAlignment="Center">
+                        <Label Content="4층" Margin="4, 0" FontSize="18" FontWeight="Bold"/>
+                        <TextBlock x:Name="fireSensor4" Text="작동 중" Margin="10, 4" FontSize="18"></TextBlock>
                     </StackPanel>
 
                 </Grid>
@@ -152,29 +152,33 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0">
-                        <Image Source="Resources/grocery-cart.png" Height="30"/>
-                        <Label Content="2층 마트" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20,3,20,0">
+                        <Image Source="Resources/grocery-cart.png" Height="30" Margin="0,0,3,0"/>
+                        <Label Content="2층 마트" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <mah:ToggleSwitch Header="전등 1" OffContent="OFF" OnContent="ON" Margin="10,0" Toggled="ToggleSwitch_Toggled" />
-                        <mah:ToggleSwitch Header="전등 2" OffContent="OFF" OnContent="ON" Margin="10,0"/>
-                        <mah:ToggleSwitch Header="전등 3" OffContent="OFF" OnContent="ON" Margin="10,0"/>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30,0,0,30">
+                        <mah:ToggleSwitch Header="전등 1" OffContent="OFF" OnContent="ON" Margin="10,0,0,0" Toggled="ToggleSwitch_Toggled" />
+                        <mah:ToggleSwitch Header="전등 2" OffContent="OFF" OnContent="ON" Margin="10,0,0,0"/>
+                        <mah:ToggleSwitch Header="전등 3" OffContent="OFF" OnContent="ON" Margin="10,0,0,0"/>
                     </StackPanel>
                 </Grid>
             </Border>
             <!-- 옥상 (1,1) -->
-            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="2" Margin="0,5,0,0" CornerRadius="10">
+            <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="2" Margin="0,5,0,0" CornerRadius="10" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0">
-                        <Image Source="Resources/terrace.png" Height="30"/>
-                        <Label Content="옥상 캠핑장" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20,3,20,0">
+                        <Image Source="Resources/terrace.png" Height="30" Margin="0,0,3,0"/>
+                        <Label Content="옥상 캠핑장" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                        <mah:ToggleSwitch Header="차양막" OffContent="ON" OnContent="OFF" Margin="10,0,0,0" Toggled="ToggleSwitch_Toggled_1" />
                     </StackPanel>
                 </Grid>
             </Border>

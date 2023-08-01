@@ -7,7 +7,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="MngCar" Height="450" Width="800" Loaded="MetroWindow_Loaded">
+        Title="MngCar" Height="450" Width="800" Loaded="MetroWindow_Loaded" FontFamily="SUITE">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="320"/>
