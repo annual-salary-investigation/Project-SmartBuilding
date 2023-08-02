@@ -10,6 +10,10 @@
 <img src="https://github.com/annual-salary-investigation/Project-SmartBuilding/blob/main/image/safe_guard.gif?raw=true" width="700">
 
 
+## rx tx 아두이노 라즈베리파이 통신
+- 참고 url(https://fishpoint.tistory.com/7687, https://periar.tistory.com/230) [포트 활성화 내용]
+- rx tx 통신이 되는게 확인이 되면 json으로 변환해서 라즈베리파이 python으로 넘겨줘야합니다.
+(아두이노에 json 라이브러리가 필요한 부분입니다.) [#include <ArduinoJson.h> 필요함]
 
 ## 엘리베이터, 3층 wpf제작 (자인 동훈)
 ### 7.4, 7.5
