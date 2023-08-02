@@ -80,49 +80,46 @@ namespace appTemplate.Views
                 await this.ShowMessageAsync("오류", $"DB조회 오류 {ex.Message}", MessageDialogStyle.Affirmative, null);
             }
         }
+        #endregion
 
-        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        #region < 차량 정보 삭제 >
+        private async void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            //if (GrdParking.SelectedItems.Count == 0) 
-            //{
-            //    await this.ShowMessageAsync("오류", "삭제할 차량을 선택하세요", MessageDialogStyle.Affirmative, null);
-            //    return;
-            //}
+            
+            if (GrdParking.SelectedItems.Count == 0) 
+            {
+                await this.ShowMessageAsync("오류", "삭제할 차량을 선택하세요", MessageDialogStyle.Affirmative, null);
+                return;
+            }
 
-            //try
-            //{
-            //    using (MySqlConnection conn = new MySqlConnection(Commons.MyConnString))
-            //    {
-            //        if (conn.State == ConnectionState.Closed) conn.Open();
-            //        var query = "DELETE FROM parking WHERE Number = @Number";
-            //        var delRes = 0;
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(Commons.MyConnString))
+                {
+                    if (conn.State == ConnectionState.Closed) conn.Open();
+                    var query = "DELETE FROM parking WHERE Number = @Number";
+                    var delRes = 0;
 
-            //        foreach (ParkingList item in GrdParking.SelectedItems)
-            //        {
-            //            MySqlCommand cmd = new MySqlCommand(query, conn);
-            //            cmd.Parameters.AddWithValue("@Number", item.Number);
+                    foreach (ParkingList item in GrdParking.SelectedItems)
+                    {
+                        MySqlCommand cmd = new MySqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@Number", item.Number);
 
-            //            delRes += cmd.ExecuteNonQuery();
-            //        }
+                        delRes += cmd.ExecuteNonQuery();
+                    }
 
-            //        if (delRes == GrdParking.SelectedItem.Count)
-            //        {
-            //            await this.ShowMessageAsync("삭제", "DB 삭제 성공!", MessageDialogStyle.Affirmative, null);
-            //        }
-            //    }
+                    if (delRes == GrdParking.SelectedItems.Count)
+                    {
+                        await this.ShowMessageAsync("삭제", "DB 삭제 성공!", MessageDialogStyle.Affirmative, null);
+                    }
+                }
 
-            //    await ShowParkingList();
-            //}
-            //catch (Exception ex)
-            //{
-            //    await Commons.ShowMessageAsync("오류", $"DB삭제 오류 {ex.Message}");
-            //}
-        }
-
-
-        private void GrdParking_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
-        {
-
+                await ShowParkingList();
+            }
+            catch (Exception ex)
+            {
+                await Commons.ShowMessageAsync("오류", $"DB삭제 오류 {ex.Message}");
+            }
         }
     }
 

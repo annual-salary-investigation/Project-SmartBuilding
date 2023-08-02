@@ -30,7 +30,7 @@
             <StackPanel Grid.Column="1">
                 <Button x:Name="BtnDelete"  Height="50" Width="200" Margin="10"
                         Content="차량 정보 삭제" FontSize="20"
-                        Style="{StaticResource MahApps.Styles.Button.Square.Highlight}" Click="BtnDelete_Click"/>
+                        Style="{StaticResource MahApps.Styles.Button.Square.Highlight}" BorderThickness="0" Click="BtnDelete_Click"/>
             </StackPanel>
         </Grid>
         
@@ -43,7 +43,7 @@
                     mah:HeaderedControlHelper.HeaderFontWeight="Bold">
             
             <DataGrid x:Name="GrdParking" IsReadOnly="True" Style="{StaticResource MahApps.Styles.DataGrid.Azure}" GridLinesVisibility="All"
-                      ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="GrdParking_SelectedCellsChanged" >
+                      ItemsSource="{Binding}" AutoGenerateColumns="False" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Number}" Header="입차 순서"/>
                     <DataGridTextColumn Binding="{Binding CarName}" Header="차번호"/>

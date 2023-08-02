@@ -24,7 +24,7 @@
         <!-- 상단바 -->
         <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="AliceBlue">
             <StackPanel Orientation="Horizontal" >
-                <TextBlock x:Name="" />
+                <!--<TextBlock x:Name="TxtMQTT"  />-->
                 <Label Content="MQTT 확인 -- 개발 마지막 단계에서 상단바 정리 예정!!" VerticalAlignment="Center"/>
                 <TextBox x:Name="TxtLog" Margin="10, 5" TextWrapping="Wrap" Width="300"/>
             </StackPanel>
@@ -177,8 +177,8 @@
                         <Label Content="옥상 캠핑장" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-                        <mah:ToggleSwitch Header="차양막" OffContent="ON" OnContent="OFF" Margin="10,0,0,0" Toggled="ToggleSwitch_Toggled_1" />
+                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                        <mah:ToggleSwitch Header="차양막" OffContent="ON" OnContent="OFF" Margin="10,0,0,30" Toggled="ToggleSwitch_Toggled_1" />
                     </StackPanel>
                 </Grid>
             </Border>

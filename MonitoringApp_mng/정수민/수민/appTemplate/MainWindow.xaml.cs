@@ -239,6 +239,7 @@ namespace appTemplate
         }
         #endregion
 
+        #region < LED 토글 >
         private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
             ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
@@ -257,6 +258,7 @@ namespace appTemplate
                 }
             }
         }
+        #endregion
 
         private void MQTT_CLIENT_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
@@ -375,6 +377,7 @@ namespace appTemplate
             parkingWindow.ShowDialog(); // 모달창
         }
 
+        #region < 차양막 펼치기 : 아두이노 연동 후 수정 요 >
         private void ToggleSwitch_Toggled_1(object sender, RoutedEventArgs e)
         {
             ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
@@ -393,5 +396,6 @@ namespace appTemplate
                 }
             }
         }
+        #endregion
     }
 }
