@@ -1,12 +1,12 @@
 #include "DHT.h"
 #include <Stepper.h>
 
-// 온습도 센서 
+// 온습도 센서
 #define DHTTYPE DHT22
-#define DHTPIN 2 
+#define DHTPIN 2
 DHT dht(DHTPIN, DHTTYPE);
 
-// LED 
+// LED
 #define RED1 22
 #define BLUE1 23
 #define GREEN1 24
@@ -32,30 +32,32 @@ DHT dht(DHTPIN, DHTTYPE);
 
 int flag = 0;
 int flag1 = 0;
+int flag2 = 0;
+
 const int stepsPerRevolution = 2048;
 Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);
 uint8_t success;
 
 void LED1powerOff()
-{ // LED common anode라서 high가 비활성화 low가 활성화임 
+{ // LED common anode라서 high가 비활성화 low가 활성화임
   digitalWrite(RED1, HIGH);
   digitalWrite(BLUE1, HIGH);
   digitalWrite(GREEN1, HIGH);
 }
 
 void LED2powerOff()
-{ // LED common anode라서 high가 비활성화 low가 활성화임 
+{ // LED common anode라서 high가 비활성화 low가 활성화임
   digitalWrite(RED2, HIGH);
   digitalWrite(BLUE2, HIGH);
   digitalWrite(GREEN2, HIGH);
 }
 
 void LED3powerOff()
-{ // LED common anode라서 high가 비활성화 low가 활성화임 
+{ // LED common anode라서 high가 비활성화 low가 활성화임
   digitalWrite(RED3, HIGH);
   digitalWrite(BLUE3, HIGH);
   digitalWrite(GREEN3, HIGH);
-} 
+}
 
 void setup()
 {
@@ -77,7 +79,7 @@ void setup()
   pinMode(GREEN1, OUTPUT);
   pinMode(GREEN2, OUTPUT);
   pinMode(GREEN3, OUTPUT);
-  
+ 
   pinMode(INA, OUTPUT);
   pinMode(INB, OUTPUT);
 
@@ -94,7 +96,7 @@ void loop()
   float f = dht.readTemperature(true);
 
   int sensor = analogRead(ILLUMI);
-  
+ 
   int state = digitalRead(FLAME);
   noTone(BUZ);
 
@@ -112,18 +114,19 @@ void loop()
   }
 
   // 25도 이상이면 팬모터 자동 작동
-  if(flag = 0 && temperature >= 25)
+  if(flag == 0 && temperature >= 25)
   {
     FanpowerOn();
+   
     flag=1;
   }
 
-  
+ 
   // LED
-  if (Serial.available() > 0) 
+  if (Serial.available() > 0)
   {
     String command = Serial.readStringUntil('\n');
-    
+   
     if (command == "0") {
       LED1powerOff();
     }
@@ -170,35 +173,51 @@ void loop()
     digitalWrite(GREEN1, HIGH);
     digitalWrite(GREEN2, HIGH);
     digitalWrite(GREEN3, HIGH);
-    
+   
     Serial.println("1");
     for(int i = 0; i<5; i++)
     {
       tone(BUZ, 500, 100);
       delay(1000);    
     }
+
+    flag2 = 1;
+  }
+  else if( flag2 == 1 && state == 0)
+  {
+    digitalWrite(RED1, HIGH);
+    digitalWrite(RED2, HIGH);
+    digitalWrite(RED3, HIGH);
+    digitalWrite(BLUE1, HIGH);
+    digitalWrite(BLUE2, HIGH);
+    digitalWrite(BLUE3, HIGH);
+    digitalWrite(GREEN1, HIGH);
+    digitalWrite(GREEN2, HIGH);
+    digitalWrite(GREEN3, HIGH);
+   
+    flag2 = 0;
   }
   else
   {
     Serial.println("0");
-    
+
     noTone(BUZ);
   }
 
   // 블라인드
-  if(flag == 0 and sensor < 300)
+  if(flag1 == 0 && sensor < 300)
   {
     myStepper.step(stepsPerRevolution);
-    flag = 1;
+    flag1 = 1;
   }
-  else if(flag == 1 and sensor > 300)
+  if(flag1 == 1 && sensor > 300)
   {
     myStepper.step(-stepsPerRevolution);
-    flag = 0;
+    flag1 = 0;
   }
  
 
-  delay(2000);
+  delay(1000);
 }
 
 // LOW 활성화 HIGH 비활성화
