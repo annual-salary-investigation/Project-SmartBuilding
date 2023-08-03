@@ -427,7 +427,41 @@ namespace appTemplate
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show($"Temp Error : {ex.Message}");
+                            MessageBox.Show($"Fire Error : {ex.Message}");
+                        }
+
+                    });
+                }
+
+                if (currSensor["Elev"] != null)
+                {
+                    this.Invoke(async () =>
+                    {
+                        var elevVaule = currSensor["Elev"];
+                        int convertelev = Int32.Parse(elevVaule);
+
+                        try
+                        {
+                            if (convertelev == 1)
+                            {
+                                txtEle.Text = $"{convertelev}층";
+                            }
+                            else if (convertelev == 2)
+                            {
+                                txtEle.Text = $"{convertelev}층";
+                            }
+                            else if (convertelev == 3)
+                            {
+                                txtEle.Text = $"{convertelev}층";
+                            }
+                            else if (convertelev == 4)
+                            {
+                                txtEle.Text = $"{convertelev}층";
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Elevator Error : {ex.Message}");
                         }
 
                     });
@@ -483,6 +517,9 @@ namespace appTemplate
             Process.GetCurrentProcess().Kill();
         }
 
-
+        private void btnCall_ELEV_Click(object sender, RoutedEventArgs e)
+        {
+            Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("8"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+        }
     }
 }

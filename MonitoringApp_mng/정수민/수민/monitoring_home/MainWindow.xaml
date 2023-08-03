@@ -117,10 +117,11 @@
                     <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="25" Background="White"/>
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Label Content="현재 층" FontSize="30" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                        <TextBlock FontSize="25" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,10">1층</TextBlock>
+                        <TextBlock x:Name="txtEle"  FontSize="25" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,10">1층</TextBlock>
                         <Button x:Name="btnEle" Content="호출"  FontSize="20" HorizontalAlignment="Center"
                                 Width="100" Height="50"
-                                Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}"/>
+                                Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}"
+                                Click="btnCall_ELEV_Click"/>
                     </StackPanel>
                 </Grid>
             </Grid>
