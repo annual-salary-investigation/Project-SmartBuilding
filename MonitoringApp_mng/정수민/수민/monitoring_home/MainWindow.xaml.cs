@@ -242,7 +242,8 @@ namespace appTemplate
         }
         #endregion
 
-        
+
+        #region < LED 제어 영역 >
         private void ToggleSwitch_Toggled_1(object sender, RoutedEventArgs e)
         {
             ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
@@ -251,13 +252,24 @@ namespace appTemplate
             {
                 if (toggleSwitch.IsOn)
                 {
+
                     // LED1 켜기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("1"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("1"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+
                 }
+
                 else
                 {
+
                     // LED1 끄기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("0"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("0"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+
                 }
             }
         }
@@ -271,12 +283,19 @@ namespace appTemplate
                 if (toggleSwitch.IsOn)
                 {
                     // LED2 켜기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("3"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("3"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+
                 }
                 else
                 {
-                    // LED2 끄기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("2"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    // LED2 끄기 메시지 발행  
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("2"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
                 }
             }
         }
@@ -290,16 +309,49 @@ namespace appTemplate
                 if (toggleSwitch.IsOn)
                 {
                     // LED3 켜기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("5"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("5"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+
+                    });
                 }
                 else
                 {
                     // LED3 끄기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("4"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("4"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
                 }
             }
         }
+        #endregion
 
+        #region < 펜모터 >
+        private void btnFan_ON_Click(object sender, RoutedEventArgs e)
+        {
+            if (Commons.MQTT_CLIENT.IsConnected)
+            {
+                this.Invoke(() =>
+                {
+                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("7"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                });
+            }
+        }
+
+        private void btnFan_OFF_Click(object sender, RoutedEventArgs e)
+        {
+            if (Commons.MQTT_CLIENT.IsConnected)
+            {
+                this.Invoke(() =>
+                {
+                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("6"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                });
+            }
+        }
+        #endregion
+
+        #region <구독 영역 - 온.습도 , 화재감지센서 동작>
         private void MQTT_CLIENT_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             var msg = Encoding.UTF8.GetString(e.Message);
@@ -307,7 +359,7 @@ namespace appTemplate
             try
             {
                 var currSensor = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg); // 역직렬화
-              
+
                 if (currSensor["Temp"] != null)
                 {
                     this.Invoke(() =>
@@ -316,14 +368,14 @@ namespace appTemplate
 
                         try
                         {
-                            double converttemp = Double.Parse(tempValue);
+                            double degree = Double.Parse(tempValue);
 
-                            Txtdegree.Text = $"{tempValue} ℃";
-                            GetDegreeImagePath(converttemp);
+                            Txtdegree.Text = $"{degree} ℃";
+                            GetDegreeImagePath(degree);
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message);
+                            MessageBox.Show($"Temp Error : {ex.Message}");
                         }
 
                     });
@@ -346,18 +398,48 @@ namespace appTemplate
 
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message);
+                            MessageBox.Show($"Humid Error : {ex.Message}");
                         }
-   
+
+                    });
+
+                }
+
+                if (currSensor["Fire"] != null)
+                {
+                    this.Invoke(async () =>
+                    {
+                        var fireVaule = currSensor["Fire"];
+                        int convertfire = Int32.Parse(fireVaule);
+
+                        try
+                        {
+                            if (convertfire == 0)
+                            {
+                                fireSensor.Text = "정상 작동 중";
+                            }
+                            else if (convertfire == 1)
+                            {
+                                fireSensor.Text = "화재 발생";
+                                await Commons.ShowMessageAsync("비상", $"화재발생!!");
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Temp Error : {ex.Message}");
+                        }
+
                     });
 
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"MqttMsgPublishReceived Error : {ex.Message}");
             }
         }
+        #endregion
 
         #region < 온도 이미지 띄우기 >
         private void GetDegreeImagePath(double degree)
@@ -395,6 +477,7 @@ namespace appTemplate
         }
         #endregion
 
+        // 종료 이벤트 - 프로세스 완전 종료
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Process.GetCurrentProcess().Kill();
