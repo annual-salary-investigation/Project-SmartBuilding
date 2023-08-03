@@ -35,7 +35,7 @@
         </Grid>
 
         <!-- 대시보드 1 온,습도 영역-->
-        <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="0" Margin="10,10,5,10" CornerRadius="10" Background="White">
+        <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="0" Margin="15,15,5,15" CornerRadius="25" Background="White">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
@@ -62,7 +62,7 @@
         </Border>
 
         <!-- 대시보드 3 센서 영역-->
-        <Border BorderThickness="1" BorderBrush="White" Grid.Row="1" Grid.Column="1" Margin="5,10,10,10" CornerRadius="10">
+        <Border BorderThickness="1" Grid.Row="1" Grid.Column="1" Margin="5,10,10,10" CornerRadius="10">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
