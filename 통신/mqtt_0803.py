@@ -10,10 +10,11 @@ import paho.mqtt.client as mqtt
 2. 윈도우 방화벽 설정 확인 : 인바운드 규칙 추가해서  TCP 1883 포트 허용
 '''
 
-# 아두이노와 시리얼 통신 설정 - 포트 열기
-ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1) 
+# 아두이노와 시리얼 통신 설정 - 포트 열기d
+ser = serial.Serial('/dev/ttyS0', 9600, timeout=1) 
     # /dev/ttyACM0 : Serial device name for the Arduino
     # 9600 : Baud rate => 아두이노랑 같아야함!!
+ser_adu = serial.Serial('/dev/ttyAMA1', 9600, timeout=1)
 
 # 아두이노로 신호 보내서 센서 제어
 def control_LED(data):
@@ -24,6 +25,9 @@ def control_FAN(data):
     ser.write(data.encode())
     time.sleep(1)
     
+def call_Ele(data):
+    ser_adu.write(data.encode())
+    time.sleep(1)
 
 # MQTT - WPF로 데이터 보내는 객체
 class publisher(Thread):
@@ -43,19 +47,23 @@ class publisher(Thread):
         while True:
             try:
                 response = ser.readline().decode('UTF-8').strip() # 아두이노로부터 응답받기
-                print(response)                
+                response1 = ser_adu.readline().decode('UTF-8').strip()
+
+                print(response)
+                print(response1)
                 temp_part = response.split('|')[0]
                 humid_part = response.split('|')[1]
                 fire_part = response.split('|')[2]
                 temp = float(temp_part)
                 humid = float(humid_part)
                 fire = int(fire_part)
+                elev = int(response1)
 
-                origin_data = {"Temp": temp, "Humid": humid, "Fire": fire} # 아두이노에서 받은 데이터 제이슨 형태로 저장
-                pub_data = json.dumps(origin_data) # 제이슨 변환
+                origin_data = {"Temp": temp, "Humid": humid, "Fire": fire, "Elev":elev} # 아두이노에서 받은 데이터 제이슨 형태로 저장
+                pub_data = json.dumps(origin_data) # 제이슨 변환          
 
                 self.client.publish(topic='pknu/rpi/control/', payload=pub_data) # pknu/rpi/contro/ 토픽으로 전송 - WPF 에서도 이 토픽으로 구독해야 값 받을 수 있음!
-                print('Data published')                
+                print('Data published')
 
             except Exception as e:
                 print(f'Other Error : {e.args}')
@@ -102,6 +110,8 @@ class subscriber(Thread):
             control_FAN('6\n')
         elif message == "7":    # 팬모터 끄기
             control_FAN('7\n')
+        elif message == "8":
+            call_Ele('8\n')
 
 if __name__ == '__main__':      
     thPub = publisher() # publisher 객체 생성
