@@ -99,9 +99,16 @@
                 <!-- 실링펜 -->
                 <Grid Grid.Row="1" Grid.Column="0" Margin="5">
                     <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="25" Background="White"/>
-                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Label Content="실링펜" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
-                        <mah:ToggleSwitch OffContent="OFF" OnContent="ON" Margin="80,10,-10,0" HorizontalAlignment="Center" />
+                    <StackPanel>
+                        <Label Content="거실 펜" Margin="70" FontSize="30" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Button x:Name="btnFan_ON" Content="ON"  FontSize="20" Width="70" Margin="10"
+                                Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}"
+                                Click="btnFan_ON_Click"/>
+                        <Button x:Name="btnFan_OFF" Content="OFF"  FontSize="20" Width="70" 
+                                Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}" Background="Gray" 
+                                Click="btnFan_OFF_Click"/>
                     </StackPanel>
                 </Grid>
 
