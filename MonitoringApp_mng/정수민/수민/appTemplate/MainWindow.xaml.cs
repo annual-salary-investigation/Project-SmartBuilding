@@ -446,7 +446,7 @@ namespace appTemplate
         }
 
         #region < 차양막 펼치기 : 아두이노 연동 후 수정 요 >
-        private void ToggleSwitch_Toggled_1(object sender, RoutedEventArgs e)
+        private void ToggleSwitch_SHIELD(object sender, RoutedEventArgs e)
         {
             ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
 
@@ -454,13 +454,21 @@ namespace appTemplate
             {
                 if (toggleSwitch.IsOn)
                 {
-                    // 차양막 펼치기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("1"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    this.Invoke(() =>
+                    {
+                        // 차양막 펼치기 메시지 발행
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SHIELD, Encoding.UTF8.GetBytes("1"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+                    
+                    
                 }
                 else
                 {
-                    // 차양막 접기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("0"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    this.Invoke(() =>
+                    {
+                        // 차양막 접기 메시지 발행
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SHIELD, Encoding.UTF8.GetBytes("0"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
                 }
             }
         }

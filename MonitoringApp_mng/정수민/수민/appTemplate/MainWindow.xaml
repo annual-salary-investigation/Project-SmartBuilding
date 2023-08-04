@@ -182,7 +182,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                        <mah:ToggleSwitch Header="차양막" OffContent="ON" OnContent="OFF" Margin="10,0,0,30" Toggled="ToggleSwitch_Toggled_1" />
+                        <mah:ToggleSwitch Header="차양막" OffContent="OFF" OnContent="ON" Margin="10,0,0,30" Toggled="ToggleSwitch_SHIELD" />
                     </StackPanel>
                 </Grid>
             </Border>
