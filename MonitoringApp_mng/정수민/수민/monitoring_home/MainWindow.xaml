@@ -151,7 +151,6 @@
                 <TextBlock x:Name="Txtdate" Text="yyyy-mm-dd" FontSize="15" HorizontalAlignment="Center" Margin="0,0,0,0"></TextBlock>
                 <TextBlock x:Name="Txtday" Text="요일" FontSize="15" HorizontalAlignment="Center" Margin="5,0"></TextBlock>
                 <TextBlock x:Name="TxtTime" Text="현재시간" FontSize="15" HorizontalAlignment="Center" Margin="5,0"></TextBlock>
-                <Label Content="MQTT 확인 -- 개발 마지막 단계에서 정리 예정!!" VerticalAlignment="Center"/>
                 <TextBox x:Name="TxtLog" Margin="5,0" TextWrapping="Wrap" Width="300"/>
             </StackPanel>
         </StatusBar>
