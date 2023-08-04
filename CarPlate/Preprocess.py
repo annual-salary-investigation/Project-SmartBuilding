@@ -241,3 +241,15 @@ class Preprocess() :
                 _, self.img_result = cv2.threshold(self.img_result, thresh=0.0, maxval=255.0, type=cv2.THRESH_BINARY | cv2.THRESH_OTSU)
                 self.img_result = cv2.copyMakeBorder(self.img_result, top=10, bottom=10, left=10, right=10, borderType=cv2.BORDER_CONSTANT, value=(0,0,0))
     
+    def isCarPlate(self) :
+            try :
+            
+                # if type(self.img_result) == np.ndarray :
+                #     return self.img_result
+                if hasattr(self, 'img_result') :
+                    return True
+                else :
+                    return False
+            except :
+                # return False
+                pass
