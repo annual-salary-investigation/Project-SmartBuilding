@@ -83,18 +83,19 @@ namespace appTemplate
 
             #region < MQTT >
             Commons.MQTT_CLIENT = new MqttClient(Commons.BROKERHOST); // MQTT 클라이언트 초기화
-            //Commons.MQTT_CLIENT.MqttMsgPublishReceived += MQTT_CLIENT_MqttMsgPublishReceived; // MQTT 메시지 수신 이벤트 핸들러 등록
+            Commons.MQTT_CLIENT.MqttMsgPublishReceived += MQTT_CLIENT_MqttMsgPublishReceived;
+                // MQTT 메시지 수신 이벤트 핸들러 등록
 
             try
             {
                 if (!Commons.MQTT_CLIENT.IsConnected)
                 {
                     // MQTT 브로커에 연결
-                    Commons.MQTT_CLIENT.Connect("localhost");
+                    Commons.MQTT_CLIENT.Connect("monitoringApp");
                     TxtLog.Text = ">>> MQTT Broker Connected";
 
                     // LED 상태를 확인하기 위해 구독
-                    Commons.MQTT_CLIENT.Subscribe(new string[] { Commons.MQTTTOPIC }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+                    Commons.MQTT_CLIENT.Subscribe(new string[] { Commons.MQTTTOPIC }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
                 }
             }
             catch (Exception ex)
@@ -103,6 +104,9 @@ namespace appTemplate
             }
             #endregion
         }
+
+        
+
         #endregion
 
         #region < 날씨 크롤링 >
@@ -239,7 +243,7 @@ namespace appTemplate
 //if (TS_1.IsOn == TS_2.IsOn == TS_3.IsOn == true)
 //{
 //    TS_All.IsOn = true;
-    private void ToggleSwitch_Toggled_All(object sender, RoutedEventArgs e)
+        private void ToggleSwitch_Toggled_All(object sender, RoutedEventArgs e)
         {
             ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
 
@@ -268,6 +272,7 @@ namespace appTemplate
                 }
             }
         }
+
         private void ToggleSwitch_Toggled_1(object sender, RoutedEventArgs e)
         {
             ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
@@ -372,45 +377,56 @@ namespace appTemplate
             }
         }
         #endregion
-        //private void MQTT_CLIENT_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
-        //{
-        //    var msg = Encoding.UTF8.GetString(e.Message);
-        //    Debug.WriteLine(msg);
-        //    try
-        //    {
-        //        var currSensor = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg); // 역직렬화
 
-        //        if (currSensor["Fire"] != null)
-        //        {
-        //            this.Invoke(() =>
-        //            {
-        //                var tempValue = currSensor["Fire"];
-                        
+        private void MQTT_CLIENT_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+        {
+            var msg = Encoding.UTF8.GetString(e.Message);
+            Debug.WriteLine(msg);
+            try
+            {
+                var currSensor = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg); // 역직렬화
 
-        //                try
-        //                {
-        //                    double degree = Double.Parse(tempValue);
+                if (currSensor["Fire"] != null)
+                {
+                    this.Invoke(() =>
+                    {
+                        var tempValue = currSensor["Fire"];
 
-        //                    fireSensor2.Text = $"{degree}";
-        //                }
-        //                catch (Exception ex)
-        //                {
-        //                    MessageBox.Show($"Temp Error : {ex.Message}");
-        //                }
+                        try
+                        {
+                            double degree = Double.Parse(tempValue);
 
-        //            });
+                            fireSensor2.Text = $"{degree}";     //2층 화재감지기 text
+                            if (degree == 2)
+                            {
+                                fireSensor2.Text = "SAFE";
+                            }
+                            else if (degree == 1)
+                            {
+                                fireSensor2.Text = "warning";
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Temp Error : {ex.Message}");
+                        }
 
-        //        }
+                    });
+
+                }
 
 
-        //    }
+            }
 
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"MqttMsgPublishReceived Error : {ex.Message}");
-        //    }
-        //}
+            catch (Exception ex)
+            {
+                //MessageBox.Show($"MqttMsgPublishReceived Error : {ex.Message}");
+                Debug.WriteLine($"Except Jsondata can't deserialized : {ex.Message}");
+            }
+        }
+
         #region < 차량 관리 버튼 이벤트 영역 - 자식창 띄우기>
+
         private void BtnMngCar_Click(object sender, RoutedEventArgs e)
         {
             var mngCarWindow = new MngCar();
@@ -540,3 +556,4 @@ namespace appTemplate
         }
     }
 }
+
