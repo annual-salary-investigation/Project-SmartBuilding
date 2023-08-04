@@ -1,0 +1,118 @@
+﻿<mah:MetroWindow 
+        x:Class="appTemplate.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:appTemplate"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d"
+        Title="Building IoT System Monitoring" Height="700" Width="1000" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing">
+    <Grid>
+        <!-- 전체 그리드 높이 / 넓이 -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <!-- 상단바 -->
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="AliceBlue">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="ImgWeather" Source="{Binding}" Width="40" VerticalAlignment="Center" Margin="10,0"/>
+                <TextBlock Text="안녕하세요 {username}님, 현재 기온은" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" />
+                <TextBlock x:Name="TxtTemp" Grid.Row="0" Grid.Column="1" Text="℃" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="10,0"/>
+                <TextBlock Text="습도는" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" />
+                <TextBlock x:Name="TxtHumid" Grid.Row="1" Grid.Column="1" Text="%" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="10,0"/>
+                <TextBlock x:Name="Txtalarm" Text="바람세기" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" />
+            </StackPanel>
+        </Grid>
+
+        <!-- 대시보드 1 온,습도 영역-->
+        <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="0" Margin="10,10,5,10" CornerRadius="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20">거실 온도</TextBlock>
+                <Grid Grid.Row="1">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="Imgdegree" Source="/Resources/normal.png" Width="100" VerticalAlignment="Center" ></Image>
+                        <TextBlock x:Name="Txtdegree" Text="ºC" FontFamily="Nanum" FontSize="30" FontWeight="ExtraBold" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30,0,0,0"></TextBlock>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20">거실 습도</TextBlock>
+                <Grid Grid.Row="3">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="Imghumid" Source="/Resources/moderate.png" Width="100" VerticalAlignment="Center"></Image>
+                        <TextBlock x:Name="Txthumid" Text="%" FontFamily="Nanum" FontSize="30" FontWeight="ExtraBold"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30,0,0,0"></TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- 대시보드2 센서 영역-->
+        <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Margin="5,10,10,10" CornerRadius="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0" HorizontalAlignment="Left">
+                    <Label Content="화재감지센서" Margin="4, 0" FontSize="15" FontWeight="Bold"/>
+                    <TextBlock x:Name="fireSensor" Text="작동 중" Margin="10, 4" FontSize="15"></TextBlock>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0, 30">
+                    <mah:ToggleSwitch Header="전등 1" OffContent="OFF" OnContent="ON" Margin="5,0" Toggled="ToggleSwitch_Toggled_1"/>
+                    <mah:ToggleSwitch Header="전등 2" OffContent="OFF" OnContent="ON" Margin="5,0" Toggled="ToggleSwitch_Toggled_2"/>
+                    <mah:ToggleSwitch Header="전등 3" OffContent="OFF" OnContent="ON" Margin="5,0" Toggled="ToggleSwitch_Toggled_3"/>
+                </StackPanel>
+
+
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Label Content="거실 펜" Margin="4, 0" FontSize="15" FontWeight="Bold" VerticalContentAlignment="Center"/>
+                    <Button x:Name="btnFan_ON" Content="ON"  FontSize="20" Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}"
+                            Click="btnFan_ON_Click"/>
+                    <Button x:Name="btnFan_OFF" Content="OFF"  FontSize="20" Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}"
+                            Click="btnFan_OFF_Click"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Label Content="현재 층" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                    <TextBlock FontSize="20" VerticalAlignment="Center">1층</TextBlock>
+                    <Button x:Name="btnEle" Content="호출"  FontSize="20" Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+
+        <!-- 하단 상태바 -->
+        <StatusBar Grid.Row="2" Grid.ColumnSpan="3">
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock x:Name="Txtdate" Text="yyyy-mm-dd" FontSize="15" HorizontalAlignment="Center" Margin="0,0,0,0"></TextBlock>
+                <TextBlock x:Name="Txtday" Text="요일" FontSize="15" HorizontalAlignment="Center" Margin="5,0"></TextBlock>
+                <TextBlock x:Name="TxtTime" Text="현재시간" FontSize="15" HorizontalAlignment="Center" Margin="5,0"></TextBlock>
+                <Label Content="MQTT 확인 -- 개발 마지막 단계에서 정리 예정!!" VerticalAlignment="Center"/>
+                <TextBox x:Name="TxtLog" Margin="5,0" TextWrapping="Wrap" Width="300"/>
+            </StackPanel>
+        </StatusBar>
+
+    </Grid>
+</mah:MetroWindow>

@@ -25,7 +25,7 @@ def control_LED(data):
 class publisher(Thread):
     def __init__(self):
         Thread.__init__(self) # 스레드 초기화
-        self.host = '210.119.12.77'
+        self.host = '210.119.12.85'
         self.port = 1883
         self.clientID = 'test_PUB'
         print('publisher 스레드 시작')
@@ -59,7 +59,7 @@ class publisher(Thread):
 class subscriber(Thread):
     def __init__(self):
         Thread.__init__(self)
-        self.host = '210.119.12.77'
+        self.host = '210.119.12.85'
         self.port = 1883
         self.clientId = 'test_SUB'
         self.topic = 'pknu/rpi/control/LED'

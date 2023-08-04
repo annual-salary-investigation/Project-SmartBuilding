@@ -158,10 +158,10 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0, 30">
-                        <mah:ToggleSwitch Header="전체 소등" OffContent="OFF" OnContent="ON" Margin="10,0" Toggled="ToggleSwitch_Toggled_All"/>
-                        <mah:ToggleSwitch Header="전등 1" OffContent="OFF" OnContent="ON" Margin="5,0" Toggled="ToggleSwitch_Toggled_1"/>
-                        <mah:ToggleSwitch Header="전등 2" OffContent="OFF" OnContent="ON" Margin="5,0" Toggled="ToggleSwitch_Toggled_2"/>
-                        <mah:ToggleSwitch Header="전등 3" OffContent="OFF" OnContent="ON" Margin="5,0" Toggled="ToggleSwitch_Toggled_3"/>
+                        <mah:ToggleSwitch x:Name="TS_All" Header="전체 소등" OffContent="OFF" OnContent="ON" Margin="10,0" Toggled="ToggleSwitch_Toggled_All"/>
+                        <mah:ToggleSwitch x:Name="TS_1" Header="전등 1" OffContent="OFF" OnContent="ON" Margin="5,0" Toggled="ToggleSwitch_Toggled_1"/>
+                        <mah:ToggleSwitch x:Name="TS_2" Header="전등 2" OffContent="OFF" OnContent="ON" Margin="5,0" Toggled="ToggleSwitch_Toggled_2"/>
+                        <mah:ToggleSwitch x:Name="TS_3" Header="전등 3" OffContent="OFF" OnContent="ON" Margin="5,0" Toggled="ToggleSwitch_Toggled_3"/>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -171,22 +171,11 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="0">
-                        <StackPanel Orientation="Horizontal" Margin="10,0">
-                            <Image Source="Resources/terrace.png" Height="30"/>
-                            <Label Content="옥상 캠핑장" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1">
-                        <TextBlock Text="status: " Margin="10" x:Name="Txtstatus"/>
-                        <TextBlock Margin="10" Text="{Binding MqttData}"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="2">
-                        <TextBlock Text="floor: " Margin="10" x:Name="Txtfloor"/>
-                        <TextBlock Margin="10" Text="{Binding MqttData}"/>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0">
+                        <Image Source="Resources/terrace.png" Height="30"/>
+                        <Label Content="옥상 캠핑장" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
                     </StackPanel>
                 </Grid>
             </Border>
