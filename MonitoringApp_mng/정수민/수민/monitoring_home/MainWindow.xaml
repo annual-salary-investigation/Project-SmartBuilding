@@ -65,64 +65,81 @@
         <Border BorderThickness="1" Grid.Row="1" Grid.Column="1" Margin="5,10,10,10" CornerRadius="10">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-
-                <!-- 화재감지 센서 -->
-                <Grid Grid.Row="0" Grid.Column="0" Margin="5">
-                    <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="25" Background="White"/>
-                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" Margin="0,10" HorizontalAlignment="Center">
-                        <Label Content="화재감지센서" Margin="4, 0" FontSize="30" FontWeight="Bold"/>
-                        <TextBlock x:Name="fireSensor" Text="작동 중" Margin="0,30,0,0" FontSize="25" HorizontalAlignment="Center"></TextBlock>
-                    </StackPanel>
-                </Grid>
-
+                
                 <!-- 전등(LED) -->
-                <Grid Grid.Row="0" Grid.Column="1" Margin="5">
-                    <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="25" Background="White"/>
+                <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="1" CornerRadius="25" Background="White" />
+                <Grid Grid.Row="0" Grid.Column="1" Margin="5" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
                     
-                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" >
-                        <Label Content="전등 1" FontSize="25" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <mah:ToggleSwitch OffContent="OFF" OnContent="ON" Margin="10,0" Toggled="ToggleSwitch_Toggled_1"/>
-                        <Label Content="전등 2" FontSize="25" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <mah:ToggleSwitch OffContent="OFF" OnContent="ON" Margin="10,0" Toggled="ToggleSwitch_Toggled_2"/>
-                        <Label Content="전등 3" FontSize="25" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <mah:ToggleSwitch OffContent="OFF" OnContent="ON" Margin="10,0" Toggled="ToggleSwitch_Toggled_3"/>
+                    <StackPanel Grid.Row="0">
+                        <Label Content="전체소등" FontSize="20" FontWeight="DemiBold" 
+                               Margin="0,10,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <mah:ToggleSwitch OffContent="OFF" OnContent="ON" Toggled="ToggleSwitch_Toggled_All" 
+                                          Margin="70,10,0,0" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="30,0,0,30" VerticalAlignment="Center" HorizontalAlignment="Left" >
+                        <Label Content="전등 1" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" />
+                        <mah:ToggleSwitch OffContent="OFF" OnContent="ON" Toggled="ToggleSwitch_Toggled_1" 
+                                          Margin="5,-3,0,0" HorizontalAlignment="Center"/>
+                        <Label Content="전등 2" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" />
+                        <mah:ToggleSwitch OffContent="OFF" OnContent="ON" Toggled="ToggleSwitch_Toggled_2" 
+                                          Margin="5,-3,0,0" HorizontalAlignment="Center"/>
+                        <Label Content="전등 3" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" />
+                        <mah:ToggleSwitch OffContent="OFF" OnContent="ON" Toggled="ToggleSwitch_Toggled_3" 
+                                          Margin="5,-3,0,0" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Grid>
 
-                <!-- 실링펜 -->
-                <Grid Grid.Row="1" Grid.Column="0" Margin="5">
-                    <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="25" Background="White"/>
-                    <StackPanel>
-                        <Label Content="거실 펜" Margin="70" FontSize="30" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Button x:Name="btnFan_ON" Content="ON"  FontSize="20" Width="70" Margin="10"
-                                Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}"
-                                Click="btnFan_ON_Click"/>
-                        <Button x:Name="btnFan_OFF" Content="OFF"  FontSize="20" Width="70" 
-                                Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}" Background="Gray" 
-                                Click="btnFan_OFF_Click"/>
-                    </StackPanel>
-                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                
+                    <!-- 화재감지 센서 -->
+                    <Grid Grid.Column="0" Margin="5,10,5,5">
+                        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="25" Background="White"/>
+                        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" Margin="0,10" HorizontalAlignment="Center">
+                            <Label Content="화재감지센서" Margin="4, 0" FontSize="25" FontWeight="Bold" VerticalAlignment="Top"/>
+                            <TextBlock x:Name="fireSensor" Text="작동 중" Margin="0,30,0,0" FontSize="25" HorizontalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+                    <!-- 실링펜 -->
+                    <Grid Grid.Column="1" Margin="5,10,5,5">
+                        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="25" Background="White"/>
+                        <StackPanel>
+                            <Label Content="거실 펜" Margin="0,85,0,0" FontSize="30" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Button x:Name="btnFan_ON" Content="ON"  FontSize="20" Width="80" Margin="20,50,5,0"
+                                    Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}"
+                                    Click="btnFan_ON_Click"/>
+                            <Button x:Name="btnFan_OFF" Content="OFF"  FontSize="20" Width="80" Margin="5,50,20,0"
+                                    Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}" Background="Gray" 
+                                    Click="btnFan_OFF_Click"/>
+                        </StackPanel>
+                    </Grid>
 
-                <!-- 엘리베이터 호출 -->
-                <Grid Grid.Row="1" Grid.Column="1" Margin="5">
-                    <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="25" Background="White"/>
-                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Label Content="현재 층" FontSize="30" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                        <TextBlock x:Name="txtEle"  FontSize="25" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,10">1층</TextBlock>
-                        <Button x:Name="btnEle" Content="호출"  FontSize="20" HorizontalAlignment="Center"
-                                Width="100" Height="50"
-                                Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}"
-                                Click="btnCall_ELEV_Click"/>
-                    </StackPanel>
+                    <!-- 엘리베이터 호출 -->
+                    <Grid Grid.Column="2" Margin="5,10,5,5">
+                        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="25" Background="White"/>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Label Content="현재 층" FontSize="30" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            <TextBlock x:Name="txtEle"  FontSize="25" FontWeight="DemiBold" Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" >1층</TextBlock>
+                            <Button x:Name="btnEle" Content="호출" Margin="0,20,0,0" FontSize="20" HorizontalAlignment="Center"
+                                    Width="80" Height="80"
+                                    Style="{DynamicResource MahApps.Styles.Button.Circle}"
+                                    Click="btnCall_ELEV_Click"/>
+                        </StackPanel>
+                    </Grid>
                 </Grid>
             </Grid>
         </Border>

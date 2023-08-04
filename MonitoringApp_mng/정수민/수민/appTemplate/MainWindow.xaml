@@ -23,10 +23,8 @@
 
         <!-- 상단바 -->
         <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="AliceBlue">
-            <StackPanel Orientation="Horizontal" >
-                <!--<TextBlock x:Name="TxtMQTT"  />-->
-                <Label Content="MQTT 확인 -- 개발 마지막 단계에서 상단바 정리 예정!!" VerticalAlignment="Center"/>
-                <TextBox x:Name="TxtLog" Margin="10, 5" TextWrapping="Wrap" Width="300"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                <TextBlock x:Name="TxtLog"  Margin="10, 5" TextWrapping="Wrap" Width="500" FontSize="25"/>
             </StackPanel>
         </Grid>
 
@@ -98,9 +96,9 @@
         <!-- 대시보드 3 센서 감시 및 제어 영역 -->
         <Grid Grid.Row="1" Grid.Column="2" Margin="5,10,10,10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
 
             <!-- 화재감지 -->
@@ -150,6 +148,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20,3,20,0">
@@ -157,10 +156,15 @@
                         <Label Content="2층 마트" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30,0,0,30">
-                        <mah:ToggleSwitch Header="전등 1" OffContent="OFF" OnContent="ON" Margin="10,0,0,0" Toggled="ToggleSwitch_Toggled" />
-                        <mah:ToggleSwitch Header="전등 2" OffContent="OFF" OnContent="ON" Margin="10,0,0,0"/>
-                        <mah:ToggleSwitch Header="전등 3" OffContent="OFF" OnContent="ON" Margin="10,0,0,0"/>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30,0,0,0">
+                        <mah:ToggleSwitch Header="전체 소등" OffContent="OFF" OnContent="ON" Margin="0" Toggled="ToggleSwitch_Toggled_All"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30,0,0,20">
+                        <mah:ToggleSwitch Header="전등 1" OffContent="OFF" OnContent="ON" Margin="0" Toggled="ToggleSwitch_Toggled_1"/>
+                        <mah:ToggleSwitch Header="전등 2" OffContent="OFF" OnContent="ON" Margin="0" Toggled="ToggleSwitch_Toggled_2"/>
+                        <mah:ToggleSwitch Header="전등 3" OffContent="OFF" OnContent="ON" Margin="0" Toggled="ToggleSwitch_Toggled_3"/>
+                        
                     </StackPanel>
                 </Grid>
             </Border>
