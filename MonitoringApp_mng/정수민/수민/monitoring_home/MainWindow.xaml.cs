@@ -36,7 +36,7 @@ namespace appTemplate
 
             // Timer 생성 및 설정
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1); // 1초마다 업데이트
+            timer.Interval = TimeSpan.FromSeconds(5); // 5초마다 업데이트
             timer.Tick += Timer_Tick;
 
             // Timer 시작
@@ -59,7 +59,7 @@ namespace appTemplate
                 string url = "https://www.weather.go.kr/w/obs-climate/land/city-obs.do";
 
                 // 웹 페이지 다운로드
-                string htmlContent = DownloadWebPage(url);
+                string htmlContent = DownloadWebPage(url);  // 오류
 
                 // HTML 파싱하여 부산 날씨 추출
                 ParseWeatherData(htmlContent, "부산");
@@ -113,7 +113,7 @@ namespace appTemplate
             {
                 // UTF-8로 인코딩된 웹 페이지 다운로드
                 client.Encoding = System.Text.Encoding.UTF8;
-                htmlContent = client.DownloadString(url);
+                htmlContent = client.DownloadString(url);   // 오류
             }
             return htmlContent;
         }
