@@ -239,7 +239,13 @@ namespace appTemplate
         }
         #endregion
 
-        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        #region<LED제어 영역>
+        private void ToggleSwitch_Toggled_All(object sender, RoutedEventArgs e)
+        {
+            // 전체 소등 이벤트 핸들러 추가
+        }
+
+        private void ToggleSwitch_Toggled_1(object sender, RoutedEventArgs e)
         {
             ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
 
@@ -247,22 +253,92 @@ namespace appTemplate
             {
                 if (toggleSwitch.IsOn)
                 {
-                    // LED 켜기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("1"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+
+                    // LED1 켜기 메시지 발행
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("1"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+
                 }
+
                 else
                 {
-                    // LED 끄기 메시지 발행
-                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC, Encoding.UTF8.GetBytes("0"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+
+                    // LED1 끄기 메시지 발행
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("0"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+
                 }
             }
         }
+
+        private void ToggleSwitch_Toggled_2(object sender, RoutedEventArgs e)
+        {
+            ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
+
+            if (Commons.MQTT_CLIENT.IsConnected)
+            {
+                if (toggleSwitch.IsOn)
+                {
+                    // LED2 켜기 메시지 발행
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("3"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+
+                }
+                else
+                {
+                    // LED2 끄기 메시지 발행  
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("2"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+                }
+            }
+        }
+
+        private void ToggleSwitch_Toggled_3(object sender, RoutedEventArgs e)
+        {
+            ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
+
+            if (Commons.MQTT_CLIENT.IsConnected)
+            {
+                if (toggleSwitch.IsOn)
+                {
+                    // LED3 켜기 메시지 발행
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("5"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+
+                    });
+                }
+                else
+                {
+                    // LED3 끄기 메시지 발행
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("4"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+                }
+            }
+        }
+        #endregion
 
         private void MQTT_CLIENT_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             var msg = Encoding.UTF8.GetString(e.Message);
             Debug.WriteLine(msg);
 
+        }
+
+        // 클로징 이벤트 
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Process.GetCurrentProcess().Kill();
         }
 
         #region < 실제 OpenAPI 불러오는 함수 >
@@ -369,10 +445,33 @@ namespace appTemplate
             parkingWindow.ShowDialog(); // 모달창
         }
 
-        // 클로징 이벤트 
-        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        #region < 차양막 펼치기 : 아두이노 연동 후 수정 요 >
+        private void ToggleSwitch_SHIELD(object sender, RoutedEventArgs e)
         {
-            Process.GetCurrentProcess().Kill();
+            ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
+
+            if (Commons.MQTT_CLIENT.IsConnected)
+            {
+                if (toggleSwitch.IsOn)
+                {
+                    this.Invoke(() =>
+                    {
+                        // 차양막 펼치기 메시지 발행
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SHIELD, Encoding.UTF8.GetBytes("1"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+
+
+                }
+                else
+                {
+                    this.Invoke(() =>
+                    {
+                        // 차양막 접기 메시지 발행
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SHIELD, Encoding.UTF8.GetBytes("0"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+                }
+            }
         }
+        #endregion
     }
 }

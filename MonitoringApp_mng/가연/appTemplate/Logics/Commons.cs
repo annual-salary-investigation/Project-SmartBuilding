@@ -36,6 +36,11 @@ namespace appTemplate.Logics
         //public static string BROKERHOST { get; set; } = "192.168.124.102";
         public static string MQTTTOPIC { get; set; } = "pknu/rpi/control/";
 
+        public static string MQTTTOPIC_LED { get; set; } = "pknu/rpi/control/LED";
+
+        // 4층 차양막 토픽
+        public static string MQTTTOPIC_SHIELD { get; set; } = "pknu/rpi/control/SHIELD/";
+
         // MQTT 클라이언트 공용 객체
         public static MqttClient MQTT_CLIENT { get; set; }
 
