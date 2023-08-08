@@ -34,7 +34,7 @@ namespace appTemplate
 
             // Timer 생성 및 설정
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1); // 1초마다 업데이트
+            timer.Interval = TimeSpan.FromSeconds(5); // 5초마다 업데이트
             timer.Tick += Timer_Tick;
 
             // Timer 시작
@@ -89,7 +89,7 @@ namespace appTemplate
                 {
                     // MQTT 브로커에 연결
                     Commons.MQTT_CLIENT.Connect("MONITOR");
-                    TxtLog.Text = ">>> MQTT Broker Connected";
+                    TxtLog.Text = "정상 연결 중";
 
                     // LED 상태를 확인하기 위해 구독
                     Commons.MQTT_CLIENT.Subscribe(new string[] { Commons.MQTTTOPIC }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
