@@ -96,8 +96,8 @@
 
                 <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
                     <Label Content="현재 층" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                    <TextBlock FontSize="20" VerticalAlignment="Center">1층</TextBlock>
-                    <Button x:Name="btnEle" Content="호출"  FontSize="20" Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}"/>
+                    <TextBlock x:Name="TxtFloor" Text="1층" FontSize="20" VerticalAlignment="Center"></TextBlock>
+                    <Button x:Name="btnEle" Content="호출"  FontSize="20" Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}" Click="btnEle_Click"/>
                 </StackPanel>
             </Grid>
         </Border>

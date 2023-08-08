@@ -338,7 +338,7 @@ namespace appTemplate
         }
         #endregion
 
-        #region <구독 영역 - 온.습도 , 화재감지센서 동작>
+        #region <구독 영역 - 온.습도 , 화재감지센서, 엘리베이터 동작>
         private void MQTT_CLIENT_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             var msg = Encoding.UTF8.GetString(e.Message);
@@ -405,7 +405,7 @@ namespace appTemplate
                             {
                                 fireSensor.Text = "정상 작동 중";
                             }
-                            else if(convertfire == 1)
+                            else if (convertfire == 1)
                             {
                                 fireSensor.Text = "화재 발생";
                                 await Commons.ShowMessageAsync("비상", $"화재발생!!");
@@ -419,6 +419,42 @@ namespace appTemplate
 
                     });
 
+                    // 엘리베이터 층 표시
+                    if (currSensor["Elev"] != null)
+                    {
+                        this.Invoke(() =>
+                        {
+                            var elevVaule = currSensor["Elev"];
+                            int convertelev = Int32.Parse(elevVaule);
+
+                            try
+                            {
+                                if (convertelev == 1)
+                                {
+                                    TxtFloor.Text = $"1 층";
+                                }
+                                else if (convertelev == 2)
+                                {
+                                    TxtFloor.Text = $"2 층";
+                                }
+                                else if (convertelev == 3)
+                                {
+                                    TxtFloor.Text = $"3 층";
+                                }
+                                else if (convertelev == 4)
+                                {
+                                    TxtFloor.Text = $"4 층";
+                                }
+
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Temp Error : {ex.Message}");
+                            }
+
+                        });
+
+                    }
                 }
             }
             catch (Exception ex)
@@ -464,11 +500,25 @@ namespace appTemplate
         }
         #endregion
 
+        #region <엘리베이터 호출 버튼 클릭>
+        private void btnEle_Click(object sender, RoutedEventArgs e)
+        {
+            if (Commons.MQTT_CLIENT.IsConnected)
+            {
+                this.Invoke(() =>
+                {
+                    Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("8"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                });
+            }
+        }
+        #endregion
+
 
         // 종료 이벤트 - 프로세스 아예 꺼줌
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Process.GetCurrentProcess().Kill();
         }
+
     }
 }
