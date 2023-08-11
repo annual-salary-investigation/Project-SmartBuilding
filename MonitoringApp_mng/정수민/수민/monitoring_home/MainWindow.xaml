@@ -86,13 +86,13 @@
                     
                     <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="30,0,0,30" VerticalAlignment="Center" HorizontalAlignment="Left" >
                         <Label Content="전등 1" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" />
-                        <mah:ToggleSwitch OffContent="OFF" OnContent="ON" Toggled="ToggleSwitch_Toggled_1" 
+                        <mah:ToggleSwitch x:Name="LED_1" OffContent="OFF" OnContent="ON" Toggled="ToggleSwitch_Toggled_1" 
                                           Margin="5,-3,0,0" HorizontalAlignment="Center"/>
                         <Label Content="전등 2" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" />
-                        <mah:ToggleSwitch OffContent="OFF" OnContent="ON" Toggled="ToggleSwitch_Toggled_2" 
+                        <mah:ToggleSwitch x:Name="LED_2" OffContent="OFF" OnContent="ON" Toggled="ToggleSwitch_Toggled_2" 
                                           Margin="5,-3,0,0" HorizontalAlignment="Center"/>
                         <Label Content="전등 3" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" />
-                        <mah:ToggleSwitch OffContent="OFF" OnContent="ON" Toggled="ToggleSwitch_Toggled_3" 
+                        <mah:ToggleSwitch x:Name="LED_3" OffContent="OFF" OnContent="ON" Toggled="ToggleSwitch_Toggled_3" 
                                           Margin="5,-3,0,0" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Grid>
@@ -134,10 +134,8 @@
                         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <Label Content="현재 층" FontSize="30" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
                             <TextBlock x:Name="txtEle"  FontSize="25" FontWeight="DemiBold" Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" >1층</TextBlock>
-                            <Button x:Name="btnEle" Content="호출" Margin="0,20,0,0" FontSize="20" HorizontalAlignment="Center"
-                                    Width="80" Height="80"
-                                    Style="{DynamicResource MahApps.Styles.Button.Circle}"
-                                    Click="btnCall_ELEV_Click"/>
+                            <Button x:Name="btnEle" Content="호출" Margin="0,20,0,0" FontSize="20" HorizontalAlignment="Center" Width="80" Height="80"
+                                    Style="{DynamicResource MahApps.Styles.Button.Circle}" Click="btnCall_ELEV_Click"/>
                         </StackPanel>
                     </Grid>
                 </Grid>

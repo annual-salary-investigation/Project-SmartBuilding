@@ -161,9 +161,9 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30,0,0,20">
-                        <mah:ToggleSwitch Header="전등 1" OffContent="OFF" OnContent="ON" Margin="0" Toggled="ToggleSwitch_Toggled_1"/>
-                        <mah:ToggleSwitch Header="전등 2" OffContent="OFF" OnContent="ON" Margin="0" Toggled="ToggleSwitch_Toggled_2"/>
-                        <mah:ToggleSwitch Header="전등 3" OffContent="OFF" OnContent="ON" Margin="0" Toggled="ToggleSwitch_Toggled_3"/>
+                        <mah:ToggleSwitch x:Name="LED_1" Header="전등 1" OffContent="OFF" OnContent="ON" Margin="0" Toggled="ToggleSwitch_Toggled_1"/>
+                        <mah:ToggleSwitch x:Name="LED_2" Header="전등 2" OffContent="OFF" OnContent="ON" Margin="0" Toggled="ToggleSwitch_Toggled_2"/>
+                        <mah:ToggleSwitch x:Name="LED_3" Header="전등 3" OffContent="OFF" OnContent="ON" Margin="0" Toggled="ToggleSwitch_Toggled_3"/>
                         
                     </StackPanel>
                 </Grid>

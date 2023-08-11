@@ -3,6 +3,7 @@ using appTemplate.Views;
 using HtmlAgilityPack;
 using MahApps.Metro.Controls;
 using Newtonsoft.Json;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,6 +24,8 @@ namespace appTemplate
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        public static readonly NLog.Logger LOGGER = NLog.LogManager.GetCurrentClassLogger(); 
+
         public bool IsConnected { get; set; } // MQTT 접속 여부 확인하기 위함
 
         public DispatcherTimer timer; // 시간 실시간으로 받기 위해 타이머 설정
@@ -41,6 +44,8 @@ namespace appTemplate
 
             // Timer 시작
             timer.Start();
+
+            LOGGER.Info("모니터링앱 시작!");
         }
 
         #region < 대시보드1 날씨영역 - 시간/날씨 실시간으로 받기 위한 메서드>
@@ -67,7 +72,9 @@ namespace appTemplate
             }
             catch (Exception ex)
             {
-                await Logics.Commons.ShowMessageAsync("오류", $"날씨 조회 오류 : {ex}");
+                //await Logics.Commons.ShowMessageAsync("오류", $"날씨 조회 오류 : {ex}");
+                LOGGER.Error(ex.Message);
+                Debug.WriteLine("오류", $"오류 발생 : {e}");
             }
             #endregion
         }
@@ -244,6 +251,32 @@ namespace appTemplate
         private void ToggleSwitch_Toggled_All(object sender, RoutedEventArgs e)
         {
             // 전체 소등 이벤트 핸들러 추가
+            ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
+
+            if (Commons.MQTT_CLIENT.IsConnected)
+            {
+                if (toggleSwitch.IsOn)
+                {
+                    LED_1.IsOn = LED_2.IsOn = LED_3.IsOn = true;
+                    // LED1 켜기 메시지 발행
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("11"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+
+                }
+
+                else
+                {
+                    LED_1.IsOn = LED_2.IsOn = LED_3.IsOn = false;
+                    // LED1 끄기 메시지 발행
+                    this.Invoke(() =>
+                    {
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("12"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    });
+
+                }
+            }
         }
 
         private void ToggleSwitch_Toggled_1(object sender, RoutedEventArgs e)
@@ -258,7 +291,7 @@ namespace appTemplate
                     // LED1 켜기 메시지 발행
                     this.Invoke(() =>
                     {
-                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("1"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("1"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
                     });
 
                 }
@@ -269,7 +302,7 @@ namespace appTemplate
                     // LED1 끄기 메시지 발행
                     this.Invoke(() =>
                     {
-                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("0"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("0"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
                     });
 
                 }
@@ -287,7 +320,7 @@ namespace appTemplate
                     // LED2 켜기 메시지 발행
                     this.Invoke(() =>
                     {
-                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("3"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("3"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
                     });
 
                 }
@@ -296,7 +329,7 @@ namespace appTemplate
                     // LED2 끄기 메시지 발행  
                     this.Invoke(() =>
                     {
-                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("2"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("2"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
                     });
                 }
             }
@@ -313,7 +346,7 @@ namespace appTemplate
                     // LED3 켜기 메시지 발행
                     this.Invoke(() =>
                     {
-                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("5"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("5"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
 
                     });
                 }
@@ -322,7 +355,7 @@ namespace appTemplate
                     // LED3 끄기 메시지 발행
                     this.Invoke(() =>
                     {
-                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_LED, Encoding.UTF8.GetBytes("4"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                        Commons.MQTT_CLIENT.Publish(Commons.MQTTTOPIC_SENSOR, Encoding.UTF8.GetBytes("4"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
                     });
                 }
             }

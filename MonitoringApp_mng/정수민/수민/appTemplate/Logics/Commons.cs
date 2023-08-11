@@ -31,14 +31,14 @@ namespace appTemplate.Logics
 
         // 화면마다 공유할 MQTT 브로커 ip 변수
         // 학교용
-         public static string BROKERHOST { get; set; } = "210.119.12.85";
+         public static string BROKERHOST { get; set; } = "210.119.12.77";
         // 집에서 할 때
         //public static string BROKERHOST { get; set; } = "192.168.124.102";
         public static string MQTTTOPIC { get; set; } = "pknu/rpi/control/";
-        public static string MQTTTOPIC_LED { get; set; } = "pknu/rpi/control/LED";
 
+        public static string MQTTTOPIC_SENSOR { get; set; } = "pknu/rpi/control/sensor";
         // 4층 차양막 토픽
-        public static string MQTTTOPIC_SHIELD { get; set; } = "pknu/rpi/control/SHIELD/";
+        public static string MQTTTOPIC_SHIELD { get; set; } = "pknu/rpi/control/control/SHIELD";
 
         // MQTT 클라이언트 공용 객체
         public static MqttClient MQTT_CLIENT { get; set; }
