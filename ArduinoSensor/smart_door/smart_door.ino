@@ -8,8 +8,8 @@
 #define PN532_MOSI (3)
 #define PN532_SS   (4)
 #define PN532_MISO (5)
-#define SUBO 6
-int suc[] = {0x53, 0x92, 0xBF, 0x86};
+#define SUBO 8
+int suc[] = {0xE3, 0x0B, 0xDD, 0xB6};
 int count = 0;
 Servo servo;
 
@@ -37,7 +37,7 @@ void setup(void) {
 
   Serial.begin(115200);
   while (!Serial) delay(10); // for Leonardo/Micro/Zero
-  servo.attach(6);
+  servo.attach(8);
   Serial.println("Hello!");
 
   nfc.begin();
@@ -87,12 +87,11 @@ void loop(void) {
       Serial.print("Seems to be a Mifare Classic card #");
       Serial.println(cardid);
 
-      if(uid[0]==0x53 && uid[1]==0x92 && uid[2]==0xBF 
-      && uid[3]==0xB6)
+      if(uid[0]==0xE3 && uid[1]==0x0B && uid[2]==0xDD && uid[3]==0xB6)
       {
-        servo.write(180);
+        servo.write(90);
         delay(5000);
-        servo.write(-180);
+        servo.write(-90);
       }
    }
     Serial.println("");
