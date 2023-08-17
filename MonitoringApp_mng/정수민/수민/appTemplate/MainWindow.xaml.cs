@@ -2,7 +2,9 @@
 using appTemplate.Views;
 using HtmlAgilityPack;
 using MahApps.Metro.Controls;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Text;
@@ -355,12 +357,82 @@ namespace appTemplate
         }
         #endregion
 
+        #region <구독 영역 - 온.습도 , 화재감지센서 동작>
         private void MQTT_CLIENT_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             var msg = Encoding.UTF8.GetString(e.Message);
             Debug.WriteLine(msg);
+            try
+            {
+                var currSensor = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg); // 역직렬화
 
+                // 화재감지 센서 - 2층
+                if (currSensor["Fire2"] != null)
+                {
+                    this.Invoke(async () =>
+                    {
+                        var fireVaule = currSensor["Fire2"];
+                        int convertfire = Int32.Parse(fireVaule);
+
+                        try
+                        {
+
+                            if (convertfire == 0)
+                            {
+                                fireSensor2.Text = "정상 작동 중";
+                            }
+                            else if (convertfire == 1)
+                            {
+                                fireSensor2.Text = "화재 발생";
+                                await Commons.ShowMessageAsync("비상", $"２층 화재발생!!");
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Fire Error : {ex.Message}");
+                        }
+
+                    });
+                }
+
+                // 화재감지 센서 - 3층
+                if (currSensor["Fire3"] != null)
+                {
+                    this.Invoke(async () =>
+                    {
+                        var fireVaule = currSensor["Fire3"];
+                        int convertfire = Int32.Parse(fireVaule);
+
+                        try
+                        {
+
+                            if (convertfire == 0)
+                            {
+                                fireSensor3.Text = "정상 작동 중";
+                            }
+                            else if (convertfire == 1)
+                            {
+                                fireSensor3.Text = "화재 발생";
+                                await Commons.ShowMessageAsync("비상", $" ３층 화재발생!!");
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Fire Error : {ex.Message}");
+                        }
+
+                    });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"MqttMsgPublishReceived Error : {ex.Message}");
+            }
         }
+        #endregion
 
         // 클로징 이벤트 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

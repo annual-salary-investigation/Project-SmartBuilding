@@ -109,7 +109,7 @@
                         <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="25" Background="White"/>
                         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" Margin="0,10" HorizontalAlignment="Center">
                             <Label Content="화재감지센서" Margin="4, 0" FontSize="25" FontWeight="Bold" VerticalAlignment="Top"/>
-                            <TextBlock x:Name="fireSensor" Text="작동 중" Margin="0,30,0,0" FontSize="25" HorizontalAlignment="Center"></TextBlock>
+                            <TextBlock x:Name="fireSensor" Margin="0,30,0,0" FontSize="25" HorizontalAlignment="Center"></TextBlock>
                         </StackPanel>
                     </Grid>
                     <!-- 실링펜 -->
@@ -133,7 +133,7 @@
                         <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="25" Background="White"/>
                         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <Label Content="현재 층" FontSize="30" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                            <TextBlock x:Name="txtEle"  FontSize="25" FontWeight="DemiBold" Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" >1층</TextBlock>
+                            <TextBlock x:Name="txtEle"  FontSize="25" FontWeight="DemiBold" Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
                             <Button x:Name="btnEle" Content="호출" Margin="0,20,0,0" FontSize="20" HorizontalAlignment="Center" Width="80" Height="80"
                                     Style="{DynamicResource MahApps.Styles.Button.Circle}" Click="btnCall_ELEV_Click"/>
                         </StackPanel>

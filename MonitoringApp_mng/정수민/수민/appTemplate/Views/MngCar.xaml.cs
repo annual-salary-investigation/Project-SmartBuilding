@@ -66,7 +66,7 @@ namespace appTemplate.Views
                     if (conn.State == System.Data.ConnectionState.Closed) conn.Open();
 
                     // 중복 체크 위해서 SELECT 쿼리 먼저 수행
-                    var checkquery = @"SELECT COUNT(*) FROM carmng WHERE CarNum = @CarNum"; // CarNum의 수를 체크
+                    var checkquery = @"SELECT COUNT(*) FROM car WHERE CarNum = @CarNum"; // CarNum의 수를 체크
                     MySqlCommand checkcmd = new MySqlCommand(checkquery, conn);
                     checkcmd.Parameters.AddWithValue("@CarNum", CarNum);
 
@@ -79,7 +79,7 @@ namespace appTemplate.Views
                     }
 
                     // 중복 체크 후 저장
-                    var query = @"INSERT INTO carmng
+                    var query = @"INSERT INTO car
                                              (RoomNum,
                                               CarNum,
                                               PhoneNum,
@@ -87,7 +87,7 @@ namespace appTemplate.Views
                                          VALUES
                                              (@RoomNum,
                                               @CarNum,
-                                              @PhoneNume,
+                                              @PhoneNum,
                                               @SpecialNote)";
 
                     var insRes = 0;

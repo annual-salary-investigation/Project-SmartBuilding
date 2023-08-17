@@ -11,7 +11,7 @@ namespace appTemplate.Logics
     internal class Commons
     {
         // 연결 문자열 담을 변수 - MySQL용 
-        public static readonly string MyConnString = "Server=localhost;" +
+        public static readonly string MyConnString = "Server=210.119.12.72;" +
                                                      "Port=3306;" +
                                                      "Database=miniproject;" +
                                                      "Uid=root;" +

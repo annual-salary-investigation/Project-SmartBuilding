@@ -90,7 +90,7 @@ void loop(void) {
       if(uid[0]==0xE3 && uid[1]==0x0B && uid[2]==0xDD && uid[3]==0xB6)
       {
         servo.write(90);
-        delay(5000);
+        delay(3000);
         servo.write(-90);
       }
    }

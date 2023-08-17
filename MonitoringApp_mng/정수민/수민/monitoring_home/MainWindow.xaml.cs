@@ -443,15 +443,16 @@ namespace appTemplate
                 }
 
                 // 화재감지 센서
-                if (currSensor["Fire"] != null)
+                if (currSensor["Fire3"] != null)
                 {
                     this.Invoke(async () =>
                     {
-                        var fireVaule = currSensor["Fire"];
+                        var fireVaule = currSensor["Fire3"];
                         int convertfire = Int32.Parse(fireVaule);
 
                         try
                         {
+                          
                             if (convertfire == 0)
                             {
                                 fireSensor.Text = "정상 작동 중";
@@ -509,7 +510,8 @@ namespace appTemplate
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"MqttMsgPublishReceived Error : {ex.Message}");
+                //MessageBox.Show();
+                Debug.WriteLine($"MqttMsgPublishReceived Error : {ex.Message}");
             }
         }
         #endregion
