@@ -106,11 +106,11 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
@@ -120,9 +120,9 @@
                         <Label Content="화재감지" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10" HorizontalAlignment="Center">
-                        <Label Content="1층" Margin="4, 0" FontSize="18" FontWeight="Bold"/>
-                        <TextBlock x:Name="fireSensor1" Text="작동 중" Margin="10, 4" FontSize="18"></TextBlock>
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,10" HorizontalAlignment="Center">
+                        <Label Content="1층" FontSize="18" FontWeight="Bold"/>
+                        <TextBlock x:Name="fireSensor1" Text="정상 작동 중" Margin="10, 4" FontSize="18"></TextBlock>
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10" HorizontalAlignment="Center">
@@ -130,14 +130,9 @@
                         <TextBlock x:Name="fireSensor2" Text="작동 중" Margin="10, 4" FontSize="18"></TextBlock>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,30" HorizontalAlignment="Center">
+                    <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,10,10" HorizontalAlignment="Center">
                         <Label Content="3층" Margin="4, 0" FontSize="18" FontWeight="Bold"/>
                         <TextBlock x:Name="fireSensor3" Text="작동 중" Margin="10, 4" FontSize="18"></TextBlock>
-                    </StackPanel>
-
-                    <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,30" HorizontalAlignment="Center">
-                        <Label Content="4층" Margin="4, 0" FontSize="18" FontWeight="Bold"/>
-                        <TextBlock x:Name="fireSensor4" Text="작동 중" Margin="10, 4" FontSize="18"></TextBlock>
                     </StackPanel>
 
                 </Grid>
